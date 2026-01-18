@@ -32,6 +32,12 @@ class WidgetbookApp extends StatelessWidget {
         ),
         // Text scale addon
         TextScaleAddon(scales: [1.0, 1.5, 2.0]),
+        // Inspector addon - shows widget tree and properties
+        InspectorAddon(),
+        // Grid addon - overlay grid for alignment
+        GridAddon(),
+        // Alignment addon - shows alignment guides
+        AlignmentAddon(),
       ],
     );
   }

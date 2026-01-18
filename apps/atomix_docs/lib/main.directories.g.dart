@@ -186,7 +186,7 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixButtonFullWidth,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Large Size',
+            name: 'Large',
             builder: _atomix_docs_use_cases_molecules_atomix_button_use_case
                 .atomixButtonLarge,
           ),
@@ -206,7 +206,7 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixButtonSecondary,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Small Size',
+            name: 'Small',
             builder: _atomix_docs_use_cases_molecules_atomix_button_use_case
                 .atomixButtonSmall,
           ),
@@ -239,11 +239,6 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Selected',
             builder: _atomix_docs_use_cases_molecules_atomix_chip_use_case
                 .atomixChipSelected,
-          ),
-          _widgetbook.WidgetbookUseCase(
-            name: 'Unselected',
-            builder: _atomix_docs_use_cases_molecules_atomix_chip_use_case
-                .atomixChipUnselected,
           ),
           _widgetbook.WidgetbookUseCase(
             name: 'With Icon',
