@@ -1,0 +1,16 @@
+name: atomix_example
+description: Example app for Atomix Design System
+publish_to: 'none'
+
+environment:
+  sdk: ^3.10.7
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  atomix_design_flutter:
+    path: ../
+
+flutter:
+  uses-material-design: true

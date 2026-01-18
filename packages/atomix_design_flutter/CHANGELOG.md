@@ -1,3 +1,16 @@
+## 0.1.1 - 2026-01-18
+
+### Changed
+- Shortened package description to meet pub.dev requirements
+- Updated README with GitHub Pages documentation link
+
+### Added
+- Example app demonstrating all components
+- Interactive Widgetbook documentation at https://osmanjimenez.github.io/atomix_design_flutter/
+
+### Fixed
+- Improved pub.dev score by adding required example
+
 ## 0.1.0 - 2026-01-18
 
 ### Added

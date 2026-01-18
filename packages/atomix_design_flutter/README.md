@@ -137,9 +137,10 @@ final customTheme = AtomixTheme.themeData(
 
 ## 📖 Documentation
 
-For complete documentation, examples, and interactive component gallery, visit:
-- [GitHub Repository](https://github.com/OsmanJimenez/atomix_design_flutter)
-- [API Documentation](https://pub.dev/documentation/atomix_design_flutter/latest/)
+For complete documentation, examples, and interactive component gallery:
+- **[Interactive Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)** - Live component demos
+- **[API Documentation](https://pub.dev/documentation/atomix_design_flutter/latest/)** - Complete API reference
+- **[GitHub Repository](https://github.com/OsmanJimenez/atomix_design_flutter)** - Source code and examples
 
 ## 🤝 Contributing
 

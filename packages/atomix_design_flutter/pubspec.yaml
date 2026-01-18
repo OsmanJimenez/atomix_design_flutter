@@ -1,6 +1,6 @@
 name: atomix_design_flutter
-description: A modern, scalable Flutter Design System built with Atomic Design principles and Material Design 3. Includes comprehensive theming, reusable components, and Widgetbook documentation.
-version: 0.1.0
+description: A modern Flutter Design System with Atomic Design and Material 3. Includes theming, reusable components, and documentation.
+version: 0.1.1
 repository: https://github.com/OsmanJimenez/atomix_design_flutter
 homepage: https://github.com/OsmanJimenez/atomix_design_flutter
 issue_tracker: https://github.com/OsmanJimenez/atomix_design_flutter/issues
