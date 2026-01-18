@@ -23,6 +23,7 @@ class AtomixText extends StatelessWidget {
     this.overflow,
     this.softWrap,
     this.semanticsLabel,
+    this.color,
   });
 
   /// The text to display.
@@ -46,11 +47,14 @@ class AtomixText extends StatelessWidget {
   /// A semantic label for the text.
   final String? semanticsLabel;
 
+  /// Optional color override.
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: style,
+      style: style?.copyWith(color: color) ?? TextStyle(color: color),
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,

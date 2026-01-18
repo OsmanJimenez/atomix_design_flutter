@@ -36,6 +36,8 @@ class AtomixDialog extends StatelessWidget {
     required this.content,
     this.actions = const [],
     this.icon,
+    this.backgroundColor,
+    this.borderRadius,
   });
 
   /// The title of the dialog.
@@ -50,10 +52,19 @@ class AtomixDialog extends StatelessWidget {
   /// Optional icon to display above the title.
   final IconData? icon;
 
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional border radius override.
+  final BorderRadius? borderRadius;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: AtomixRadius.lgBorderRadius),
+      backgroundColor: backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius ?? AtomixRadius.lgBorderRadius,
+      ),
       icon: icon != null ? Icon(icon, size: 32) : null,
       title: Text(title),
       content: Text(content),

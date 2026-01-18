@@ -1,26 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+
+@widgetbook.UseCase(name: 'Playground', type: AtomixAppBar)
+Widget atomixAppBarPlayground(BuildContext context) {
+  final title = context.knobs.string(label: 'Title', initialValue: 'Dashboard');
+
+  final centerTitle = context.knobs.boolean(
+    label: 'Center Title',
+    initialValue: false,
+  );
+
+  final elevation = context.knobs.list<double>(
+    label: 'Foundation Elevation',
+    options: [
+      AtomixElevation.none,
+      AtomixElevation.xs,
+      AtomixElevation.sm,
+      AtomixElevation.md,
+      AtomixElevation.lg,
+    ],
+    initialOption: AtomixElevation.none,
+  );
+
+  final showLeading = context.knobs.boolean(
+    label: 'Show Leading Icon',
+    initialValue: true,
+  );
+
+  final leadingIcon = showLeading
+      ? context.knobs.list<IconData>(
+          label: 'Leading Icon',
+          options: [Icons.menu, Icons.arrow_back, Icons.close, Icons.home],
+        )
+      : null;
+
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Custom Background',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.list<Color>(
+          label: 'Background Color',
+          options: [
+            AtomixColors.primary,
+            AtomixColors.secondary,
+            AtomixColors.surface,
+            const Color(0xFF1E1E1E),
+          ],
+          labelBuilder: (color) {
+            if (color == AtomixColors.primary) return 'Primary';
+            if (color == AtomixColors.secondary) return 'Secondary';
+            if (color == AtomixColors.surface) return 'Surface';
+            return 'Dark Custom';
+          },
+        )
+      : null;
+
+  // Helper strings
+  final centerStr = centerTitle ? '\n  centerTitle: true,' : '';
+  final elevationStr = elevation != AtomixElevation.none
+      ? '\n  elevation: $elevation,'
+      : '';
+  final leadingStr = showLeading
+      ? '\n  leading: Icons.${leadingIcon.toString().split('(').last.split(')').first},'
+      : '';
+  final colorStr = useFoundationColor ? '\n  backgroundColor: ...,' : '';
+
+  final code =
+      '''Scaffold(
+  appBar: AtomixAppBar(
+    title: '$title',$centerStr$elevationStr$leadingStr$colorStr
+    onLeadingPressed: () {},
+  ),
+  body: ...,
+)''';
+
+  return Scaffold(
+    appBar: AtomixAppBar(
+      title: title,
+      centerTitle: centerTitle,
+      elevation: elevation,
+      leading: leadingIcon,
+      backgroundColor: foundationColor,
+      onLeadingPressed: () {},
+    ),
+    body: Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            const Text('Use the Knobs to customize the App Bar above.'),
+            const SizedBox(height: 32),
+            CodeSnippet(code: code),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 @widgetbook.UseCase(name: 'Default', type: AtomixAppBar)
 Widget atomixAppBarDefault(BuildContext context) {
   return Scaffold(
     appBar: const AtomixAppBar(title: 'Home'),
-    body: Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Text('App Bar Example'),
-            const SizedBox(height: 24),
-            const CodeSnippet(
-              code: '''AtomixAppBar(
+    body: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const Text('Basic App Bar with title only.'),
+          const SizedBox(height: 24),
+          const CodeSnippet(
+            code: '''AtomixAppBar(
   title: 'Home',
 )''',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
@@ -31,25 +129,23 @@ Widget atomixAppBarWithLeading(BuildContext context) {
   return Scaffold(
     appBar: AtomixAppBar(
       title: 'Settings',
-      leading: Icons.menu,
+      leading: Icons.arrow_back,
       onLeadingPressed: () {},
     ),
-    body: Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Text('App Bar with Menu'),
-            const SizedBox(height: 24),
-            const CodeSnippet(
-              code: '''AtomixAppBar(
+    body: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const Text('App Bar with a back button.'),
+          const SizedBox(height: 24),
+          const CodeSnippet(
+            code: '''AtomixAppBar(
   title: 'Settings',
-  leading: Icons.menu,
+  leading: Icons.arrow_back,
   onLeadingPressed: () {},
 )''',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
@@ -59,36 +155,28 @@ Widget atomixAppBarWithLeading(BuildContext context) {
 Widget atomixAppBarWithActions(BuildContext context) {
   return Scaffold(
     appBar: AtomixAppBar(
-      title: 'Messages',
+      title: 'Feed',
       actions: [
         IconButton(icon: const Icon(Icons.search), onPressed: () {}),
-        IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
+        IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
       ],
     ),
-    body: Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Text('App Bar with Actions'),
-            const SizedBox(height: 24),
-            const CodeSnippet(
-              code: '''AtomixAppBar(
-  title: 'Messages',
+    body: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const Text('App Bar with multiple actions.'),
+          const SizedBox(height: 24),
+          const CodeSnippet(
+            code: '''AtomixAppBar(
+  title: 'Feed',
   actions: [
-    IconButton(
-      icon: Icon(Icons.search),
-      onPressed: () {},
-    ),
-    IconButton(
-      icon: Icon(Icons.more_vert),
-      onPressed: () {},
-    ),
+    IconButton(icon: Icon(Icons.search), onPressed: () {}),
+    IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
   ],
 )''',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
@@ -97,22 +185,20 @@ Widget atomixAppBarWithActions(BuildContext context) {
 @widgetbook.UseCase(name: 'Centered Title', type: AtomixAppBar)
 Widget atomixAppBarCentered(BuildContext context) {
   return Scaffold(
-    appBar: const AtomixAppBar(title: 'Centered', centerTitle: true),
-    body: Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Text('Centered App Bar'),
-            const SizedBox(height: 24),
-            const CodeSnippet(
-              code: '''AtomixAppBar(
-  title: 'Centered',
+    appBar: const AtomixAppBar(title: 'Profile', centerTitle: true),
+    body: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const Text('App Bar with centered title (iOS style).'),
+          const SizedBox(height: 24),
+          const CodeSnippet(
+            code: '''AtomixAppBar(
+  title: 'Profile',
   centerTitle: true,
 )''',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );

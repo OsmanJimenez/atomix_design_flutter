@@ -98,19 +98,24 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixDivider',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'Horizontal',
+            name: 'Default',
             builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
-                .atomixDividerHorizontal,
+                .atomixDividerDefault,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Thick',
+            name: 'Large Spacing',
             builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
-                .atomixDividerThick,
+                .atomixDividerLarge,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'With Color',
+            name: 'Playground',
             builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
-                .atomixDividerWithColor,
+                .atomixDividerPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'With Indent',
+            builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
+                .atomixDividerIndent,
           ),
         ],
       ),
@@ -118,19 +123,19 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixIcon',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'Default',
+            name: 'Colors',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
-                .atomixIconDefault,
+                .atomixIconColors,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Large',
+            name: 'Playground',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
-                .atomixIconLarge,
+                .atomixIconPlayground,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'With Color',
+            name: 'Sizes',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
-                .atomixIconWithColor,
+                .atomixIconSizes,
           ),
         ],
       ),
@@ -138,24 +143,19 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixSpacer',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'Horizontal',
+            name: 'Horizontal Scale',
             builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
-                .atomixSpacerHorizontal,
+                .atomixSpacerHorizontalScale,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Large',
+            name: 'Playground',
             builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
-                .atomixSpacerLarge,
+                .atomixSpacerPlayground,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Medium',
+            name: 'Vertical Scale',
             builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
-                .atomixSpacerMedium,
-          ),
-          _widgetbook.WidgetbookUseCase(
-            name: 'Small',
-            builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
-                .atomixSpacerSmall,
+                .atomixSpacerVerticalScale,
           ),
         ],
       ),
@@ -168,24 +168,24 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixTextBodyLarge,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Default',
+            name: 'Body Medium',
             builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
-                .atomixTextDefault,
+                .atomixTextBodyMedium,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Display Large',
+            name: 'Heading Large',
             builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
-                .atomixTextDisplayLarge,
-          ),
-          _widgetbook.WidgetbookUseCase(
-            name: 'Headline Medium',
-            builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
-                .atomixTextHeadlineMedium,
+                .atomixTextHeadingLarge,
           ),
           _widgetbook.WidgetbookUseCase(
             name: 'Label Small',
             builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
                 .atomixTextLabelSmall,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
+                .atomixTextPlayground,
           ),
         ],
       ),
@@ -328,6 +328,11 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixChipDeletable,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_molecules_atomix_chip_use_case
+                .atomixChipPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'Selected',
             builder: _atomix_docs_use_cases_molecules_atomix_chip_use_case
                 .atomixChipSelected,
@@ -353,24 +358,19 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixListTileDisabled,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_molecules_atomix_list_tile_use_case
+                .atomixListTilePlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'Selected',
             builder: _atomix_docs_use_cases_molecules_atomix_list_tile_use_case
                 .atomixListTileSelected,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'With Leading Icon',
-            builder: _atomix_docs_use_cases_molecules_atomix_list_tile_use_case
-                .atomixListTileWithLeading,
-          ),
-          _widgetbook.WidgetbookUseCase(
             name: 'With Subtitle',
             builder: _atomix_docs_use_cases_molecules_atomix_list_tile_use_case
                 .atomixListTileWithSubtitle,
-          ),
-          _widgetbook.WidgetbookUseCase(
-            name: 'With Trailing',
-            builder: _atomix_docs_use_cases_molecules_atomix_list_tile_use_case
-                .atomixListTileWithTrailing,
           ),
         ],
       ),
@@ -438,6 +438,11 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixAppBarDefault,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_organisms_atomix_app_bar_use_case
+                .atomixAppBarPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'With Actions',
             builder: _atomix_docs_use_cases_organisms_atomix_app_bar_use_case
                 .atomixAppBarWithActions,
@@ -459,6 +464,12 @@ final directories = <_widgetbook.WidgetbookNode>[
                     .atomixBottomSheetDefault,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder:
+                _atomix_docs_use_cases_organisms_atomix_bottom_sheet_use_case
+                    .atomixBottomSheetPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'With Action',
             builder:
                 _atomix_docs_use_cases_organisms_atomix_bottom_sheet_use_case
@@ -468,7 +479,7 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Without Handle',
             builder:
                 _atomix_docs_use_cases_organisms_atomix_bottom_sheet_use_case
-                    .atomixBottomSheetWithoutHandle,
+                    .atomixBottomSheetNoHandle,
           ),
         ],
       ),
@@ -511,7 +522,12 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixDialogDefault,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Simple',
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_organisms_atomix_dialog_use_case
+                .atomixDialogPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Simple Dialog',
             builder: _atomix_docs_use_cases_organisms_atomix_dialog_use_case
                 .atomixDialogSimple,
           ),

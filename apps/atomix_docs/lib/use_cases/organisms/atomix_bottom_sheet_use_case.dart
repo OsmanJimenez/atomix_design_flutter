@@ -1,32 +1,144 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Default', type: AtomixBottomSheet)
-Widget atomixBottomSheetDefault(BuildContext context) {
+@widgetbook.UseCase(name: 'Playground', type: AtomixBottomSheet)
+Widget atomixBottomSheetPlayground(BuildContext context) {
+  final title = context.knobs.string(
+    label: 'Title',
+    initialValue: 'Sheet Title',
+  );
+
+  final showHandle = context.knobs.boolean(
+    label: 'Show Handle',
+    initialValue: true,
+  );
+
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Custom Background',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.list<Color>(
+          label: 'Background Color',
+          options: [
+            AtomixColors.surface,
+            const Color(0xFFF3F4F6),
+            const Color(0xFFE5E7EB),
+          ],
+        )
+      : null;
+
+  final foundationRadius = context.knobs.list<BorderRadius>(
+    label: 'Foundation Radius (Top)',
+    options: [
+      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.xs)),
+      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.sm)),
+      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.md)),
+      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg)),
+      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.xl)),
+    ],
+    initialOption: const BorderRadius.vertical(
+      top: Radius.circular(AtomixRadius.lg),
+    ),
+  );
+
+  // Helper strings
+  final titleStr = title.isNotEmpty ? '\n    title: \'$title\',' : '';
+  final handleStr = !showHandle ? '\n    showHandle: false,' : '';
+  final radiusStr =
+      foundationRadius !=
+          const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg))
+      ? '\n    borderRadius: ...,'
+      : '';
+
+  final code =
+      '''showModalBottomSheet(
+  context: context,
+  builder: (context) => AtomixBottomSheet(
+    title: '$title',$handleStr$radiusStr
+    child: Padding(
+      padding: EdgeInsets.all(24),
+      child: Text('Sheet Content'),
+    ),
+  ),
+)''';
+
   return Center(
     child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
           AtomixButton(
-            label: 'Show Bottom Sheet',
+            label: 'Open Interactive Bottom Sheet',
             onPressed: () {
               showModalBottomSheet(
                 context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => AtomixBottomSheet(
+                  title: title.isEmpty ? null : title,
+                  showHandle: showHandle,
+                  backgroundColor: foundationColor,
+                  borderRadius: foundationRadius,
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'Interactive Bottom Sheet content goes here.',
+                        ),
+                        const SizedBox(height: 24),
+                        AtomixButton(
+                          label: 'Close',
+                          onPressed: () => Navigator.pop(context),
+                          fullWidth: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 32),
+          CodeSnippet(code: code),
+        ],
+      ),
+    ),
+  );
+}
+
+@widgetbook.UseCase(name: 'Default', type: AtomixBottomSheet)
+Widget atomixBottomSheetDefault(BuildContext context) {
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          AtomixButton(
+            label: 'Show Default Bottom Sheet',
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
                 builder: (context) => const AtomixBottomSheet(
                   title: 'Options',
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AtomixListTile(title: 'Option 1', leading: Icons.star),
-                      AtomixListTile(
-                        title: 'Option 2',
-                        leading: Icons.favorite,
-                      ),
-                      AtomixListTile(title: 'Option 3', leading: Icons.share),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AtomixListTile(title: 'Option 1', leading: Icons.star),
+                        AtomixListTile(
+                          title: 'Option 2',
+                          leading: Icons.favorite,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -34,19 +146,9 @@ Widget atomixBottomSheetDefault(BuildContext context) {
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''showModalBottomSheet(
-  context: context,
-  builder: (context) => AtomixBottomSheet(
-    title: 'Options',
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AtomixListTile(title: 'Option 1', leading: Icons.star),
-        AtomixListTile(title: 'Option 2', leading: Icons.favorite),
-        AtomixListTile(title: 'Option 3', leading: Icons.share),
-      ],
-    ),
-  ),
+            code: '''AtomixBottomSheet(
+  title: 'Options',
+  child: Column(...),
 )''',
           ),
         ],
@@ -56,34 +158,24 @@ Widget atomixBottomSheetDefault(BuildContext context) {
 }
 
 @widgetbook.UseCase(name: 'Without Handle', type: AtomixBottomSheet)
-Widget atomixBottomSheetWithoutHandle(BuildContext context) {
+Widget atomixBottomSheetNoHandle(BuildContext context) {
   return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+    child: Padding(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
           AtomixButton(
-            label: 'Show Bottom Sheet (No Handle)',
+            label: 'Show without Handle',
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                builder: (context) => AtomixBottomSheet(
+                backgroundColor: Colors.transparent,
+                builder: (context) => const AtomixBottomSheet(
                   title: 'Settings',
                   showHandle: false,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AtomixListTile(
-                        title: 'Account',
-                        leading: Icons.person,
-                        onTap: () {},
-                      ),
-                      AtomixListTile(
-                        title: 'Privacy',
-                        leading: Icons.lock,
-                        onTap: () {},
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.all(24),
+                    child: Text('A bottom sheet without the drag handle.'),
                   ),
                 ),
               );
@@ -91,19 +183,10 @@ Widget atomixBottomSheetWithoutHandle(BuildContext context) {
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''showModalBottomSheet(
-  context: context,
-  builder: (context) => AtomixBottomSheet(
-    title: 'Settings',
-    showHandle: false,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AtomixListTile(title: 'Account', leading: Icons.person),
-        AtomixListTile(title: 'Privacy', leading: Icons.lock),
-      ],
-    ),
-  ),
+            code: '''AtomixBottomSheet(
+  title: 'Settings',
+  showHandle: false,
+  child: ...,
 )''',
           ),
         ],
@@ -115,44 +198,33 @@ Widget atomixBottomSheetWithoutHandle(BuildContext context) {
 @widgetbook.UseCase(name: 'With Action', type: AtomixBottomSheet)
 Widget atomixBottomSheetWithAction(BuildContext context) {
   return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+    child: Padding(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
           AtomixButton(
-            label: 'Show Bottom Sheet with Action',
+            label: 'Show with Action',
             onPressed: () {
               showModalBottomSheet(
                 context: context,
+                backgroundColor: Colors.transparent,
                 builder: (context) => AtomixBottomSheet(
-                  title: 'Share',
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text('Share this content with:'),
-                      ),
-                      AtomixListTile(
-                        title: 'Twitter',
-                        leading: Icons.share,
-                        onTap: () {},
-                      ),
-                      AtomixListTile(
-                        title: 'Facebook',
-                        leading: Icons.share,
-                        onTap: () {},
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: AtomixButton(
-                          label: 'Cancel',
-                          variant: AtomixButtonVariant.tertiary,
+                  title: 'Delete Confirmation',
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text('Are you sure you want to delete?'),
+                        const SizedBox(height: 24),
+                        AtomixButton(
+                          label: 'Delete Now',
+                          variant: AtomixButtonVariant.primary,
                           onPressed: () => Navigator.pop(context),
                           fullWidth: true,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -160,25 +232,9 @@ Widget atomixBottomSheetWithAction(BuildContext context) {
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''showModalBottomSheet(
-  context: context,
-  builder: (context) => AtomixBottomSheet(
-    title: 'Share',
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text('Share this content with:'),
-        AtomixListTile(title: 'Twitter', leading: Icons.share),
-        AtomixListTile(title: 'Facebook', leading: Icons.share),
-        AtomixButton(
-          label: 'Cancel',
-          variant: AtomixButtonVariant.tertiary,
-          onPressed: () => Navigator.pop(context),
-          fullWidth: true,
-        ),
-      ],
-    ),
-  ),
+            code: '''AtomixBottomSheet(
+  title: 'Delete Confirmation',
+  child: Column(...),
 )''',
           ),
         ],

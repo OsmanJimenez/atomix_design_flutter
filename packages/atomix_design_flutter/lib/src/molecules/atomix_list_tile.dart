@@ -26,6 +26,9 @@ class AtomixListTile extends StatelessWidget {
     this.onTap,
     this.enabled = true,
     this.selected = false,
+    this.tileColor,
+    this.selectedTileColor,
+    this.textColor,
   });
 
   /// The primary content of the list tile.
@@ -49,16 +52,38 @@ class AtomixListTile extends StatelessWidget {
   /// Whether this list tile is selected.
   final bool selected;
 
+  /// Optional background color.
+  final Color? tileColor;
+
+  /// Optional background color when selected.
+  final Color? selectedTileColor;
+
+  /// Optional text color override.
+  final Color? textColor;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title),
-      subtitle: subtitle != null ? Text(subtitle!) : null,
-      leading: leading != null ? Icon(leading) : null,
+      title: Text(
+        title,
+        style: textColor != null ? TextStyle(color: textColor) : null,
+      ),
+      subtitle: subtitle != null
+          ? Text(
+              subtitle!,
+              style: textColor != null
+                  ? TextStyle(color: textColor?.withOpacity(0.7))
+                  : null,
+            )
+          : null,
+      leading: leading != null ? Icon(leading, color: textColor) : null,
       trailing: trailing,
       onTap: enabled ? onTap : null,
       enabled: enabled,
       selected: selected,
+      tileColor: tileColor,
+      selectedTileColor: selectedTileColor,
+      iconColor: textColor,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AtomixSpacing.md,
         vertical: AtomixSpacing.xs,

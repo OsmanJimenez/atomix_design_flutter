@@ -29,6 +29,8 @@ class AtomixBottomSheet extends StatelessWidget {
     required this.child,
     this.title,
     this.showHandle = true,
+    this.backgroundColor,
+    this.borderRadius,
   });
 
   /// The content of the bottom sheet.
@@ -40,16 +42,22 @@ class AtomixBottomSheet extends StatelessWidget {
   /// Whether to show the drag handle.
   final bool showHandle;
 
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional border radius override.
+  final BorderRadius? borderRadius;
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AtomixRadius.lg),
-        ),
+        color: backgroundColor ?? Theme.of(context).colorScheme.surface,
+        borderRadius:
+            borderRadius ??
+            const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

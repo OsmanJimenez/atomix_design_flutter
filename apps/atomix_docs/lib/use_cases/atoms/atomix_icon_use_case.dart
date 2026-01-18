@@ -1,37 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Default', type: AtomixIcon)
-Widget atomixIconDefault(BuildContext context) {
+@widgetbook.UseCase(name: 'Playground', type: AtomixIcon)
+Widget atomixIconPlayground(BuildContext context) {
+  final icon = context.knobs.list<IconData>(
+    label: 'Icon',
+    options: [
+      Icons.home,
+      Icons.settings,
+      Icons.person,
+      Icons.favorite,
+      Icons.star,
+      Icons.notifications,
+      Icons.search,
+      Icons.email,
+      Icons.check_circle,
+      Icons.error,
+    ],
+  );
+
+  final size = context.knobs.double.slider(
+    label: 'Size',
+    initialValue: 24,
+    min: 12,
+    max: 120,
+  );
+
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Custom Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.list<Color>(
+          label: 'Color',
+          options: [
+            AtomixColors.primary,
+            AtomixColors.secondary,
+            AtomixColors.success,
+            AtomixColors.error,
+            AtomixColors.info,
+            AtomixColors.warning,
+          ],
+          labelBuilder: (color) {
+            if (color == AtomixColors.primary) return 'Primary';
+            if (color == AtomixColors.secondary) return 'Secondary';
+            if (color == AtomixColors.success) return 'Success';
+            if (color == AtomixColors.error) return 'Error';
+            if (color == AtomixColors.info) return 'Info';
+            if (color == AtomixColors.warning) return 'Warning';
+            return 'Custom';
+          },
+        )
+      : null;
+
+  // Helper strings
+  final iconName = icon.toString().split('(').last.split(')').first;
+  final colorStr = useFoundationColor ? '\n  color: ...,' : '';
+
+  final code =
+      '''AtomixIcon(
+  Icons.$iconName,
+  size: $size,$colorStr
+)''';
+
   return Center(
     child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          const AtomixIcon(Icons.star),
-          const SizedBox(height: 24),
-          const CodeSnippet(code: '''AtomixIcon(Icons.star)'''),
+          AtomixIcon(icon, size: size, color: foundationColor),
+          const SizedBox(height: 32),
+          CodeSnippet(code: code),
         ],
       ),
     ),
   );
 }
 
-@widgetbook.UseCase(name: 'Large', type: AtomixIcon)
-Widget atomixIconLarge(BuildContext context) {
+@widgetbook.UseCase(name: 'Sizes', type: AtomixIcon)
+Widget atomixIconSizes(BuildContext context) {
   return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+    child: Padding(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          const AtomixIcon(Icons.favorite, size: 48),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AtomixIcon(Icons.favorite, size: 16),
+              SizedBox(width: 16),
+              AtomixIcon(Icons.favorite, size: 24),
+              SizedBox(width: 16),
+              AtomixIcon(Icons.favorite, size: 32),
+              SizedBox(width: 16),
+              AtomixIcon(Icons.favorite, size: 48),
+            ],
+          ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''AtomixIcon(
-  Icons.favorite,
-  size: 48,
+            code: '''Row(
+  children: [
+    AtomixIcon(Icons.favorite, size: 16),
+    AtomixIcon(Icons.favorite, size: 24),
+    AtomixIcon(Icons.favorite, size: 32),
+    AtomixIcon(Icons.favorite, size: 48),
+  ],
 )''',
           ),
         ],
@@ -40,24 +117,33 @@ Widget atomixIconLarge(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Color', type: AtomixIcon)
-Widget atomixIconWithColor(BuildContext context) {
+@widgetbook.UseCase(name: 'Colors', type: AtomixIcon)
+Widget atomixIconColors(BuildContext context) {
   return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+    child: Padding(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          const AtomixIcon(
-            Icons.check_circle,
-            color: AtomixColors.success,
-            size: 32,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AtomixIcon(Icons.star, color: AtomixColors.primary),
+              const SizedBox(width: 16),
+              AtomixIcon(Icons.check_circle, color: AtomixColors.success),
+              const SizedBox(width: 16),
+              AtomixIcon(Icons.error, color: AtomixColors.error),
+              const SizedBox(width: 16),
+              AtomixIcon(Icons.info, color: AtomixColors.info),
+            ],
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''AtomixIcon(
-  Icons.check_circle,
-  color: AtomixColors.success,
-  size: 32,
+            code: '''Row(
+  children: [
+    AtomixIcon(Icons.star, color: AtomixColors.primary),
+    AtomixIcon(Icons.check_circle, color: AtomixColors.success),
+    AtomixIcon(Icons.error, color: AtomixColors.error),
+  ],
 )''',
           ),
         ],

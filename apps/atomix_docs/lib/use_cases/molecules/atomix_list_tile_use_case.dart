@@ -1,7 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+
+@widgetbook.UseCase(name: 'Playground', type: AtomixListTile)
+Widget atomixListTilePlayground(BuildContext context) {
+  final title = context.knobs.string(
+    label: 'Title',
+    initialValue: 'List Item Title',
+  );
+
+  final subtitle = context.knobs.string(
+    label: 'Subtitle',
+    initialValue: 'Supporting text goes here',
+  );
+
+  final selected = context.knobs.boolean(
+    label: 'Selected',
+    initialValue: false,
+  );
+
+  final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+
+  final showLeading = context.knobs.boolean(
+    label: 'Show Leading Icon',
+    initialValue: true,
+  );
+
+  final leadingIcon = showLeading
+      ? context.knobs.list<IconData>(
+          label: 'Leading Icon',
+          options: [
+            Icons.person,
+            Icons.settings,
+            Icons.info,
+            Icons.email,
+            Icons.notifications,
+          ],
+        )
+      : null;
+
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Custom Tile Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.list<Color>(
+          label: 'Tile Color',
+          options: [
+            AtomixColors.surface,
+            AtomixColors.primary.withOpacity(0.1),
+            AtomixColors.success.withOpacity(0.1),
+            AtomixColors.warning.withOpacity(0.1),
+            AtomixColors.error.withOpacity(0.1),
+          ],
+          labelBuilder: (color) {
+            if (color == AtomixColors.surface) return 'Surface';
+            return 'Foundation Tint';
+          },
+        )
+      : null;
+
+  // Helper strings
+  final subtitleStr = subtitle.isNotEmpty ? '\n  subtitle: \'$subtitle\',' : '';
+  final leadingStr = showLeading
+      ? '\n  leading: Icons.${leadingIcon.toString().split('(').last.split(')').first},'
+      : '';
+  final selectedStr = selected ? '\n  selected: true,' : '';
+  final enabledStr = !enabled ? '\n  enabled: false,' : '';
+  final colorStr = useFoundationColor ? '\n  tileColor: ...,' : '';
+
+  final code =
+      '''AtomixListTile(
+  title: '$title',$subtitleStr$leadingStr$selectedStr$enabledStr$colorStr
+  onTap: () {},
+)''';
+
+  return Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          AtomixListTile(
+            title: title,
+            subtitle: subtitle.isEmpty ? null : subtitle,
+            selected: selected,
+            enabled: enabled,
+            leading: leadingIcon,
+            tileColor: foundationColor,
+            onTap: () {},
+          ),
+          const SizedBox(height: 32),
+          CodeSnippet(code: code),
+        ],
+      ),
+    ),
+  );
+}
 
 @widgetbook.UseCase(name: 'Default', type: AtomixListTile)
 Widget atomixListTileDefault(BuildContext context) {
@@ -10,12 +107,12 @@ Widget atomixListTileDefault(BuildContext context) {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          AtomixListTile(title: 'List Tile', onTap: () {}),
+          const AtomixListTile(title: 'Settings', leading: Icons.settings),
           const SizedBox(height: 24),
           const CodeSnippet(
             code: '''AtomixListTile(
-  title: 'List Tile',
-  onTap: () {},
+  title: 'Settings',
+  leading: Icons.settings,
 )''',
           ),
         ],
@@ -31,75 +128,17 @@ Widget atomixListTileWithSubtitle(BuildContext context) {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          AtomixListTile(
-            title: 'Settings',
-            subtitle: 'Manage your preferences',
-            onTap: () {},
-          ),
-          const SizedBox(height: 24),
-          const CodeSnippet(
-            code: '''AtomixListTile(
-  title: 'Settings',
-  subtitle: 'Manage your preferences',
-  onTap: () {},
-)''',
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-@widgetbook.UseCase(name: 'With Leading Icon', type: AtomixListTile)
-Widget atomixListTileWithLeading(BuildContext context) {
-  return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          AtomixListTile(
-            title: 'Profile',
-            subtitle: 'View your profile',
-            leading: Icons.person,
-            onTap: () {},
-          ),
-          const SizedBox(height: 24),
-          const CodeSnippet(
-            code: '''AtomixListTile(
-  title: 'Profile',
-  subtitle: 'View your profile',
-  leading: Icons.person,
-  onTap: () {},
-)''',
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-@widgetbook.UseCase(name: 'With Trailing', type: AtomixListTile)
-Widget atomixListTileWithTrailing(BuildContext context) {
-  return Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          AtomixListTile(
+          const AtomixListTile(
             title: 'Notifications',
-            subtitle: 'Manage notifications',
+            subtitle: 'Manage your alert preferences',
             leading: Icons.notifications,
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
             code: '''AtomixListTile(
   title: 'Notifications',
-  subtitle: 'Manage notifications',
+  subtitle: 'Manage your alert preferences',
   leading: Icons.notifications,
-  trailing: Icon(Icons.chevron_right),
-  onTap: () {},
 )''',
           ),
         ],
@@ -115,19 +154,19 @@ Widget atomixListTileSelected(BuildContext context) {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          AtomixListTile(
+          const AtomixListTile(
             title: 'Selected Item',
-            leading: Icons.check,
+            subtitle: 'This item is currently active',
             selected: true,
-            onTap: () {},
+            leading: Icons.check_circle,
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
             code: '''AtomixListTile(
   title: 'Selected Item',
-  leading: Icons.check,
+  subtitle: 'This item is currently active',
   selected: true,
-  onTap: () {},
+  leading: Icons.check_circle,
 )''',
           ),
         ],
@@ -145,17 +184,17 @@ Widget atomixListTileDisabled(BuildContext context) {
         children: [
           const AtomixListTile(
             title: 'Disabled Item',
-            subtitle: 'This item is disabled',
-            leading: Icons.block,
+            subtitle: 'You cannot interact with this',
             enabled: false,
+            leading: Icons.block,
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
             code: '''AtomixListTile(
   title: 'Disabled Item',
-  subtitle: 'This item is disabled',
-  leading: Icons.block,
+  subtitle: 'You cannot interact with this',
   enabled: false,
+  leading: Icons.block,
 )''',
           ),
         ],

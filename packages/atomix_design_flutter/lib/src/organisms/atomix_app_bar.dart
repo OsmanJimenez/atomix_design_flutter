@@ -27,6 +27,8 @@ class AtomixAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.centerTitle = false,
     this.elevation,
+    this.backgroundColor,
+    this.foregroundColor,
   });
 
   /// The title text displayed in the app bar.
@@ -47,6 +49,12 @@ class AtomixAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The elevation of the app bar.
   final double? elevation;
 
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional foreground color override.
+  final Color? foregroundColor;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -57,6 +65,8 @@ class AtomixAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       centerTitle: centerTitle,
       elevation: elevation ?? AtomixElevation.none,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
     );
   }
 
