@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(name: 'Default', type: AtomixAppBar)
 Widget atomixAppBarDefault(BuildContext context) {
   return Scaffold(
     appBar: const AtomixAppBar(title: 'Home'),
-    body: const Center(child: Text('App Bar Example')),
+    body: Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text('App Bar Example'),
+            const SizedBox(height: 24),
+            const CodeSnippet(
+              code: '''AtomixAppBar(
+  title: 'Home',
+)''',
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 }
 
@@ -18,7 +34,24 @@ Widget atomixAppBarWithLeading(BuildContext context) {
       leading: Icons.menu,
       onLeadingPressed: () {},
     ),
-    body: const Center(child: Text('App Bar with Menu')),
+    body: Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text('App Bar with Menu'),
+            const SizedBox(height: 24),
+            const CodeSnippet(
+              code: '''AtomixAppBar(
+  title: 'Settings',
+  leading: Icons.menu,
+  onLeadingPressed: () {},
+)''',
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 }
 
@@ -32,7 +65,32 @@ Widget atomixAppBarWithActions(BuildContext context) {
         IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
       ],
     ),
-    body: const Center(child: Text('App Bar with Actions')),
+    body: Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text('App Bar with Actions'),
+            const SizedBox(height: 24),
+            const CodeSnippet(
+              code: '''AtomixAppBar(
+  title: 'Messages',
+  actions: [
+    IconButton(
+      icon: Icon(Icons.search),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.more_vert),
+      onPressed: () {},
+    ),
+  ],
+)''',
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 }
 
@@ -40,6 +98,22 @@ Widget atomixAppBarWithActions(BuildContext context) {
 Widget atomixAppBarCentered(BuildContext context) {
   return Scaffold(
     appBar: const AtomixAppBar(title: 'Centered', centerTitle: true),
-    body: const Center(child: Text('Centered App Bar')),
+    body: Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text('Centered App Bar'),
+            const SizedBox(height: 24),
+            const CodeSnippet(
+              code: '''AtomixAppBar(
+  title: 'Centered',
+  centerTitle: true,
+)''',
+            ),
+          ],
+        ),
+      ),
+    ),
   );
 }

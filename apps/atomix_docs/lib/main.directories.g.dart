@@ -20,6 +20,18 @@ import 'package:atomix_docs/use_cases/atoms/atomix_spacer_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_spacer_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_text_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_text_use_case;
+import 'package:atomix_docs/use_cases/foundation/colors_use_case.dart'
+    as _atomix_docs_use_cases_foundation_colors_use_case;
+import 'package:atomix_docs/use_cases/foundation/customization_use_case.dart'
+    as _atomix_docs_use_cases_foundation_customization_use_case;
+import 'package:atomix_docs/use_cases/foundation/elevation_use_case.dart'
+    as _atomix_docs_use_cases_foundation_elevation_use_case;
+import 'package:atomix_docs/use_cases/foundation/radius_use_case.dart'
+    as _atomix_docs_use_cases_foundation_radius_use_case;
+import 'package:atomix_docs/use_cases/foundation/spacing_use_case.dart'
+    as _atomix_docs_use_cases_foundation_spacing_use_case;
+import 'package:atomix_docs/use_cases/foundation/typography_use_case.dart'
+    as _atomix_docs_use_cases_foundation_typography_use_case;
 import 'package:atomix_docs/use_cases/molecules/atomix_button_use_case.dart'
     as _atomix_docs_use_cases_molecules_atomix_button_use_case;
 import 'package:atomix_docs/use_cases/molecules/atomix_chip_use_case.dart'
@@ -81,9 +93,9 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixDivider',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'Default',
+            name: 'Horizontal',
             builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
-                .atomixDividerDefault,
+                .atomixDividerHorizontal,
           ),
           _widgetbook.WidgetbookUseCase(
             name: 'Thick',
@@ -91,9 +103,9 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixDividerThick,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'With Indent',
+            name: 'With Color',
             builder: _atomix_docs_use_cases_atoms_atomix_divider_use_case
-                .atomixDividerIndent,
+                .atomixDividerWithColor,
           ),
         ],
       ),
@@ -101,24 +113,19 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixIcon',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'Colored',
-            builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
-                .atomixIconColored,
-          ),
-          _widgetbook.WidgetbookUseCase(
             name: 'Default',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
                 .atomixIconDefault,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Large Size',
+            name: 'Large',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
                 .atomixIconLarge,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'Small Size',
+            name: 'With Color',
             builder: _atomix_docs_use_cases_atoms_atomix_icon_use_case
-                .atomixIconSmall,
+                .atomixIconWithColor,
           ),
         ],
       ),
@@ -126,14 +133,24 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'AtomixSpacer',
         useCases: [
           _widgetbook.WidgetbookUseCase(
-            name: 'All Sizes',
-            builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
-                .atomixSpacerAllSizes,
-          ),
-          _widgetbook.WidgetbookUseCase(
             name: 'Horizontal',
             builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
                 .atomixSpacerHorizontal,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Large',
+            builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
+                .atomixSpacerLarge,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Medium',
+            builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
+                .atomixSpacerMedium,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Small',
+            builder: _atomix_docs_use_cases_atoms_atomix_spacer_use_case
+                .atomixSpacerSmall,
           ),
         ],
       ),
@@ -164,6 +181,71 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Label Small',
             builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
                 .atomixTextLabelSmall,
+          ),
+        ],
+      ),
+    ],
+  ),
+  _widgetbook.WidgetbookFolder(
+    name: 'foundation',
+    children: [
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixColors',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Color Palette',
+            builder: _atomix_docs_use_cases_foundation_colors_use_case
+                .atomixColorsShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixElevation',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Elevation Scale',
+            builder: _atomix_docs_use_cases_foundation_elevation_use_case
+                .atomixElevationShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixRadius',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Border Radius',
+            builder: _atomix_docs_use_cases_foundation_radius_use_case
+                .atomixRadiusShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixSpacing',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Spacing Scale',
+            builder: _atomix_docs_use_cases_foundation_spacing_use_case
+                .atomixSpacingShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixTheme',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'How to Customize',
+            builder: _atomix_docs_use_cases_foundation_customization_use_case
+                .customizationGuide,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixTypography',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Typography Scale',
+            builder: _atomix_docs_use_cases_foundation_typography_use_case
+                .atomixTypographyShowcase,
           ),
         ],
       ),
@@ -362,10 +444,10 @@ final directories = <_widgetbook.WidgetbookNode>[
                     .atomixBottomSheetDefault,
           ),
           _widgetbook.WidgetbookUseCase(
-            name: 'With Form',
+            name: 'With Action',
             builder:
                 _atomix_docs_use_cases_organisms_atomix_bottom_sheet_use_case
-                    .atomixBottomSheetWithForm,
+                    .atomixBottomSheetWithAction,
           ),
           _widgetbook.WidgetbookUseCase(
             name: 'Without Handle',
