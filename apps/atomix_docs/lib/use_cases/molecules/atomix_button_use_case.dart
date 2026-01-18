@@ -1,7 +1,195 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+
+@widgetbook.UseCase(name: 'Playground', type: AtomixButton)
+Widget atomixButtonPlayground(BuildContext context) {
+  // Knobs for interactivity
+  final label = context.knobs.string(
+    label: 'Label',
+    initialValue: 'Customizable Button',
+  );
+
+  final variant = context.knobs.list<AtomixButtonVariant>(
+    label: 'Variant',
+    options: AtomixButtonVariant.values,
+    labelBuilder: (value) => value.toString().split('.').last,
+  );
+
+  final size = context.knobs.list<AtomixButtonSize>(
+    label: 'Size',
+    options: AtomixButtonSize.values,
+    labelBuilder: (value) => value.toString().split('.').last,
+  );
+
+  final fullWidth = context.knobs.boolean(
+    label: 'Full Width',
+    initialValue: false,
+  );
+
+  final isLoading = context.knobs.boolean(
+    label: 'Loading',
+    initialValue: false,
+  );
+
+  final disabled = context.knobs.boolean(
+    label: 'Disabled',
+    initialValue: false,
+  );
+
+  // Foundation Customization Knobs
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Use Custom Foundation Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.list<Color>(
+          label: 'Foundation Color',
+          options: [
+            AtomixColors.primary,
+            AtomixColors.secondary,
+            AtomixColors.success,
+            AtomixColors.warning,
+            AtomixColors.error,
+            AtomixColors.info,
+          ],
+          labelBuilder: (color) {
+            if (color == AtomixColors.primary) return 'Primary';
+            if (color == AtomixColors.secondary) return 'Secondary';
+            if (color == AtomixColors.success) return 'Success';
+            if (color == AtomixColors.warning) return 'Warning';
+            if (color == AtomixColors.error) return 'Error';
+            if (color == AtomixColors.info) return 'Info';
+            return 'Unknown';
+          },
+        )
+      : null;
+
+  final foundationRadius = context.knobs.list<BorderRadius>(
+    label: 'Foundation Radius',
+    options: [
+      AtomixRadius.xsBorderRadius,
+      AtomixRadius.smBorderRadius,
+      AtomixRadius.mdBorderRadius,
+      AtomixRadius.lgBorderRadius,
+      AtomixRadius.xlBorderRadius,
+      AtomixRadius.fullBorderRadius,
+    ],
+    initialOption: AtomixRadius.mdBorderRadius,
+    labelBuilder: (radius) {
+      if (radius == AtomixRadius.xsBorderRadius) return 'Extra Small (4px)';
+      if (radius == AtomixRadius.smBorderRadius) return 'Small (8px)';
+      if (radius == AtomixRadius.mdBorderRadius) return 'Medium (12px)';
+      if (radius == AtomixRadius.lgBorderRadius) return 'Large (16px)';
+      if (radius == AtomixRadius.xlBorderRadius) return 'Extra Large (24px)';
+      if (radius == AtomixRadius.fullBorderRadius) return 'Full (Rounded)';
+      return 'Custom';
+    },
+  );
+
+  final showIcon = context.knobs.boolean(
+    label: 'Show Icon',
+    initialValue: false,
+  );
+
+  final iconData = showIcon
+      ? context.knobs.list<IconData>(
+          label: 'Icon',
+          options: [
+            Icons.star,
+            Icons.favorite,
+            Icons.send,
+            Icons.add,
+            Icons.settings,
+          ],
+        )
+      : null;
+
+  // Helper strings for code snippet
+  String colorName(Color? color) {
+    if (color == AtomixColors.primary) return 'AtomixColors.primary';
+    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
+    if (color == AtomixColors.success) return 'AtomixColors.success';
+    if (color == AtomixColors.warning) return 'AtomixColors.warning';
+    if (color == AtomixColors.error) return 'AtomixColors.error';
+    if (color == AtomixColors.info) return 'AtomixColors.info';
+    return 'null';
+  }
+
+  String radiusName(BorderRadius radius) {
+    if (radius == AtomixRadius.xsBorderRadius)
+      return 'AtomixRadius.xsBorderRadius';
+    if (radius == AtomixRadius.smBorderRadius)
+      return 'AtomixRadius.smBorderRadius';
+    if (radius == AtomixRadius.mdBorderRadius)
+      return 'AtomixRadius.mdBorderRadius';
+    if (radius == AtomixRadius.lgBorderRadius)
+      return 'AtomixRadius.lgBorderRadius';
+    if (radius == AtomixRadius.xlBorderRadius)
+      return 'AtomixRadius.xlBorderRadius';
+    if (radius == AtomixRadius.fullBorderRadius)
+      return 'AtomixRadius.fullBorderRadius';
+    return 'null';
+  }
+
+  final variantStr =
+      'AtomixButtonVariant.${variant.toString().split('.').last}';
+  final sizeStr = 'AtomixButtonSize.${size.toString().split('.').last}';
+  final iconStr = showIcon
+      ? '\n  icon: Icons.${iconData.toString().split('(').last.split(')').first},'
+      : '';
+  final loadingStr = isLoading ? '\n  isLoading: true,' : '';
+  final fullWidthStr = fullWidth ? '\n  fullWidth: true,' : '';
+  final colorStr = useFoundationColor
+      ? '\n  backgroundColor: ${colorName(foundationColor)},'
+      : '';
+  final radiusStr = foundationRadius != AtomixRadius.mdBorderRadius
+      ? '\n  borderRadius: ${radiusName(foundationRadius)},'
+      : '';
+  final onPressedStr = disabled ? 'null,' : '() {},';
+
+  final code =
+      '''AtomixButton(
+  label: '$label',
+  variant: $variantStr,
+  size: $sizeStr,$iconStr$loadingStr$fullWidthStr$colorStr$radiusStr
+  onPressed: $onPressedStr
+)''';
+
+  return Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AtomixButton(
+            label: label,
+            variant: variant,
+            size: size,
+            fullWidth: fullWidth,
+            isLoading: isLoading,
+            icon: iconData,
+            backgroundColor: foundationColor,
+            borderRadius: foundationRadius,
+            onPressed: disabled ? null : () {},
+          ),
+          const SizedBox(height: 32),
+          Text(
+            'Interactive Code:',
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          CodeSnippet(code: code),
+        ],
+      ),
+    ),
+  );
+}
 
 @widgetbook.UseCase(name: 'Primary', type: AtomixButton)
 Widget atomixButtonPrimary(BuildContext context) {

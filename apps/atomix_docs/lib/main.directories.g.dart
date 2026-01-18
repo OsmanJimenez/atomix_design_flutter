@@ -73,6 +73,11 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixBadgeNeutral,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_atoms_atomix_badge_use_case
+                .atomixBadgePlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'Success',
             builder: _atomix_docs_use_cases_atoms_atomix_badge_use_case
                 .atomixBadgeSuccess,
@@ -278,6 +283,11 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixButtonLoading,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_molecules_atomix_button_use_case
+                .atomixButtonPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'Primary',
             builder: _atomix_docs_use_cases_molecules_atomix_button_use_case
                 .atomixButtonPrimary,
@@ -388,6 +398,11 @@ final directories = <_widgetbook.WidgetbookNode>[
                 .atomixTextFieldPassword,
           ),
           _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_molecules_atomix_text_field_use_case
+                .atomixTextFieldPlayground,
+          ),
+          _widgetbook.WidgetbookUseCase(
             name: 'With Error',
             builder: _atomix_docs_use_cases_molecules_atomix_text_field_use_case
                 .atomixTextFieldWithError,
@@ -474,6 +489,11 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Outlined',
             builder: _atomix_docs_use_cases_organisms_atomix_card_use_case
                 .atomixCardOutlined,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Playground',
+            builder: _atomix_docs_use_cases_organisms_atomix_card_use_case
+                .atomixCardPlayground,
           ),
           _widgetbook.WidgetbookUseCase(
             name: 'Tappable',

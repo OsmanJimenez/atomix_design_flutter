@@ -40,6 +40,9 @@ class AtomixBadge extends StatelessWidget {
     required this.label,
     this.variant = AtomixBadgeVariant.neutral,
     this.icon,
+    this.backgroundColor,
+    this.textColor,
+    this.borderRadius,
   });
 
   /// The text to display in the badge.
@@ -50,6 +53,15 @@ class AtomixBadge extends StatelessWidget {
 
   /// Optional icon to display before the label.
   final IconData? icon;
+
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional text color override.
+  final Color? textColor;
+
+  /// Optional border radius override.
+  final BorderRadius? borderRadius;
 
   Color _getBackgroundColor(BuildContext context) {
     final brightness = Theme.of(context).brightness;
@@ -107,8 +119,9 @@ class AtomixBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = _getTextColor(context);
-    final backgroundColor = _getBackgroundColor(context);
+    final finalTextColor = textColor ?? _getTextColor(context);
+    final finalBackgroundColor =
+        backgroundColor ?? _getBackgroundColor(context);
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
@@ -117,20 +130,20 @@ class AtomixBadge extends StatelessWidget {
         vertical: AtomixSpacing.xxs,
       ),
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: AtomixRadius.smBorderRadius,
+        color: finalBackgroundColor,
+        borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: 14, color: textColor),
+            Icon(icon, size: 14, color: finalTextColor),
             const SizedBox(width: AtomixSpacing.xxs),
           ],
           Text(
             label,
             style: textTheme.labelSmall?.copyWith(
-              color: textColor,
+              color: finalTextColor,
               fontWeight: FontWeight.w600,
             ),
           ),

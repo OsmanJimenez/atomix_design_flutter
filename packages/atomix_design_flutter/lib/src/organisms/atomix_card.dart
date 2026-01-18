@@ -36,6 +36,9 @@ class AtomixCard extends StatelessWidget {
     required this.child,
     this.variant = AtomixCardVariant.filled,
     this.onTap,
+    this.backgroundColor,
+    this.elevation,
+    this.borderRadius,
   });
 
   /// The widget below this widget in the tree.
@@ -46,6 +49,15 @@ class AtomixCard extends StatelessWidget {
 
   /// Called when the card is tapped.
   final VoidCallback? onTap;
+
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional elevation override.
+  final double? elevation;
+
+  /// Optional border radius override.
+  final BorderRadius? borderRadius;
 
   double _getElevation() {
     switch (variant) {
@@ -63,9 +75,10 @@ class AtomixCard extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final card = Card(
-      elevation: _getElevation(),
+      elevation: elevation ?? _getElevation(),
+      color: backgroundColor,
       shape: RoundedRectangleBorder(
-        borderRadius: AtomixRadius.mdBorderRadius,
+        borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
         side: variant == AtomixCardVariant.outlined
             ? BorderSide(color: colorScheme.outline)
             : BorderSide.none,

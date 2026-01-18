@@ -51,6 +51,9 @@ class AtomixButton extends StatelessWidget {
     this.isLoading = false,
     this.icon,
     this.fullWidth = false,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderRadius,
   });
 
   /// The text label for the button.
@@ -73,6 +76,15 @@ class AtomixButton extends StatelessWidget {
 
   /// Whether the button should take full width.
   final bool fullWidth;
+
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional foreground color override.
+  final Color? foregroundColor;
+
+  /// Optional border radius override.
+  final BorderRadius? borderRadius;
 
   EdgeInsets _getPadding() {
     switch (size) {
@@ -149,8 +161,10 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: FilledButton.styleFrom(
             padding: padding,
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: AtomixRadius.mdBorderRadius,
+              borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
             ),
           ),
           child: content,
@@ -162,8 +176,12 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: OutlinedButton.styleFrom(
             padding: padding,
+            side: backgroundColor != null
+                ? BorderSide(color: backgroundColor!)
+                : null,
+            foregroundColor: foregroundColor ?? backgroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: AtomixRadius.mdBorderRadius,
+              borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
             ),
           ),
           child: content,
@@ -175,8 +193,9 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: TextButton.styleFrom(
             padding: padding,
+            foregroundColor: foregroundColor ?? backgroundColor,
             shape: RoundedRectangleBorder(
-              borderRadius: AtomixRadius.smBorderRadius,
+              borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
             ),
           ),
           child: content,
