@@ -32,6 +32,10 @@ import 'package:atomix_docs/use_cases/foundation/spacing_use_case.dart'
     as _atomix_docs_use_cases_foundation_spacing_use_case;
 import 'package:atomix_docs/use_cases/foundation/typography_use_case.dart'
     as _atomix_docs_use_cases_foundation_typography_use_case;
+import 'package:atomix_docs/use_cases/layout/atomix_layout_use_case.dart'
+    as _atomix_docs_use_cases_layout_atomix_layout_use_case;
+import 'package:atomix_docs/use_cases/layout/layout_readme.dart'
+    as _atomix_docs_use_cases_layout_layout_readme;
 import 'package:atomix_docs/use_cases/molecules/atomix_button_use_case.dart'
     as _atomix_docs_use_cases_molecules_atomix_button_use_case;
 import 'package:atomix_docs/use_cases/molecules/atomix_chip_use_case.dart'
@@ -48,6 +52,10 @@ import 'package:atomix_docs/use_cases/organisms/atomix_card_use_case.dart'
     as _atomix_docs_use_cases_organisms_atomix_card_use_case;
 import 'package:atomix_docs/use_cases/organisms/atomix_dialog_use_case.dart'
     as _atomix_docs_use_cases_organisms_atomix_dialog_use_case;
+import 'package:atomix_docs/use_cases/templates/playground_template_use_case.dart'
+    as _atomix_docs_use_cases_templates_playground_template_use_case;
+import 'package:atomix_docs/use_cases/templates/templates_readme.dart'
+    as _atomix_docs_use_cases_templates_templates_readme;
 import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 
 final directories = <_widgetbook.WidgetbookNode>[
@@ -251,6 +259,35 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Typography Scale',
             builder: _atomix_docs_use_cases_foundation_typography_use_case
                 .atomixTypographyShowcase,
+          ),
+        ],
+      ),
+    ],
+  ),
+  _widgetbook.WidgetbookFolder(
+    name: 'layout',
+    children: [
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixBox',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Layout Box',
+            builder: _atomix_docs_use_cases_layout_atomix_layout_use_case
+                .atomixBoxPlayground,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixGrid',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'README',
+            builder: _atomix_docs_use_cases_layout_layout_readme.layoutReadme,
+          ),
+          _widgetbook.WidgetbookUseCase(
+            name: 'Responsive Grid',
+            builder: _atomix_docs_use_cases_layout_atomix_layout_use_case
+                .atomixGridPlayground,
           ),
         ],
       ),
@@ -535,6 +572,32 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'With Icon',
             builder: _atomix_docs_use_cases_organisms_atomix_dialog_use_case
                 .atomixDialogWithIcon,
+          ),
+        ],
+      ),
+    ],
+  ),
+  _widgetbook.WidgetbookFolder(
+    name: 'use_cases',
+    children: [
+      _widgetbook.WidgetbookFolder(
+        name: 'templates',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'AtomixTemplates',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Full Page Playground',
+                builder:
+                    _atomix_docs_use_cases_templates_playground_template_use_case
+                        .playgroundTemplate,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'README',
+                builder: _atomix_docs_use_cases_templates_templates_readme
+                    .templatesReadme,
+              ),
+            ],
           ),
         ],
       ),

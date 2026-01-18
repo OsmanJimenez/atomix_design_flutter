@@ -5,17 +5,6 @@ import '../foundation/atomix_spacing.dart';
 ///
 /// A wrapper around SizedBox that uses Atomix spacing tokens.
 /// Provides consistent spacing across the design system.
-///
-/// Example:
-/// ```dart
-/// Column(
-///   children: [
-///     Text('First'),
-///     AtomixSpacer.md(),
-///     Text('Second'),
-///   ],
-/// )
-/// ```
 class AtomixSpacer extends StatelessWidget {
   /// Creates an Atomix spacer with custom dimensions.
   const AtomixSpacer({super.key, this.width, this.height});
@@ -51,14 +40,10 @@ class AtomixSpacer extends StatelessWidget {
       height = AtomixSpacing.xxxl;
 
   /// Creates a horizontal spacer with the specified width.
-  const AtomixSpacer.horizontal(double width, {super.key})
-    : width = width,
-      height = null;
+  const AtomixSpacer.horizontal(this.width, {super.key}) : height = null;
 
   /// Creates a vertical spacer with the specified height.
-  const AtomixSpacer.vertical(double height, {super.key})
-    : width = null,
-      height = height;
+  const AtomixSpacer.vertical(this.height, {super.key}) : width = null;
 
   /// The width of the spacer.
   final double? width;

@@ -89,7 +89,7 @@ Widget atomixSpacerPlayground(BuildContext context) {
 
 @widgetbook.UseCase(name: 'Vertical Scale', type: AtomixSpacer)
 Widget atomixSpacerVerticalScale(BuildContext context) {
-  return const Center(
+  return Center(
     child: Padding(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -121,7 +121,7 @@ Widget atomixSpacerVerticalScale(BuildContext context) {
 
 @widgetbook.UseCase(name: 'Horizontal Scale', type: AtomixSpacer)
 Widget atomixSpacerHorizontalScale(BuildContext context) {
-  return const Center(
+  return Center(
     child: Padding(
       padding: EdgeInsets.all(16),
       child: Column(

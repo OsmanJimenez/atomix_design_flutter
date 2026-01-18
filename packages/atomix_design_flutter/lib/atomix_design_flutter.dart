@@ -26,3 +26,7 @@ export 'src/organisms/atomix_app_bar.dart';
 export 'src/organisms/atomix_card.dart';
 export 'src/organisms/atomix_dialog.dart';
 export 'src/organisms/atomix_bottom_sheet.dart';
+
+// Layout
+export 'src/layout/atomix_box.dart';
+export 'src/layout/atomix_grid.dart';

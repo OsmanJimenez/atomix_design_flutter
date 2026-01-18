@@ -47,7 +47,6 @@ Widget atomixBottomSheetPlayground(BuildContext context) {
   );
 
   // Helper strings
-  final titleStr = title.isNotEmpty ? '\n    title: \'$title\',' : '';
   final handleStr = !showHandle ? '\n    showHandle: false,' : '';
   final radiusStr =
       foundationRadius !=
