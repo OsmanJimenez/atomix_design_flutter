@@ -1,3 +1,13 @@
+## 0.3.0 - 2026-01-18
+
+### Added
+- **Foundation Expansion**:
+    - `AtomixAnimations`: Standardized durations and curves for consistent motion.
+    - `AtomixBreakpoints`: Essential screen widths for responsive design.
+    - `AtomixShadows`: Advanced multi-layered shadows for enhanced depth.
+- **Documentation**:
+    - Added visual showcases for Animations, Breakpoints, and Shadows in Widgetbook.
+
 ## 0.2.0 - 2026-01-18
 
 ### Added

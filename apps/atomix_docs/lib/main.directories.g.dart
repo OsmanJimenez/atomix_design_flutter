@@ -20,6 +20,10 @@ import 'package:atomix_docs/use_cases/atoms/atomix_spacer_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_spacer_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_text_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_text_use_case;
+import 'package:atomix_docs/use_cases/foundation/animations_use_case.dart'
+    as _atomix_docs_use_cases_foundation_animations_use_case;
+import 'package:atomix_docs/use_cases/foundation/breakpoints_use_case.dart'
+    as _atomix_docs_use_cases_foundation_breakpoints_use_case;
 import 'package:atomix_docs/use_cases/foundation/colors_use_case.dart'
     as _atomix_docs_use_cases_foundation_colors_use_case;
 import 'package:atomix_docs/use_cases/foundation/customization_use_case.dart'
@@ -28,6 +32,8 @@ import 'package:atomix_docs/use_cases/foundation/elevation_use_case.dart'
     as _atomix_docs_use_cases_foundation_elevation_use_case;
 import 'package:atomix_docs/use_cases/foundation/radius_use_case.dart'
     as _atomix_docs_use_cases_foundation_radius_use_case;
+import 'package:atomix_docs/use_cases/foundation/shadows_use_case.dart'
+    as _atomix_docs_use_cases_foundation_shadows_use_case;
 import 'package:atomix_docs/use_cases/foundation/spacing_use_case.dart'
     as _atomix_docs_use_cases_foundation_spacing_use_case;
 import 'package:atomix_docs/use_cases/foundation/typography_use_case.dart'
@@ -59,6 +65,41 @@ import 'package:atomix_docs/use_cases/templates/templates_readme.dart'
 import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 
 final directories = <_widgetbook.WidgetbookNode>[
+  _widgetbook.WidgetbookCategory(
+    name: 'Foundation',
+    children: [
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixAnimations',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Animations',
+            builder: _atomix_docs_use_cases_foundation_animations_use_case
+                .animationsUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixBreakpoints',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Breakpoints',
+            builder: _atomix_docs_use_cases_foundation_breakpoints_use_case
+                .breakpointsUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixShadows',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Shadows',
+            builder: _atomix_docs_use_cases_foundation_shadows_use_case
+                .shadowsUseCase,
+          ),
+        ],
+      ),
+    ],
+  ),
   _widgetbook.WidgetbookFolder(
     name: 'atoms',
     children: [

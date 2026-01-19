@@ -1,10 +1,13 @@
 // Foundation
+export 'src/foundation/atomix_animations.dart';
+export 'src/foundation/atomix_breakpoints.dart';
 export 'src/foundation/atomix_colors.dart';
-export 'src/foundation/atomix_spacing.dart';
-export 'src/foundation/atomix_radius.dart';
 export 'src/foundation/atomix_elevation.dart';
-export 'src/foundation/atomix_typography.dart';
+export 'src/foundation/atomix_radius.dart';
+export 'src/foundation/atomix_shadows.dart';
+export 'src/foundation/atomix_spacing.dart';
 export 'src/foundation/atomix_theme.dart';
+export 'src/foundation/atomix_typography.dart';
 
 // Atoms
 export 'src/atoms/atomix_text.dart';
