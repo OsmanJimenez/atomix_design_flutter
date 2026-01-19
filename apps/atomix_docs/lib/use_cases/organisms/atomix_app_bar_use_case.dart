@@ -6,15 +6,18 @@ import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(name: 'Playground', type: AtomixAppBar)
 Widget atomixAppBarPlayground(BuildContext context) {
-  final title = context.knobs.string(label: 'Title', initialValue: 'Dashboard');
+  final title = context.knobs.string(
+    label: 'AppBar > Title',
+    initialValue: 'Dashboard',
+  );
 
   final centerTitle = context.knobs.boolean(
-    label: 'Center Title',
+    label: 'AppBar > Center Title',
     initialValue: false,
   );
 
-  final elevation = context.knobs.list<double>(
-    label: 'Foundation Elevation',
+  final elevation = context.knobs.object.dropdown<double>(
+    label: 'Foundation > Elevation',
     options: [
       AtomixElevation.none,
       AtomixElevation.xs,
@@ -26,25 +29,25 @@ Widget atomixAppBarPlayground(BuildContext context) {
   );
 
   final showLeading = context.knobs.boolean(
-    label: 'Show Leading Icon',
+    label: 'AppBar > Show Leading Icon',
     initialValue: true,
   );
 
   final leadingIcon = showLeading
-      ? context.knobs.list<IconData>(
-          label: 'Leading Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'AppBar > Leading Icon',
           options: [Icons.menu, Icons.arrow_back, Icons.close, Icons.home],
         )
       : null;
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Background',
+    label: 'Foundation > Custom Background',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Background Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Background Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,

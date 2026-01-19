@@ -72,7 +72,7 @@ class AtomixBottomSheet extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(
                     context,
-                  ).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                  ).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                   borderRadius: AtomixRadius.fullBorderRadius,
                 ),
               ),

@@ -26,8 +26,8 @@ Widget atomixGridPlayground(BuildContext context) {
       )
       .toInt();
 
-  final gutter = context.knobs.list<double>(
-    label: 'Gutter (Spacing)',
+  final gutter = context.knobs.object.dropdown<double>(
+    label: 'Grid > Gutter (Spacing)',
     options: [
       AtomixSpacing.xs,
       AtomixSpacing.sm,
@@ -64,7 +64,7 @@ Widget atomixGridPlayground(BuildContext context) {
             AtomixCol(
               span: span1,
               child: Container(
-                color: Colors.blue.withOpacity(0.2),
+                color: Colors.blue.withValues(alpha: 0.2),
                 height: 100,
                 child: Center(child: Text('Span $span1')),
               ),
@@ -72,7 +72,7 @@ Widget atomixGridPlayground(BuildContext context) {
             AtomixCol(
               span: span2,
               child: Container(
-                color: Colors.green.withOpacity(0.2),
+                color: Colors.green.withValues(alpha: 0.2),
                 height: 100,
                 child: Center(child: Text('Span $span2')),
               ),
@@ -88,20 +88,20 @@ Widget atomixGridPlayground(BuildContext context) {
 
 @widgetbook.UseCase(name: 'Layout Box', type: AtomixBox)
 Widget atomixBoxPlayground(BuildContext context) {
-  final padding = context.knobs.list<double>(
-    label: 'Padding',
+  final padding = context.knobs.object.dropdown<double>(
+    label: 'Box > Padding',
     options: [0, AtomixSpacing.sm, AtomixSpacing.md, AtomixSpacing.lg],
     initialOption: AtomixSpacing.md,
   );
 
-  final elevation = context.knobs.list<double>(
-    label: 'Elevation',
+  final elevation = context.knobs.object.dropdown<double>(
+    label: 'Box > Elevation',
     options: [0, AtomixElevation.sm, AtomixElevation.md, AtomixElevation.lg],
     initialOption: 0,
   );
 
-  final radius = context.knobs.list<BorderRadius>(
-    label: 'Radius',
+  final radius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Box > Radius',
     options: [
       AtomixRadius.xsBorderRadius,
       AtomixRadius.smBorderRadius,

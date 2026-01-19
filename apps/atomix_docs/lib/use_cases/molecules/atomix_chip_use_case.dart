@@ -7,33 +7,33 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixChip)
 Widget atomixChipPlayground(BuildContext context) {
   final label = context.knobs.string(
-    label: 'Label',
+    label: 'Chip > Label',
     initialValue: 'Interective Chip',
   );
 
   final selected = context.knobs.boolean(
-    label: 'Selected',
+    label: 'Chip > Selected',
     initialValue: false,
   );
 
   final isSelectable = context.knobs.boolean(
-    label: 'Is Selectable',
+    label: 'Chip > Is Selectable',
     initialValue: true,
   );
 
   final isDeletable = context.knobs.boolean(
-    label: 'Is Deletable',
+    label: 'Chip > Is Deletable',
     initialValue: false,
   );
 
   final showIcon = context.knobs.boolean(
-    label: 'Show Icon',
+    label: 'Icons > Show Icon',
     initialValue: false,
   );
 
   final iconData = showIcon
-      ? context.knobs.list<IconData>(
-          label: 'Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'Icons > Icon Type',
           options: [
             Icons.star,
             Icons.favorite,
@@ -45,13 +45,13 @@ Widget atomixChipPlayground(BuildContext context) {
       : null;
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Color',
+    label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Background Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,
@@ -72,8 +72,8 @@ Widget atomixChipPlayground(BuildContext context) {
         )
       : null;
 
-  final foundationRadius = context.knobs.list<BorderRadius>(
-    label: 'Foundation Radius',
+  final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Foundation > Radius',
     options: [
       AtomixRadius.xsBorderRadius,
       AtomixRadius.smBorderRadius,
@@ -87,28 +87,46 @@ Widget atomixChipPlayground(BuildContext context) {
 
   // Helper strings
   String colorName(Color? color) {
-    if (color == AtomixColors.primary) return 'AtomixColors.primary';
-    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (color == AtomixColors.success) return 'AtomixColors.success';
-    if (color == AtomixColors.info) return 'AtomixColors.info';
-    if (color == AtomixColors.warning) return 'AtomixColors.warning';
-    if (color == AtomixColors.error) return 'AtomixColors.error';
+    if (color == AtomixColors.primary) {
+      return 'AtomixColors.primary';
+    }
+    if (color == AtomixColors.secondary) {
+      return 'AtomixColors.secondary';
+    }
+    if (color == AtomixColors.success) {
+      return 'AtomixColors.success';
+    }
+    if (color == AtomixColors.info) {
+      return 'AtomixColors.info';
+    }
+    if (color == AtomixColors.warning) {
+      return 'AtomixColors.warning';
+    }
+    if (color == AtomixColors.error) {
+      return 'AtomixColors.error';
+    }
     return 'null';
   }
 
   String radiusName(BorderRadius radius) {
-    if (radius == AtomixRadius.xsBorderRadius)
+    if (radius == AtomixRadius.xsBorderRadius) {
       return 'AtomixRadius.xsBorderRadius';
-    if (radius == AtomixRadius.smBorderRadius)
+    }
+    if (radius == AtomixRadius.smBorderRadius) {
       return 'AtomixRadius.smBorderRadius';
-    if (radius == AtomixRadius.mdBorderRadius)
+    }
+    if (radius == AtomixRadius.mdBorderRadius) {
       return 'AtomixRadius.mdBorderRadius';
-    if (radius == AtomixRadius.lgBorderRadius)
+    }
+    if (radius == AtomixRadius.lgBorderRadius) {
       return 'AtomixRadius.lgBorderRadius';
-    if (radius == AtomixRadius.xlBorderRadius)
+    }
+    if (radius == AtomixRadius.xlBorderRadius) {
       return 'AtomixRadius.xlBorderRadius';
-    if (radius == AtomixRadius.fullBorderRadius)
+    }
+    if (radius == AtomixRadius.fullBorderRadius) {
       return 'AtomixRadius.fullBorderRadius';
+    }
     return 'null';
   }
 

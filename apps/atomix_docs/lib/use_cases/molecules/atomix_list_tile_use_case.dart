@@ -7,30 +7,33 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixListTile)
 Widget atomixListTilePlayground(BuildContext context) {
   final title = context.knobs.string(
-    label: 'Title',
+    label: 'ListTile > Title',
     initialValue: 'List Item Title',
   );
 
   final subtitle = context.knobs.string(
-    label: 'Subtitle',
+    label: 'ListTile > Subtitle',
     initialValue: 'Supporting text goes here',
   );
 
   final selected = context.knobs.boolean(
-    label: 'Selected',
+    label: 'ListTile > Selected',
     initialValue: false,
   );
 
-  final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+  final enabled = context.knobs.boolean(
+    label: 'ListTile > Enabled',
+    initialValue: true,
+  );
 
   final showLeading = context.knobs.boolean(
-    label: 'Show Leading Icon',
+    label: 'ListTile > Show Leading Icon',
     initialValue: true,
   );
 
   final leadingIcon = showLeading
-      ? context.knobs.list<IconData>(
-          label: 'Leading Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'ListTile > Leading Icon',
           options: [
             Icons.person,
             Icons.settings,
@@ -42,19 +45,19 @@ Widget atomixListTilePlayground(BuildContext context) {
       : null;
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Tile Color',
+    label: 'Tile > Custom Tile Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Tile Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Tile > Color',
           options: [
             AtomixColors.surface,
-            AtomixColors.primary.withOpacity(0.1),
-            AtomixColors.success.withOpacity(0.1),
-            AtomixColors.warning.withOpacity(0.1),
-            AtomixColors.error.withOpacity(0.1),
+            AtomixColors.primary.withValues(alpha: 0.1),
+            AtomixColors.success.withValues(alpha: 0.1),
+            AtomixColors.warning.withValues(alpha: 0.1),
+            AtomixColors.error.withValues(alpha: 0.1),
           ],
           labelBuilder: (color) {
             if (color == AtomixColors.surface) return 'Surface';

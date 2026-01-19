@@ -6,8 +6,8 @@ import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(name: 'Playground', type: AtomixSpacer)
 Widget atomixSpacerPlayground(BuildContext context) {
-  final spacing = context.knobs.list<double>(
-    label: 'Foundation Spacing',
+  final spacing = context.knobs.object.dropdown<double>(
+    label: 'Spacer > Foundation Spacing',
     options: [
       AtomixSpacing.xxs,
       AtomixSpacing.xs,
@@ -33,7 +33,7 @@ Widget atomixSpacerPlayground(BuildContext context) {
   );
 
   final isVertical = context.knobs.boolean(
-    label: 'Is Vertical',
+    label: 'Spacer > Is Vertical',
     initialValue: true,
   );
 
@@ -61,7 +61,7 @@ Widget atomixSpacerPlayground(BuildContext context) {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             child: isVertical
                 ? Column(
                     children: [

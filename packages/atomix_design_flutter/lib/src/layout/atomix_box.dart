@@ -79,7 +79,7 @@ class AtomixBox extends StatelessWidget {
         boxShadow: effectiveElevation > 0
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: effectiveElevation,
                   offset: Offset(0, effectiveElevation / 2),
                 ),

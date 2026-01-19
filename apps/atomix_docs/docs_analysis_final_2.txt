@@ -1,0 +1,6 @@
+Analyzing atomix_docs...                                        
+
+   info - 'DeviceFrameAddon' is deprecated and shouldn't be used. The [DeviceFrameAddon] is deprecated and will be removed in a future version. Please use the [ViewportAddon] instead. More info: https://docs.widgetbook.io/addons/viewport-addon - lib\main.dart:30:9 - deprecated_member_use
+   info - 'scales' is deprecated and shouldn't be used. Use TextScaleAddon.min and TextScaleAddon.max instead - lib\main.dart:34:24 - deprecated_member_use
+
+2 issues found. (ran in 4.1s)

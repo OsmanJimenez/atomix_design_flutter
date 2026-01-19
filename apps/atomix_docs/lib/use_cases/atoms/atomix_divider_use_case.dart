@@ -7,41 +7,41 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixDivider)
 Widget atomixDividerPlayground(BuildContext context) {
   final height = context.knobs.double.slider(
-    label: 'Height',
+    label: 'Divider > Height',
     initialValue: 16,
     min: 1,
     max: 64,
   );
 
   final thickness = context.knobs.double.slider(
-    label: 'Thickness',
+    label: 'Divider > Thickness',
     initialValue: 1,
     min: 1,
     max: 10,
   );
 
   final indent = context.knobs.double.slider(
-    label: 'Indent',
+    label: 'Divider > Indent',
     initialValue: 0,
     min: 0,
     max: 100,
   );
 
   final endIndent = context.knobs.double.slider(
-    label: 'End Indent',
+    label: 'Divider > End Indent',
     initialValue: 0,
     min: 0,
     max: 100,
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Color',
+    label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,

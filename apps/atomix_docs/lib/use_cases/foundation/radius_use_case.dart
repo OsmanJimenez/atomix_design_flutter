@@ -62,7 +62,7 @@ Widget _buildRadiusCard(String name, BorderRadius radius, String pixels) {
         width: 100,
         height: 100,
         decoration: BoxDecoration(
-          color: AtomixColors.primary.withOpacity(0.2),
+          color: AtomixColors.primary.withValues(alpha: 0.2),
           border: Border.all(color: AtomixColors.primary, width: 2),
           borderRadius: radius,
         ),

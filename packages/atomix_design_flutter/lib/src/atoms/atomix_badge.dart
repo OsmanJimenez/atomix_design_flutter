@@ -69,24 +69,24 @@ class AtomixBadge extends StatelessWidget {
     switch (variant) {
       case AtomixBadgeVariant.success:
         return brightness == Brightness.light
-            ? AtomixColors.success.withOpacity(0.1)
-            : AtomixColors.successDark.withOpacity(0.2);
+            ? AtomixColors.success.withValues(alpha: 0.1)
+            : AtomixColors.successDark.withValues(alpha: 0.2);
       case AtomixBadgeVariant.warning:
         return brightness == Brightness.light
-            ? AtomixColors.warning.withOpacity(0.1)
-            : AtomixColors.warningDark.withOpacity(0.2);
+            ? AtomixColors.warning.withValues(alpha: 0.1)
+            : AtomixColors.warningDark.withValues(alpha: 0.2);
       case AtomixBadgeVariant.error:
         return brightness == Brightness.light
-            ? AtomixColors.error.withOpacity(0.1)
-            : AtomixColors.errorDark.withOpacity(0.2);
+            ? AtomixColors.error.withValues(alpha: 0.1)
+            : AtomixColors.errorDark.withValues(alpha: 0.2);
       case AtomixBadgeVariant.info:
         return brightness == Brightness.light
-            ? AtomixColors.info.withOpacity(0.1)
-            : AtomixColors.infoDark.withOpacity(0.2);
+            ? AtomixColors.info.withValues(alpha: 0.1)
+            : AtomixColors.infoDark.withValues(alpha: 0.2);
       case AtomixBadgeVariant.neutral:
         return brightness == Brightness.light
-            ? AtomixColors.textTertiary.withOpacity(0.1)
-            : AtomixColors.textTertiaryDark.withOpacity(0.2);
+            ? AtomixColors.textTertiary.withValues(alpha: 0.1)
+            : AtomixColors.textTertiaryDark.withValues(alpha: 0.2);
     }
   }
 

@@ -7,24 +7,24 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixDialog)
 Widget atomixDialogPlayground(BuildContext context) {
   final title = context.knobs.string(
-    label: 'Title',
+    label: 'Dialog > Title',
     initialValue: 'Confirm Action',
   );
 
   final content = context.knobs.string(
-    label: 'Content',
+    label: 'Dialog > Content',
     initialValue:
         'Are you sure you want to proceed? This action cannot be undone.',
   );
 
   final showIcon = context.knobs.boolean(
-    label: 'Show Icon',
+    label: 'Dialog > Show Icon',
     initialValue: false,
   );
 
   final iconData = showIcon
-      ? context.knobs.list<IconData>(
-          label: 'Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'Dialog > Icon Type',
           options: [
             Icons.warning,
             Icons.info,
@@ -35,8 +35,8 @@ Widget atomixDialogPlayground(BuildContext context) {
         )
       : null;
 
-  final foundationRadius = context.knobs.list<BorderRadius>(
-    label: 'Foundation Radius',
+  final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Foundation > Radius',
     options: [
       AtomixRadius.xsBorderRadius,
       AtomixRadius.smBorderRadius,
@@ -49,16 +49,16 @@ Widget atomixDialogPlayground(BuildContext context) {
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Background',
+    label: 'Foundation > Custom Background',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Background Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Background Color',
           options: [
             AtomixColors.surface,
-            AtomixColors.primary.withOpacity(0.05),
+            AtomixColors.primary.withValues(alpha: 0.05),
             const Color(0xFFF9FAFB),
           ],
         )

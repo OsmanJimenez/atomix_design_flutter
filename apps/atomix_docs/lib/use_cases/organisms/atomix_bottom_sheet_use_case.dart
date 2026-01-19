@@ -7,23 +7,23 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixBottomSheet)
 Widget atomixBottomSheetPlayground(BuildContext context) {
   final title = context.knobs.string(
-    label: 'Title',
+    label: 'BottomSheet > Title',
     initialValue: 'Sheet Title',
   );
 
   final showHandle = context.knobs.boolean(
-    label: 'Show Handle',
+    label: 'BottomSheet > Show Handle',
     initialValue: true,
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Background',
+    label: 'Foundation > Custom Background',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Background Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Background Color',
           options: [
             AtomixColors.surface,
             const Color(0xFFF3F4F6),
@@ -32,8 +32,8 @@ Widget atomixBottomSheetPlayground(BuildContext context) {
         )
       : null;
 
-  final foundationRadius = context.knobs.list<BorderRadius>(
-    label: 'Foundation Radius (Top)',
+  final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Foundation > Radius (Top)',
     options: [
       const BorderRadius.vertical(top: Radius.circular(AtomixRadius.xs)),
       const BorderRadius.vertical(top: Radius.circular(AtomixRadius.sm)),

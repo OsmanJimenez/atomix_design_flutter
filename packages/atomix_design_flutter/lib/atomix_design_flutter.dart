@@ -1,5 +1,3 @@
-library atomix_design_flutter;
-
 // Foundation
 export 'src/foundation/atomix_colors.dart';
 export 'src/foundation/atomix_spacing.dart';

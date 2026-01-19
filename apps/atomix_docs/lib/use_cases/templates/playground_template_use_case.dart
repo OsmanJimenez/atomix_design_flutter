@@ -9,131 +9,272 @@ class AtomixTemplates {}
 
 @widgetbook.UseCase(name: 'Full Page Playground', type: AtomixTemplates)
 Widget playgroundTemplate(BuildContext context) {
-  final headerOption = context.knobs.list<String>(
-    label: 'Header',
-    options: ['AppBar Default', 'AppBar Centered', 'None'],
+  // --- PAGE CONFIGURATION ---
+  final showCode = context.knobs.boolean(
+    label: 'Page > Show Generated Code',
+    initialValue: false,
   );
 
-  final bodyOption = context.knobs.list<String>(
-    label: 'Body Content',
-    options: ['Grid Layout', 'Card List', 'Form Example', 'Empty'],
+  // Header Config
+  final hasHeader = context.knobs.boolean(
+    label: 'Header > Has Header',
+    initialValue: true,
+  );
+  final headerTitle = context.knobs.string(
+    label: 'Header > Title',
+    initialValue: 'My App',
+  );
+  final headerCentered = context.knobs.boolean(
+    label: 'Header > Centered',
+    initialValue: false,
   );
 
-  final footerOption = context.knobs.list<String>(
-    label: 'Footer',
-    options: ['Button Group', 'Bottom Sheet Style', 'None'],
+  // Layout Config
+  final layoutType = context.knobs.object.dropdown<String>(
+    label: 'Layout > Type',
+    options: ['Grid (Responsive)', 'Column (Vertical)'],
   );
 
-  Widget? buildHeader() {
-    if (headerOption == 'AppBar Default') {
-      return const AtomixAppBar(title: 'App Title');
+  final globalPadding = context.knobs.object.dropdown<double>(
+    label: 'Layout > Page Padding',
+    options: [0, 8, 16, 24, 32],
+    initialOption: 16,
+  );
+
+  // --- SLOT CONFIGURATION ---
+  // We'll define 6 slots. Each slot can be a different component.
+
+  List<Map<String, dynamic>> slots = [];
+
+  for (int i = 1; i <= 6; i++) {
+    final type = context.knobs.object.dropdown<String>(
+      label: 'Slot $i > Component',
+      options: [
+        'None',
+        'Heading',
+        'Body Text',
+        'Button',
+        'TextField',
+        'Card',
+        'ListTile',
+        'Chip',
+        'Badge',
+        'Icon',
+        'Spacer',
+        'Divider',
+      ],
+      initialOption: i == 1 ? 'Heading' : 'None',
+    );
+
+    if (type != 'None') {
+      final label = context.knobs.string(
+        label: 'Slot $i > Text/Label',
+        initialValue: _getDefaultLabel(type, i),
+      );
+
+      final span = context.knobs.object.dropdown<int>(
+        label: 'Slot $i > Grid Span',
+        options: [1, 2, 3, 4, 6, 8, 9, 12],
+        initialOption: 12,
+      );
+
+      slots.add({'index': i, 'type': type, 'label': label, 'span': span});
     }
-    if (headerOption == 'AppBar Centered') {
-      return const AtomixAppBar(title: 'App Title', centerTitle: true);
-    }
-    return null;
   }
+
+  // --- COMPONENT BUILDERS ---
+
+  Widget buildComponent(String type, String label) {
+    switch (type) {
+      case 'Heading':
+        return AtomixText(
+          label,
+          style: Theme.of(context).textTheme.headlineMedium,
+        );
+      case 'Body Text':
+        return AtomixText(label, style: Theme.of(context).textTheme.bodyMedium);
+      case 'Button':
+        return AtomixButton(label: label, onPressed: () {});
+      case 'TextField':
+        return AtomixTextField(label: label, hint: 'Type something...');
+      case 'Card':
+        return AtomixCard(
+          variant: AtomixCardVariant.elevated,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: AtomixText(label),
+          ),
+        );
+      case 'ListTile':
+        return AtomixCard(
+          variant: AtomixCardVariant.filled,
+          child: AtomixListTile(
+            title: label,
+            subtitle: 'Secondary information',
+            leading: Icons.info_outline,
+          ),
+        );
+      case 'Chip':
+        return Wrap(
+          children: [AtomixChip(label: label, onSelected: (_) {})],
+        );
+      case 'Badge':
+        return AtomixBadge(label: label, variant: AtomixBadgeVariant.info);
+      case 'Icon':
+        return const Center(
+          child: AtomixIcon(Icons.star, size: 48, color: AtomixColors.primary),
+        );
+      case 'Spacer':
+        return const AtomixSpacer.md();
+      case 'Divider':
+        return const AtomixDivider();
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  // --- CODE GENERATION ---
+
+  String generateCode() {
+    final buffer = StringBuffer();
+    buffer.writeln('Scaffold(');
+    if (hasHeader) {
+      buffer.writeln('  appBar: AtomixAppBar(');
+      buffer.writeln("    title: '$headerTitle',");
+      if (headerCentered) buffer.writeln('    centerTitle: true,');
+      buffer.writeln('  ),');
+    }
+    buffer.writeln('  body: Padding(');
+    buffer.writeln('    padding: EdgeInsets.all($globalPadding),');
+
+    if (layoutType.startsWith('Grid')) {
+      buffer.writeln('    child: AtomixGrid(');
+      buffer.writeln('      children: [');
+      for (var slot in slots) {
+        buffer.writeln('        AtomixCol(');
+        buffer.writeln('          span: ${slot['span']},');
+        buffer.writeln(
+          '          child: ${_getComponentCode(slot['type'], slot['label'])},',
+        );
+        buffer.writeln('        ),');
+      }
+      buffer.writeln('      ],');
+      buffer.writeln('    ),');
+    } else {
+      buffer.writeln('    child: Column(');
+      buffer.writeln('      children: [');
+      for (var slot in slots) {
+        buffer.writeln(
+          '        ${_getComponentCode(slot['type'], slot['label'])},',
+        );
+        if (slot != slots.last) buffer.writeln('        SizedBox(height: 16),');
+      }
+      buffer.writeln('      ],');
+      buffer.writeln('    ),');
+    }
+
+    buffer.writeln('  ),');
+    buffer.writeln(')');
+    return buffer.toString();
+  }
+
+  // --- RENDER ---
 
   Widget buildBody() {
-    if (bodyOption == 'Grid Layout') {
-      return Padding(
-        padding: const EdgeInsets.all(AtomixSpacing.md),
-        child: AtomixGrid(
-          children: [
-            for (int i = 0; i < 6; i++)
-              AtomixCol(
-                span: 6,
-                child: AtomixCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('Item $i'),
+    final content = layoutType.startsWith('Grid')
+        ? AtomixGrid(
+            children: slots
+                .map(
+                  (s) => AtomixCol(
+                    span: s['span'],
+                    child: buildComponent(s['type'], s['label']),
                   ),
-                ),
-              ),
-          ],
-        ),
-      );
-    }
-    if (bodyOption == 'Card List') {
-      return ListView.separated(
-        padding: const EdgeInsets.all(AtomixSpacing.md),
-        itemCount: 5,
-        separatorBuilder: (_, __) => const AtomixSpacer.md(),
-        itemBuilder: (context, index) => AtomixCard(
-          child: AtomixListTile(
-            title: 'Card Item $index',
-            subtitle: 'This is a description',
-            leading: Icons.label,
-          ),
-        ),
-      );
-    }
-    if (bodyOption == 'Form Example') {
-      return Padding(
-        padding: const EdgeInsets.all(AtomixSpacing.lg),
-        child: Column(
-          children: [
-            const AtomixTextField(label: 'Username', hint: 'Enter name'),
-            const AtomixSpacer.md(),
-            const AtomixTextField(
-              label: 'Password',
-              hint: 'Enter password',
-              obscureText: true,
-            ),
-            const AtomixSpacer.lg(),
-            AtomixButton(label: 'Submit', fullWidth: true, onPressed: () {}),
-          ],
-        ),
-      );
-    }
-    return const Center(child: Text('Empty State'));
-  }
+                )
+                .toList(),
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: slots
+                .map(
+                  (s) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: buildComponent(s['type'], s['label']),
+                  ),
+                )
+                .toList(),
+          );
 
-  Widget? buildFooter() {
-    if (footerOption == 'Button Group') {
-      return Padding(
-        padding: const EdgeInsets.all(AtomixSpacing.md),
-        child: Row(
-          children: [
-            Expanded(
-              child: AtomixButton(
-                label: 'Cancel',
-                variant: AtomixButtonVariant.secondary,
-                onPressed: () {},
-              ),
-            ),
-            const AtomixSpacer.horizontal(AtomixSpacing.md),
-            Expanded(
-              child: AtomixButton(label: 'Confirm', onPressed: () {}),
-            ),
-          ],
-        ),
-      );
-    }
-    if (footerOption == 'Bottom Sheet Style') {
-      return AtomixBox(
-        backgroundColor: Theme.of(context).cardColor,
-        elevation: AtomixElevation.md,
-        padding: const EdgeInsets.all(AtomixSpacing.lg),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Sticky Footer Action'),
-            const AtomixSpacer.sm(),
-            AtomixButton(label: 'Continue', fullWidth: true, onPressed: () {}),
-          ],
-        ),
-      );
-    }
-    return null;
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(globalPadding),
+      child: content,
+    );
   }
-
-  final header = buildHeader();
 
   return Scaffold(
-    appBar: header is PreferredSizeWidget ? header : null,
-    body: buildBody(),
-    bottomNavigationBar: buildFooter(),
+    appBar: hasHeader
+        ? AtomixAppBar(title: headerTitle, centerTitle: headerCentered)
+        : null,
+    body: Column(
+      children: [
+        Expanded(child: buildBody()),
+        if (showCode)
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CodeSnippet(code: generateCode()),
+          ),
+      ],
+    ),
   );
+}
+
+String _getDefaultLabel(String type, int index) {
+  switch (type) {
+    case 'Heading':
+      return 'Section $index Title';
+    case 'Body Text':
+      return 'This is a sample description text for the section';
+    case 'Button':
+      return 'Click Me';
+    case 'Card':
+      return 'Card Content $index';
+    case 'TextField':
+      return 'Input $index';
+    case 'ListTile':
+      return 'List Item $index';
+    case 'Chip':
+      return 'Tag $index';
+    case 'Badge':
+      return 'New';
+    default:
+      return 'Label $index';
+  }
+}
+
+String _getComponentCode(String type, String label) {
+  switch (type) {
+    case 'Heading':
+      return "AtomixText('$label', style: textTheme.headlineMedium)";
+    case 'Body Text':
+      return "AtomixText('$label')";
+    case 'Button':
+      return "AtomixButton(label: '$label', onPressed: () {})";
+    case 'TextField':
+      return "AtomixTextField(label: '$label')";
+    case 'Card':
+      return "AtomixCard(child: Padding(padding: EdgeInsets.all(16), child: Text('$label')))";
+    case 'ListTile':
+      return "AtomixListTile(title: '$label')";
+    case 'Chip':
+      return "AtomixChip(label: '$label')";
+    case 'Badge':
+      return "AtomixBadge(label: '$label')";
+    case 'Icon':
+      return "AtomixIcon(Icons.star)";
+    case 'Spacer':
+      return "AtomixSpacer.md()";
+    case 'Divider':
+      return "AtomixDivider()";
+    default:
+      return "SizedBox()";
+  }
 }

@@ -7,12 +7,12 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixText)
 Widget atomixTextPlayground(BuildContext context) {
   final data = context.knobs.string(
-    label: 'Text Content',
+    label: 'Text > Content',
     initialValue: 'The quick brown fox jumps over the lazy dog',
   );
 
-  final textStyle = context.knobs.list<TextStyle>(
-    label: 'Typography Style',
+  final textStyle = context.knobs.object.dropdown<TextStyle>(
+    label: 'Text > Typography Style',
     options: [
       Theme.of(context).textTheme.displayLarge!,
       Theme.of(context).textTheme.headlineMedium!,
@@ -31,20 +31,20 @@ Widget atomixTextPlayground(BuildContext context) {
     },
   );
 
-  final textAlign = context.knobs.list<TextAlign>(
-    label: 'Text Align',
+  final textAlign = context.knobs.object.dropdown<TextAlign>(
+    label: 'Text > Align',
     options: TextAlign.values,
     labelBuilder: (value) => value.toString().split('.').last,
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Color',
+    label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,

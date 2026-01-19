@@ -72,7 +72,7 @@ class AtomixListTile extends StatelessWidget {
           ? Text(
               subtitle!,
               style: textColor != null
-                  ? TextStyle(color: textColor?.withOpacity(0.7))
+                  ? TextStyle(color: textColor?.withValues(alpha: 0.7))
                   : null,
             )
           : null,

@@ -1,3 +1,22 @@
+## 0.2.0 - 2026-01-18
+
+### Added
+- **Layout System**: Introduced `AtomixBox` and `AtomixGrid` for powerful structural layouts.
+- **Templates**: Added interactive page-builder templates in Widgetbook.
+- **Interactive Documentation**: Completely revamped all components with Knobs for real-time property editing.
+
+### Changed
+- **Modernized API**: Replaced all instances of `Color.withOpacity()` with the new `Color.withValues(alpha: ...)`.
+- **Improved Widgetbook UX**: Knobs are now logically grouped (e.g., `Component > Property`).
+- **Standardized Knobs**: Migrated from `context.knobs.list` to `context.knobs.object.dropdown` for better type safety and UI.
+- **Code Generation**: All playgrounds now include dynamic, copy-pasteable code snippets.
+
+### Fixed
+- Resolved all `deprecated_member_use` warnings across the package and documentation.
+- Fixed `unnecessary_library_name` lint in main package.
+- Corrected `curly_braces_in_flow_control_structures` across the documentation app.
+- Fixed Widgetbook configuration for `ViewportAddon` and `TextScaleAddon` compatibility.
+
 ## 0.1.1 - 2026-01-18
 
 ### Changed

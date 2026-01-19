@@ -6,20 +6,20 @@ import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(name: 'Playground', type: AtomixCard)
 Widget atomixCardPlayground(BuildContext context) {
-  final variant = context.knobs.list<AtomixCardVariant>(
-    label: 'Variant',
+  final variant = context.knobs.object.dropdown<AtomixCardVariant>(
+    label: 'Card > Variant',
     options: AtomixCardVariant.values,
     labelBuilder: (value) => value.toString().split('.').last,
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Use Custom Color',
+    label: 'Foundation > Use Custom Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Foundation Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,
@@ -40,8 +40,8 @@ Widget atomixCardPlayground(BuildContext context) {
         )
       : null;
 
-  final elevation = context.knobs.list<double>(
-    label: 'Foundation Elevation',
+  final elevation = context.knobs.object.dropdown<double>(
+    label: 'Foundation > Elevation',
     options: [
       AtomixElevation.none,
       AtomixElevation.xs,
@@ -54,8 +54,8 @@ Widget atomixCardPlayground(BuildContext context) {
     labelBuilder: (value) => 'Elevation $value',
   );
 
-  final foundationRadius = context.knobs.list<BorderRadius>(
-    label: 'Foundation Radius',
+  final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Foundation > Radius',
     options: [
       AtomixRadius.xsBorderRadius,
       AtomixRadius.smBorderRadius,
@@ -68,7 +68,7 @@ Widget atomixCardPlayground(BuildContext context) {
   );
 
   final isTappable = context.knobs.boolean(
-    label: 'Is Tappable',
+    label: 'Card > Is Tappable',
     initialValue: false,
   );
 
@@ -84,18 +84,24 @@ Widget atomixCardPlayground(BuildContext context) {
   }
 
   String radiusName(BorderRadius radius) {
-    if (radius == AtomixRadius.xsBorderRadius)
+    if (radius == AtomixRadius.xsBorderRadius) {
       return 'AtomixRadius.xsBorderRadius';
-    if (radius == AtomixRadius.smBorderRadius)
+    }
+    if (radius == AtomixRadius.smBorderRadius) {
       return 'AtomixRadius.smBorderRadius';
-    if (radius == AtomixRadius.mdBorderRadius)
+    }
+    if (radius == AtomixRadius.mdBorderRadius) {
       return 'AtomixRadius.mdBorderRadius';
-    if (radius == AtomixRadius.lgBorderRadius)
+    }
+    if (radius == AtomixRadius.lgBorderRadius) {
       return 'AtomixRadius.lgBorderRadius';
-    if (radius == AtomixRadius.xlBorderRadius)
+    }
+    if (radius == AtomixRadius.xlBorderRadius) {
       return 'AtomixRadius.xlBorderRadius';
-    if (radius == AtomixRadius.fullBorderRadius)
+    }
+    if (radius == AtomixRadius.fullBorderRadius) {
       return 'AtomixRadius.fullBorderRadius';
+    }
     return 'null';
   }
 

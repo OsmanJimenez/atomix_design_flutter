@@ -6,8 +6,8 @@ import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(name: 'Playground', type: AtomixIcon)
 Widget atomixIconPlayground(BuildContext context) {
-  final icon = context.knobs.list<IconData>(
-    label: 'Icon',
+  final icon = context.knobs.object.dropdown<IconData>(
+    label: 'Icon > Type',
     options: [
       Icons.home,
       Icons.settings,
@@ -23,20 +23,20 @@ Widget atomixIconPlayground(BuildContext context) {
   );
 
   final size = context.knobs.double.slider(
-    label: 'Size',
+    label: 'Icon > Size',
     initialValue: 24,
     min: 12,
     max: 120,
   );
 
   final useFoundationColor = context.knobs.boolean(
-    label: 'Custom Color',
+    label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
   final foundationColor = useFoundationColor
-      ? context.knobs.list<Color>(
-          label: 'Color',
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
           options: [
             AtomixColors.primary,
             AtomixColors.secondary,

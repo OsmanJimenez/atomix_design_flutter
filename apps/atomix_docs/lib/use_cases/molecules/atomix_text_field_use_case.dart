@@ -7,49 +7,55 @@ import '../../widgets/code_snippet.dart';
 @widgetbook.UseCase(name: 'Playground', type: AtomixTextField)
 Widget atomixTextFieldPlayground(BuildContext context) {
   final label = context.knobs.string(
-    label: 'Label',
+    label: 'TextField > Label',
     initialValue: 'Email Address',
   );
 
   final hint = context.knobs.string(
-    label: 'Hint',
+    label: 'TextField > Hint',
     initialValue: 'enter@example.com',
   );
 
   final helperText = context.knobs.string(
-    label: 'Helper Text',
+    label: 'TextField > Helper Text',
     initialValue: '',
   );
 
-  final errorText = context.knobs.string(label: 'Error Text', initialValue: '');
+  final errorText = context.knobs.string(
+    label: 'TextField > Error Text',
+    initialValue: '',
+  );
 
-  final enabled = context.knobs.boolean(label: 'Enabled', initialValue: true);
+  final enabled = context.knobs.boolean(
+    label: 'TextField > Enabled',
+    initialValue: true,
+  );
 
   final obscureText = context.knobs.boolean(
-    label: 'Obscure Text (Password)',
+    label: 'TextField > Obscure (Password)',
     initialValue: false,
   );
 
   final showPrefix = context.knobs.boolean(
-    label: 'Show Prefix Icon',
+    label: 'Icons > Show Prefix Icon',
     initialValue: false,
   );
 
   final prefixIcon = showPrefix
-      ? context.knobs.list<IconData>(
-          label: 'Prefix Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'Icons > Prefix Icon',
           options: [Icons.email, Icons.person, Icons.lock, Icons.search],
         )
       : null;
 
   final showSuffix = context.knobs.boolean(
-    label: 'Show Suffix Icon',
+    label: 'Icons > Show Suffix Icon',
     initialValue: false,
   );
 
   final suffixIcon = showSuffix
-      ? context.knobs.list<IconData>(
-          label: 'Suffix Icon',
+      ? context.knobs.object.dropdown<IconData>(
+          label: 'Icons > Suffix Icon',
           options: [
             Icons.visibility,
             Icons.clear,

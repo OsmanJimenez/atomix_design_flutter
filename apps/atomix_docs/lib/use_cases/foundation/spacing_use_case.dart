@@ -84,7 +84,7 @@ Widget _buildSpacingItem(String name, double value, String pixels) {
           height: 40,
           width: value,
           decoration: BoxDecoration(
-            color: AtomixColors.primary.withOpacity(0.3),
+            color: AtomixColors.primary.withValues(alpha: 0.3),
             border: Border.all(color: AtomixColors.primary),
           ),
         ),
