@@ -1,3 +1,16 @@
+## 0.4.0 - 2026-01-18
+
+### Added
+- **Atoms Library Expansion**: Added 20+ new atomic components.
+    - **Forms**: `AtomixCheckbox`, `AtomixRadio`, `AtomixSwitch`, `AtomixLabel`.
+    - **Visual & Status**: `AtomixAvatar`, `AtomixTag`, `AtomixDot`, `AtomixProgressCircular`, `AtomixProgressLinear`.
+    - **Data & Text**: `AtomixPriceText`, `AtomixLink`, `AtomixCounter`, `AtomixRating`.
+    - **Loading & Structure**: `AtomixSkeleton`, `AtomixShimmer`, `AtomixTooltip`, `AtomixThumbnail`.
+    - **Navigation & Misc**: `AtomixBreadcrumbItem`, `AtomixTabIndicator`.
+- **Documentation**: 
+    - Full interactive playgrounds for all new Atoms.
+    - Unified Foundation documentation structure.
+
 ## 0.3.0 - 2026-01-18
 
 ### Added

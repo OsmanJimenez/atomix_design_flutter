@@ -3,7 +3,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Color Palette', type: AtomixColors)
+@widgetbook.UseCase(
+  name: 'Color Palette',
+  path: '[Foundation]',
+  type: AtomixColors,
+)
 Widget atomixColorsShowcase(BuildContext context) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(24),

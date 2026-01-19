@@ -3,7 +3,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Typography Scale', type: AtomixTypography)
+@widgetbook.UseCase(
+  name: 'Typography Scale',
+  path: '[Foundation]',
+  type: AtomixTypography,
+)
 Widget atomixTypographyShowcase(BuildContext context) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(24),

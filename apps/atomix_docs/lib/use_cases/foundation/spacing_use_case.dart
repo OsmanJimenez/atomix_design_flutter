@@ -3,7 +3,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Spacing Scale', type: AtomixSpacing)
+@widgetbook.UseCase(
+  name: 'Spacing Scale',
+  path: '[Foundation]',
+  type: AtomixSpacing,
+)
 Widget atomixSpacingShowcase(BuildContext context) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(24),

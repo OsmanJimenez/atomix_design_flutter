@@ -10,14 +10,36 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:atomix_docs/use_cases/atoms/atomix_avatar_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_avatar_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_badge_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_badge_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_checkbox_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_checkbox_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_data_text_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_data_text_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_divider_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_divider_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_dot_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_dot_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_icon_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_icon_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_label_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_label_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_loading_structure_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_loading_structure_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_navigation_misc_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_navigation_misc_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_progress_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_progress_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_radio_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_radio_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_spacer_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_spacer_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_switch_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_switch_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_tag_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_tag_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_text_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_text_use_case;
 import 'package:atomix_docs/use_cases/foundation/animations_use_case.dart'
@@ -66,6 +88,123 @@ import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 
 final directories = <_widgetbook.WidgetbookNode>[
   _widgetbook.WidgetbookCategory(
+    name: 'Atoms',
+    children: [
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixAvatar',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Avatar',
+            builder: _atomix_docs_use_cases_atoms_atomix_avatar_use_case
+                .avatarUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixBreadcrumbItem',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Navigation & Misc',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_navigation_misc_use_case
+                    .navigationMiscUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixCheckbox',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Checkbox',
+            builder: _atomix_docs_use_cases_atoms_atomix_checkbox_use_case
+                .checkboxUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixDot',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Dot (Status)',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_dot_use_case.dotUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixLabel',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Label',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_label_use_case.labelUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixPriceText',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Data & Text Atoms',
+            builder: _atomix_docs_use_cases_atoms_atomix_data_text_use_case
+                .dataTextUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixProgressCircular',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Progress Indicators',
+            builder: _atomix_docs_use_cases_atoms_atomix_progress_use_case
+                .progressUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixRadio',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Radio',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_radio_use_case.radioUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixSkeleton',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Loading & Structure',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_loading_structure_use_case
+                    .loadingStructureUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixSwitch',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Switch',
+            builder: _atomix_docs_use_cases_atoms_atomix_switch_use_case
+                .switchUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixTag',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Tag',
+            builder:
+                _atomix_docs_use_cases_atoms_atomix_tag_use_case.tagUseCase,
+          ),
+        ],
+      ),
+    ],
+  ),
+  _widgetbook.WidgetbookCategory(
     name: 'Foundation',
     children: [
       _widgetbook.WidgetbookComponent(
@@ -89,12 +228,72 @@ final directories = <_widgetbook.WidgetbookNode>[
         ],
       ),
       _widgetbook.WidgetbookComponent(
+        name: 'AtomixColors',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Color Palette',
+            builder: _atomix_docs_use_cases_foundation_colors_use_case
+                .atomixColorsShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixElevation',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Elevation Levels',
+            builder: _atomix_docs_use_cases_foundation_elevation_use_case
+                .atomixElevationShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixRadius',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Border Radius',
+            builder: _atomix_docs_use_cases_foundation_radius_use_case
+                .atomixRadiusShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
         name: 'AtomixShadows',
         useCases: [
           _widgetbook.WidgetbookUseCase(
             name: 'Shadows',
             builder: _atomix_docs_use_cases_foundation_shadows_use_case
                 .shadowsUseCase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixSpacing',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Spacing Scale',
+            builder: _atomix_docs_use_cases_foundation_spacing_use_case
+                .atomixSpacingShowcase,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixTheme',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Theme Customization',
+            builder: _atomix_docs_use_cases_foundation_customization_use_case
+                .customizationGuide,
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookComponent(
+        name: 'AtomixTypography',
+        useCases: [
+          _widgetbook.WidgetbookUseCase(
+            name: 'Typography Scale',
+            builder: _atomix_docs_use_cases_foundation_typography_use_case
+                .atomixTypographyShowcase,
           ),
         ],
       ),
@@ -235,71 +434,6 @@ final directories = <_widgetbook.WidgetbookNode>[
             name: 'Playground',
             builder: _atomix_docs_use_cases_atoms_atomix_text_use_case
                 .atomixTextPlayground,
-          ),
-        ],
-      ),
-    ],
-  ),
-  _widgetbook.WidgetbookFolder(
-    name: 'foundation',
-    children: [
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixColors',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Color Palette',
-            builder: _atomix_docs_use_cases_foundation_colors_use_case
-                .atomixColorsShowcase,
-          ),
-        ],
-      ),
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixElevation',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Elevation Scale',
-            builder: _atomix_docs_use_cases_foundation_elevation_use_case
-                .atomixElevationShowcase,
-          ),
-        ],
-      ),
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixRadius',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Border Radius',
-            builder: _atomix_docs_use_cases_foundation_radius_use_case
-                .atomixRadiusShowcase,
-          ),
-        ],
-      ),
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixSpacing',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Spacing Scale',
-            builder: _atomix_docs_use_cases_foundation_spacing_use_case
-                .atomixSpacingShowcase,
-          ),
-        ],
-      ),
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixTheme',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'How to Customize',
-            builder: _atomix_docs_use_cases_foundation_customization_use_case
-                .customizationGuide,
-          ),
-        ],
-      ),
-      _widgetbook.WidgetbookComponent(
-        name: 'AtomixTypography',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Typography Scale',
-            builder: _atomix_docs_use_cases_foundation_typography_use_case
-                .atomixTypographyShowcase,
           ),
         ],
       ),

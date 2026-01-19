@@ -15,6 +15,25 @@ export 'src/atoms/atomix_icon.dart';
 export 'src/atoms/atomix_divider.dart';
 export 'src/atoms/atomix_spacer.dart';
 export 'src/atoms/atomix_badge.dart';
+export 'src/atoms/atomix_checkbox.dart';
+export 'src/atoms/atomix_radio.dart';
+export 'src/atoms/atomix_switch.dart';
+export 'src/atoms/atomix_label.dart';
+export 'src/atoms/atomix_avatar.dart';
+export 'src/atoms/atomix_tag.dart';
+export 'src/atoms/atomix_dot.dart';
+export 'src/atoms/atomix_progress_circular.dart';
+export 'src/atoms/atomix_progress_linear.dart';
+export 'src/atoms/atomix_price_text.dart';
+export 'src/atoms/atomix_link.dart';
+export 'src/atoms/atomix_counter.dart';
+export 'src/atoms/atomix_rating.dart';
+export 'src/atoms/atomix_skeleton.dart';
+export 'src/atoms/atomix_shimmer.dart';
+export 'src/atoms/atomix_tooltip.dart';
+export 'src/atoms/atomix_thumbnail.dart';
+export 'src/atoms/atomix_breadcrumb_item.dart';
+export 'src/atoms/atomix_tab_indicator.dart';
 
 // Molecules
 export 'src/molecules/atomix_button.dart';
