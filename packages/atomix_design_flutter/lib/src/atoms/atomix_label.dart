@@ -15,16 +15,31 @@ class AtomixLabel extends StatelessWidget {
   /// Whether to display the label in an error state.
   final bool isError;
 
+  /// Custom color for the main label.
+  final Color? labelColor;
+
+  /// Custom color for the sub-label.
+  final Color? subLabelColor;
+
   const AtomixLabel({
     super.key,
     required this.label,
     this.isRequired = false,
     this.subLabel,
     this.isError = false,
+    this.labelColor,
+    this.subLabelColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final defaultLabelColor = isError
+        ? AtomixColors.error
+        : AtomixColors.textPrimary;
+    final defaultSubLabelColor = isError
+        ? AtomixColors.error
+        : AtomixColors.textSecondary;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -36,7 +51,7 @@ class AtomixLabel extends StatelessWidget {
               label,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: isError ? AtomixColors.error : AtomixColors.textPrimary,
+                color: labelColor ?? defaultLabelColor,
               ),
             ),
             if (isRequired)
@@ -51,7 +66,7 @@ class AtomixLabel extends StatelessWidget {
           AtomixText(
             subLabel!,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: isError ? AtomixColors.error : AtomixColors.textSecondary,
+              color: subLabelColor ?? defaultSubLabelColor,
             ),
           ),
         ],

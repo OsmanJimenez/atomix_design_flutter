@@ -3,8 +3,13 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixBadge)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Badge',
+  type: AtomixBadge,
+)
 Widget atomixBadgePlayground(BuildContext context) {
   final label = context.knobs.string(
     label: 'Badge > Label',
@@ -33,27 +38,7 @@ Widget atomixBadgePlayground(BuildContext context) {
             AtomixColors.error,
             AtomixColors.info,
           ],
-          labelBuilder: (color) {
-            if (color == AtomixColors.primary) {
-              return 'Primary';
-            }
-            if (color == AtomixColors.secondary) {
-              return 'Secondary';
-            }
-            if (color == AtomixColors.success) {
-              return 'Success';
-            }
-            if (color == AtomixColors.warning) {
-              return 'Warning';
-            }
-            if (color == AtomixColors.error) {
-              return 'Error';
-            }
-            if (color == AtomixColors.info) {
-              return 'Info';
-            }
-            return 'Unknown';
-          },
+          labelBuilder: KnobHelpers.colorLabel,
         )
       : null;
 
@@ -68,6 +53,7 @@ Widget atomixBadgePlayground(BuildContext context) {
       AtomixRadius.fullBorderRadius,
     ],
     initialOption: AtomixRadius.smBorderRadius,
+    labelBuilder: KnobHelpers.radiusLabel,
   );
 
   final showIcon = context.knobs.boolean(
@@ -170,7 +156,7 @@ Widget atomixBadgePlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Neutral', type: AtomixBadge)
+@widgetbook.UseCase(name: 'Neutral', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeNeutral(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -194,7 +180,7 @@ Widget atomixBadgeNeutral(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Success', type: AtomixBadge)
+@widgetbook.UseCase(name: 'Success', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeSuccess(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -218,7 +204,7 @@ Widget atomixBadgeSuccess(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Warning', type: AtomixBadge)
+@widgetbook.UseCase(name: 'Warning', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeWarning(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -242,7 +228,7 @@ Widget atomixBadgeWarning(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Error', type: AtomixBadge)
+@widgetbook.UseCase(name: 'Error', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeError(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -263,7 +249,7 @@ Widget atomixBadgeError(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Info', type: AtomixBadge)
+@widgetbook.UseCase(name: 'Info', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeInfo(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -284,7 +270,7 @@ Widget atomixBadgeInfo(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Icon', type: AtomixBadge)
+@widgetbook.UseCase(name: 'With Icon', path: '[Atoms]/Badge', type: AtomixBadge)
 Widget atomixBadgeWithIcon(BuildContext context) {
   return Center(
     child: SingleChildScrollView(

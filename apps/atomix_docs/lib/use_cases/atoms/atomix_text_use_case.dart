@@ -3,8 +3,9 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixText)
+@widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Text', type: AtomixText)
 Widget atomixTextPlayground(BuildContext context) {
   final data = context.knobs.string(
     label: 'Text > Content',
@@ -52,6 +53,7 @@ Widget atomixTextPlayground(BuildContext context) {
             AtomixColors.success,
             AtomixColors.error,
           ],
+          labelBuilder: KnobHelpers.colorLabel,
         )
       : null;
 
@@ -82,7 +84,11 @@ Widget atomixTextPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Heading Large', type: AtomixText)
+@widgetbook.UseCase(
+  name: 'Heading Large',
+  path: '[Atoms]/Text',
+  type: AtomixText,
+)
 Widget atomixTextHeadingLarge(BuildContext context) {
   return Center(
     child: Padding(
@@ -106,7 +112,7 @@ Widget atomixTextHeadingLarge(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Body Large', type: AtomixText)
+@widgetbook.UseCase(name: 'Body Large', path: '[Atoms]/Text', type: AtomixText)
 Widget atomixTextBodyLarge(BuildContext context) {
   return Center(
     child: Padding(
@@ -130,7 +136,7 @@ Widget atomixTextBodyLarge(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Body Medium', type: AtomixText)
+@widgetbook.UseCase(name: 'Body Medium', path: '[Atoms]/Text', type: AtomixText)
 Widget atomixTextBodyMedium(BuildContext context) {
   return Center(
     child: Padding(
@@ -146,7 +152,7 @@ Widget atomixTextBodyMedium(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Label Small', type: AtomixText)
+@widgetbook.UseCase(name: 'Label Small', path: '[Atoms]/Text', type: AtomixText)
 Widget atomixTextLabelSmall(BuildContext context) {
   return Center(
     child: Padding(

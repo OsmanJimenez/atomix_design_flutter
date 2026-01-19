@@ -15,12 +15,16 @@ class AtomixThumbnail extends StatelessWidget {
   /// Whether to show a border.
   final bool hasBorder;
 
+  /// Custom border color override.
+  final Color? borderColor;
+
   const AtomixThumbnail({
     super.key,
     required this.imageUrl,
     this.size = 64,
     this.borderRadius,
     this.hasBorder = true,
+    this.borderColor,
   });
 
   @override
@@ -31,7 +35,9 @@ class AtomixThumbnail extends StatelessWidget {
       decoration: BoxDecoration(
         color: AtomixColors.border.withValues(alpha: 0.1),
         borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
-        border: hasBorder ? Border.all(color: AtomixColors.border) : null,
+        border: hasBorder
+            ? Border.all(color: borderColor ?? AtomixColors.border)
+            : null,
         image: DecorationImage(
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,

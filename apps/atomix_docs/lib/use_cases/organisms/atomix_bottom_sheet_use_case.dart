@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixBottomSheet)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Organisms]/BottomSheet',
+  type: AtomixBottomSheet,
+)
 Widget atomixBottomSheetPlayground(BuildContext context) {
   final title = context.knobs.string(
     label: 'BottomSheet > Title',
@@ -111,7 +115,11 @@ Widget atomixBottomSheetPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixBottomSheet)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Organisms]/BottomSheet',
+  type: AtomixBottomSheet,
+)
 Widget atomixBottomSheetDefault(BuildContext context) {
   return Center(
     child: Padding(
@@ -156,7 +164,11 @@ Widget atomixBottomSheetDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Without Handle', type: AtomixBottomSheet)
+@widgetbook.UseCase(
+  name: 'Without Handle',
+  path: '[Organisms]/BottomSheet',
+  type: AtomixBottomSheet,
+)
 Widget atomixBottomSheetNoHandle(BuildContext context) {
   return Center(
     child: Padding(
@@ -194,7 +206,11 @@ Widget atomixBottomSheetNoHandle(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Action', type: AtomixBottomSheet)
+@widgetbook.UseCase(
+  name: 'With Action',
+  path: '[Organisms]/BottomSheet',
+  type: AtomixBottomSheet,
+)
 Widget atomixBottomSheetWithAction(BuildContext context) {
   return Center(
     child: Padding(

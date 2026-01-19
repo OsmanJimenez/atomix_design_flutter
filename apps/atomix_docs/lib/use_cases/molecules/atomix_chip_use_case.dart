@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixChip)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Molecules]/Chip',
+  type: AtomixChip,
+)
 Widget atomixChipPlayground(BuildContext context) {
   final label = context.knobs.string(
     label: 'Chip > Label',
@@ -170,7 +174,7 @@ Widget atomixChipPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixChip)
+@widgetbook.UseCase(name: 'Default', path: '[Molecules]/Chip', type: AtomixChip)
 Widget atomixChipDefault(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -190,7 +194,11 @@ Widget atomixChipDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Selected', type: AtomixChip)
+@widgetbook.UseCase(
+  name: 'Selected',
+  path: '[Molecules]/Chip',
+  type: AtomixChip,
+)
 Widget atomixChipSelected(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -216,7 +224,11 @@ Widget atomixChipSelected(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Icon', type: AtomixChip)
+@widgetbook.UseCase(
+  name: 'With Icon',
+  path: '[Molecules]/Chip',
+  type: AtomixChip,
+)
 Widget atomixChipWithIcon(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -237,7 +249,11 @@ Widget atomixChipWithIcon(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Deletable', type: AtomixChip)
+@widgetbook.UseCase(
+  name: 'Deletable',
+  path: '[Molecules]/Chip',
+  type: AtomixChip,
+)
 Widget atomixChipDeletable(BuildContext context) {
   return Center(
     child: SingleChildScrollView(

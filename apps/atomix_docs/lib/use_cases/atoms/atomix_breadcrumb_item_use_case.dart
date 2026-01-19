@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
-  path: '[Atoms]/Breadcrumb Item',
+  path: '[Atoms]/BreadcrumbItem',
   type: AtomixBreadcrumbItem,
 )
-Widget breadcrumbPlayground(BuildContext context) {
+Widget breadcrumbItemPlayground(BuildContext context) {
   final label = context.knobs.string(
     label: 'Breadcrumb > Label',
-    initialValue: 'Products',
+    initialValue: 'Settings',
   );
 
   final isLast = context.knobs.boolean(
@@ -20,10 +21,40 @@ Widget breadcrumbPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Foundation > Custom Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
+          options: [
+            AtomixColors.primary,
+            AtomixColors.secondary,
+            AtomixColors.success,
+            AtomixColors.info,
+          ],
+          labelBuilder: KnobHelpers.colorLabel,
+        )
+      : null;
+
+  String colorName(Color? c) {
+    if (c == AtomixColors.primary) return 'AtomixColors.primary';
+    if (c == AtomixColors.secondary) return 'AtomixColors.secondary';
+    if (c == AtomixColors.success) return 'AtomixColors.success';
+    if (c == AtomixColors.info) return 'AtomixColors.info';
+    return 'null';
+  }
+
+  final colorStr = foundationColor != null
+      ? '\n  color: ${colorName(foundationColor)},'
+      : '';
+
   final code =
       '''AtomixBreadcrumbItem(
   label: '$label',
-  isLast: $isLast,
+  isLast: $isLast,$colorStr
   onTap: () {},
 )''';
 
@@ -32,11 +63,11 @@ Widget breadcrumbPlayground(BuildContext context) {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AtomixBreadcrumbItem(label: label, isLast: isLast, onTap: () {}),
-            ],
+          AtomixBreadcrumbItem(
+            label: label,
+            isLast: isLast,
+            color: foundationColor,
+            onTap: () {},
           ),
           const SizedBox(height: 32),
           CodeSnippet(code: code),
@@ -47,11 +78,11 @@ Widget breadcrumbPlayground(BuildContext context) {
 }
 
 @widgetbook.UseCase(
-  name: 'Breadcrumb Trail',
-  path: '[Atoms]/Breadcrumb Item',
+  name: 'Sequence',
+  path: '[Atoms]/BreadcrumbItem',
   type: AtomixBreadcrumbItem,
 )
-Widget breadcrumbTrail(BuildContext context) {
+Widget breadcrumbSequence(BuildContext context) {
   return const Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +91,8 @@ Widget breadcrumbTrail(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             AtomixBreadcrumbItem(label: 'Home'),
-            AtomixBreadcrumbItem(label: 'Categories'),
-            AtomixBreadcrumbItem(label: 'Electronics', isLast: true),
+            AtomixBreadcrumbItem(label: 'Products'),
+            AtomixBreadcrumbItem(label: 'Detail', isLast: true),
           ],
         ),
         SizedBox(height: 24),
@@ -69,8 +100,8 @@ Widget breadcrumbTrail(BuildContext context) {
           code: '''Row(
   children: [
     AtomixBreadcrumbItem(label: 'Home'),
-    AtomixBreadcrumbItem(label: 'Categories'),
-    AtomixBreadcrumbItem(label: 'Electronics', isLast: true),
+    AtomixBreadcrumbItem(label: 'Products'),
+    AtomixBreadcrumbItem(label: 'Detail', isLast: true),
   ],
 )''',
         ),

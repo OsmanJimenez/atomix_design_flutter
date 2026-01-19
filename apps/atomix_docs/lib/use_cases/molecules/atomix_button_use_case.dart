@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonPlayground(BuildContext context) {
   // Knobs for interactivity
   final label = context.knobs.string(
@@ -209,7 +213,11 @@ Widget atomixButtonPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Primary', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Primary',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonPrimary(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -236,7 +244,11 @@ Widget atomixButtonPrimary(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Secondary', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Secondary',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonSecondary(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -263,7 +275,11 @@ Widget atomixButtonSecondary(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Tertiary', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Tertiary',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonTertiary(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -290,7 +306,11 @@ Widget atomixButtonTertiary(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Small', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Small',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonSmall(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -317,7 +337,11 @@ Widget atomixButtonSmall(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Large', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Large',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonLarge(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -344,7 +368,11 @@ Widget atomixButtonLarge(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Disabled', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Disabled',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonDisabled(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -366,7 +394,11 @@ Widget atomixButtonDisabled(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Loading', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Loading',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonLoading(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -393,7 +425,11 @@ Widget atomixButtonLoading(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Icon', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'With Icon',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonWithIcon(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -420,7 +456,11 @@ Widget atomixButtonWithIcon(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Full Width', type: AtomixButton)
+@widgetbook.UseCase(
+  name: 'Full Width',
+  path: '[Molecules]/Button',
+  type: AtomixButton,
+)
 Widget atomixButtonFullWidth(BuildContext context) {
   return Center(
     child: SingleChildScrollView(

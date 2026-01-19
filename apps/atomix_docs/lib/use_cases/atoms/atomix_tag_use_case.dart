@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Tag', type: AtomixTag)
 Widget tagPlayground(BuildContext context) {
@@ -17,7 +18,7 @@ Widget tagPlayground(BuildContext context) {
   );
 
   final color = context.knobs.object.dropdown<Color>(
-    label: 'Tag > Color',
+    label: 'Tag > Theme Color',
     options: [
       AtomixColors.primary,
       AtomixColors.success,
@@ -25,20 +26,56 @@ Widget tagPlayground(BuildContext context) {
       AtomixColors.warning,
       AtomixColors.info,
     ],
-    labelBuilder: (c) {
-      if (c == AtomixColors.primary) return 'Primary';
-      if (c == AtomixColors.success) return 'Success';
-      if (c == AtomixColors.error) return 'Error';
-      if (c == AtomixColors.warning) return 'Warning';
-      return 'Info';
-    },
+    labelBuilder: KnobHelpers.colorLabel,
   );
+
+  final useFoundationRadius = context.knobs.boolean(
+    label: 'Foundation > Custom Radius',
+    initialValue: false,
+  );
+
+  final foundationRadius = useFoundationRadius
+      ? context.knobs.object.dropdown<BorderRadius>(
+          label: 'Foundation > Radius',
+          options: [
+            AtomixRadius.xsBorderRadius,
+            AtomixRadius.smBorderRadius,
+            AtomixRadius.mdBorderRadius,
+            AtomixRadius.lgBorderRadius,
+            AtomixRadius.fullBorderRadius,
+          ],
+          labelBuilder: KnobHelpers.radiusLabel,
+        )
+      : null;
+
+  String colorName(Color? c) {
+    if (c == AtomixColors.primary) return 'AtomixColors.primary';
+    if (c == AtomixColors.success) return 'AtomixColors.success';
+    if (c == AtomixColors.error) return 'AtomixColors.error';
+    if (c == AtomixColors.warning) return 'AtomixColors.warning';
+    if (c == AtomixColors.info) return 'AtomixColors.info';
+    return 'null';
+  }
+
+  String radiusName(BorderRadius? r) {
+    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
+    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
+    if (r == AtomixRadius.mdBorderRadius) return 'AtomixRadius.mdBorderRadius';
+    if (r == AtomixRadius.lgBorderRadius) return 'AtomixRadius.lgBorderRadius';
+    if (r == AtomixRadius.fullBorderRadius)
+      return 'AtomixRadius.fullBorderRadius';
+    return 'null';
+  }
+
+  final radiusStr = foundationRadius != null
+      ? '\n  borderRadius: ${radiusName(foundationRadius)},'
+      : '';
 
   final code =
       '''AtomixTag(
   label: '$label',
   icon: ${showIcon ? 'Icons.label' : 'null'},
-  color: ${color == AtomixColors.primary ? 'AtomixColors.primary' : 'CustomColor'},
+  color: ${colorName(color)},$radiusStr
 )''';
 
   return Center(
@@ -50,6 +87,7 @@ Widget tagPlayground(BuildContext context) {
             label: label,
             icon: showIcon ? Icons.label : null,
             color: color,
+            borderRadius: foundationRadius,
           ),
           const SizedBox(height: 32),
           CodeSnippet(code: code),
@@ -83,27 +121,48 @@ Widget tagSuccess(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(
-  name: 'Status variants',
-  path: '[Atoms]/Tag',
-  type: AtomixTag,
-)
-Widget tagVariants(BuildContext context) {
+@widgetbook.UseCase(name: 'Error', path: '[Atoms]/Tag', type: AtomixTag)
+Widget tagError(BuildContext context) {
   return const Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Wrap(
-          spacing: 8,
-          children: [
-            AtomixTag(label: 'New', color: AtomixColors.primary),
-            AtomixTag(label: 'Sale', color: AtomixColors.error),
-            AtomixTag(label: 'Stock', color: AtomixColors.info),
-          ],
+        AtomixTag(
+          label: 'Critical',
+          color: AtomixColors.error,
+          icon: Icons.warning_amber_rounded,
         ),
         SizedBox(height: 24),
         CodeSnippet(
-          code: '''AtomixTag(label: 'New', color: AtomixColors.primary)''',
+          code: '''AtomixTag(
+  label: 'Critical',
+  color: AtomixColors.error,
+  icon: Icons.warning_amber_rounded,
+)''',
+        ),
+      ],
+    ),
+  );
+}
+
+@widgetbook.UseCase(name: 'Info', path: '[Atoms]/Tag', type: AtomixTag)
+Widget tagInfo(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixTag(
+          label: 'Update Available',
+          color: AtomixColors.info,
+          icon: Icons.info_outline,
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixTag(
+  label: 'Update Available',
+  color: AtomixColors.info,
+  icon: Icons.info_outline,
+)''',
         ),
       ],
     ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -15,10 +16,38 @@ Widget shimmerPlayground(BuildContext context) {
     initialValue: true,
   );
 
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Foundation > Custom Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Base Color',
+          options: [
+            AtomixColors.border,
+            AtomixColors.primary,
+            AtomixColors.secondary,
+          ],
+          labelBuilder: KnobHelpers.colorLabel,
+        )
+      : null;
+
+  String colorName(Color? c) {
+    if (c == AtomixColors.primary) return 'AtomixColors.primary';
+    if (c == AtomixColors.secondary) return 'AtomixColors.secondary';
+    if (c == AtomixColors.border) return 'AtomixColors.border';
+    return 'null';
+  }
+
+  final colorStr = foundationColor != null
+      ? '\n  baseColor: ${colorName(foundationColor)},'
+      : '';
+
   final code =
       '''AtomixShimmer(
-  isActive: $isActive,
-  child: AtomixSkeleton(width: 200, height: 20),
+  isActive: $isActive,$colorStr
+  child: AtomixSkeleton(width: 200, height: 100),
 )''';
 
   return Center(
@@ -28,7 +57,8 @@ Widget shimmerPlayground(BuildContext context) {
         children: [
           AtomixShimmer(
             isActive: isActive,
-            child: const AtomixSkeleton(width: 300, height: 100),
+            baseColor: foundationColor,
+            child: const AtomixSkeleton(width: 200, height: 100),
           ),
           const SizedBox(height: 32),
           CodeSnippet(code: code),
@@ -39,35 +69,50 @@ Widget shimmerPlayground(BuildContext context) {
 }
 
 @widgetbook.UseCase(
-  name: 'Loading Product',
+  name: 'List Item Placeholder',
   path: '[Atoms]/Shimmer',
   type: AtomixShimmer,
 )
-Widget shimmerProduct(BuildContext context) {
+Widget shimmerList(BuildContext context) {
   return const Center(
-    child: Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixShimmer(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AtomixSkeleton(width: 50, height: 50, isCircle: true),
+              SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AtomixSkeleton(width: 150, height: 12),
+                  SizedBox(height: 8),
+                  AtomixSkeleton(width: 100, height: 10),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 32),
+        CodeSnippet(
+          code: '''AtomixShimmer(
+  child: Row(
+    children: [
+      AtomixSkeleton(width: 50, height: 50, isCircle: true),
+      SizedBox(width: 16),
+      Column(
         children: [
-          AtomixShimmer(
-            child: Column(
-              children: [
-                AtomixSkeleton(width: 250, height: 150),
-                SizedBox(height: 12),
-                AtomixSkeleton(width: 200, height: 20),
-                SizedBox(height: 8),
-                AtomixSkeleton(width: 100, height: 16),
-              ],
-            ),
-          ),
-          SizedBox(height: 24),
-          CodeSnippet(
-            code: '''AtomixShimmer(
-  child: ProductCardSkeleton(),
-)''',
-          ),
+          AtomixSkeleton(width: 150, height: 12),
+          AtomixSkeleton(width: 100, height: 10),
         ],
       ),
+    ],
+  ),
+)''',
+        ),
+      ],
     ),
   );
 }

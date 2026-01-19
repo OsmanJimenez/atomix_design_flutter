@@ -18,6 +18,12 @@ class AtomixAvatar extends StatelessWidget {
   /// Color of the initials text.
   final Color? foregroundColor;
 
+  /// Custom border radius for foundation override.
+  final BorderRadius? borderRadius;
+
+  /// Custom shadow for foundation override.
+  final List<BoxShadow>? boxShadow;
+
   const AtomixAvatar({
     super.key,
     this.imageUrl,
@@ -25,6 +31,8 @@ class AtomixAvatar extends StatelessWidget {
     this.size = 40,
     this.backgroundColor,
     this.foregroundColor,
+    this.borderRadius,
+    this.boxShadow,
   });
 
   @override
@@ -34,7 +42,8 @@ class AtomixAvatar extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         color: backgroundColor ?? AtomixColors.primary.withValues(alpha: 0.1),
-        shape: BoxShape.circle,
+        borderRadius: borderRadius ?? BorderRadius.circular(size),
+        boxShadow: boxShadow,
         image: imageUrl != null
             ? DecorationImage(image: NetworkImage(imageUrl!), fit: BoxFit.cover)
             : null,

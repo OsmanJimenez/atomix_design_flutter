@@ -12,11 +12,23 @@ class AtomixTooltip extends StatelessWidget {
   /// Position of the tooltip.
   final TooltipTriggerMode triggerMode;
 
+  /// Custom background color override.
+  final Color? backgroundColor;
+
+  /// Custom text color override.
+  final Color? textColor;
+
+  /// Custom border radius override.
+  final BorderRadius? borderRadius;
+
   const AtomixTooltip({
     super.key,
     required this.message,
     required this.child,
     this.triggerMode = TooltipTriggerMode.longPress,
+    this.backgroundColor,
+    this.textColor,
+    this.borderRadius,
   });
 
   @override
@@ -25,10 +37,11 @@ class AtomixTooltip extends StatelessWidget {
       message: message,
       triggerMode: triggerMode,
       decoration: BoxDecoration(
-        color: AtomixColors.onBackground.withValues(alpha: 0.9),
-        borderRadius: AtomixRadius.xsBorderRadius,
+        color:
+            backgroundColor ?? AtomixColors.onBackground.withValues(alpha: 0.9),
+        borderRadius: borderRadius ?? AtomixRadius.xsBorderRadius,
       ),
-      textStyle: const TextStyle(color: Colors.white, fontSize: 12),
+      textStyle: TextStyle(color: textColor ?? Colors.white, fontSize: 12),
       child: child,
     );
   }

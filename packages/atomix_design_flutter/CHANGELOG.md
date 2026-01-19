@@ -1,3 +1,33 @@
+## 0.5.0 - 2026-01-19
+
+### Added
+- **Atoms Gallery**: Introduced a visual landing page for the "Atoms" category to provide a high-level overview.
+- **Atoms README**: Added conceptual documentation for the atomic level of the design system.
+
+### Changed
+- **Widgetbook Standardization**: Unified the navigation structure. All components now use an explicit `path: '[Category]/ComponentName'` format.
+- **Improved UX**: Eliminated implicit lowercase folders in the sidebar for a cleaner, professional tree structure.
+- **Layout System**: Renamed Playground scenarios and consolidated `AtomixBox` (Responsive Box) and `AtomixGrid`.
+
+## 0.4.3 - 2026-01-19
+
+### Changed
+- **Developer Experience (DX)**: Improved Widgetbook knobs for all atomic components.
+  - Replaced technical object strings with clean, semantic labels (e.g., "Primary", "Success", "MD").
+  - Centralized knob labeling logic in `KnobHelpers` for consistency.
+
+## 0.4.2 - 2026-01-19
+
+### Added
+- **Foundation Integration**: 20+ atomic components now support explicit override of Foundation tokens.
+  - Added `backgroundColor`, `textColor`, `borderRadius`, `borderColor`, and `shadow` properties where applicable.
+- **Enhanced Documentation**: All Atoms now feature an interactive "Playground" with "Foundation" knobs.
+- **Granular Scenarios**: Refactored all atoms to include separate use cases for specific states (Success, Error, Disabled, etc.), each with its own static code snippet.
+
+### Changed
+- **Token Transparency**: Code snippets in Widgetbook now show `AtomixColors.primary` instead of hex codes.
+- **Modern Builders**: Improved the internal logic of `AtomixShimmer` and `AtomixTooltip` for better reliability.
+
 ## 0.4.1 - 2026-01-18
 
 ### Changed

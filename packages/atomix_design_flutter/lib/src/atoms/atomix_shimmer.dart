@@ -9,7 +9,19 @@ class AtomixShimmer extends StatefulWidget {
   /// Whether the shimmer is active.
   final bool isActive;
 
-  const AtomixShimmer({super.key, required this.child, this.isActive = true});
+  /// Custom base color for foundation override.
+  final Color? baseColor;
+
+  /// Custom highlight color for foundation override.
+  final Color? highlightColor;
+
+  const AtomixShimmer({
+    super.key,
+    required this.child,
+    this.isActive = true,
+    this.baseColor,
+    this.highlightColor,
+  });
 
   @override
   State<AtomixShimmer> createState() => _AtomixShimmerState();
@@ -64,9 +76,16 @@ class _AtomixShimmerState extends State<AtomixShimmer>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                AtomixColors.border.withValues(alpha: 0.1),
-                AtomixColors.border.withValues(alpha: 0.6),
-                AtomixColors.border.withValues(alpha: 0.1),
+                (widget.baseColor ?? AtomixColors.border).withValues(
+                  alpha: 0.1,
+                ),
+                (widget.highlightColor ??
+                        widget.baseColor ??
+                        AtomixColors.border)
+                    .withValues(alpha: 0.6),
+                (widget.baseColor ?? AtomixColors.border).withValues(
+                  alpha: 0.1,
+                ),
               ],
               stops: const [0.1, 0.5, 0.9],
               transform: _SlidingGradientTransform(offset: _animation.value),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -20,7 +21,7 @@ Widget skeletonPlayground(BuildContext context) {
   final height = context.knobs.double.slider(
     label: 'Skeleton > Height',
     min: 10,
-    max: 300,
+    max: 200,
     initialValue: 20,
   );
 
@@ -29,11 +30,64 @@ Widget skeletonPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Foundation > Custom Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
+          options: [
+            AtomixColors.border,
+            AtomixColors.primary,
+            AtomixColors.textDisabled,
+          ],
+          labelBuilder: KnobHelpers.colorLabel,
+        )
+      : null;
+
+  final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
+    label: 'Foundation > Radius',
+    options: [
+      AtomixRadius.xsBorderRadius,
+      AtomixRadius.smBorderRadius,
+      AtomixRadius.mdBorderRadius,
+      AtomixRadius.lgBorderRadius,
+      BorderRadius.zero,
+    ],
+    initialOption: AtomixRadius.smBorderRadius,
+    labelBuilder: KnobHelpers.radiusLabel,
+  );
+
+  String colorName(Color? c) {
+    if (c == AtomixColors.primary) return 'AtomixColors.primary';
+    if (c == AtomixColors.border) return 'AtomixColors.border';
+    if (c == AtomixColors.textDisabled) return 'AtomixColors.textDisabled';
+    return 'null';
+  }
+
+  String radiusName(BorderRadius r) {
+    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
+    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
+    if (r == AtomixRadius.mdBorderRadius) return 'AtomixRadius.mdBorderRadius';
+    if (r == AtomixRadius.lgBorderRadius) return 'AtomixRadius.lgBorderRadius';
+    return 'BorderRadius.zero';
+  }
+
+  final colorStr = foundationColor != null
+      ? '\n  color: ${colorName(foundationColor)},'
+      : '';
+  final radiusStr =
+      (!isCircle && foundationRadius != AtomixRadius.smBorderRadius)
+      ? '\n  borderRadius: ${radiusName(foundationRadius)},'
+      : '';
+
   final code =
       '''AtomixSkeleton(
-  width: $width,
+  width: ${isCircle ? height : width},
   height: $height,
-  isCircle: $isCircle,
+  isCircle: $isCircle,$colorStr$radiusStr
 )''';
 
   return Center(
@@ -41,7 +95,13 @@ Widget skeletonPlayground(BuildContext context) {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          AtomixSkeleton(width: width, height: height, isCircle: isCircle),
+          AtomixSkeleton(
+            width: isCircle ? height : width,
+            height: height,
+            isCircle: isCircle,
+            color: foundationColor,
+            borderRadius: foundationRadius,
+          ),
           const SizedBox(height: 32),
           CodeSnippet(code: code),
         ],
@@ -51,48 +111,39 @@ Widget skeletonPlayground(BuildContext context) {
 }
 
 @widgetbook.UseCase(
-  name: 'Avatars & Lines',
+  name: 'Text Line',
   path: '[Atoms]/Skeleton',
   type: AtomixSkeleton,
 )
-Widget skeletonAvatars(BuildContext context) {
+Widget skeletonText(BuildContext context) {
   return const Center(
-    child: Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AtomixSkeleton(width: 50, height: 50, isCircle: true),
-              SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AtomixSkeleton(width: 120, height: 16),
-                  SizedBox(height: 8),
-                  AtomixSkeleton(width: 80, height: 12),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 24),
-          CodeSnippet(
-            code: '''// Profile Skeleton
-Row(
-  children: [
-    AtomixSkeleton(width: 50, height: 50, isCircle: true),
-    Column(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixSkeleton(width: 120, height: 16),
-        AtomixSkeleton(width: 80, height: 12),
+        AtomixSkeleton(width: 200, height: 16),
+        SizedBox(height: 24),
+        CodeSnippet(code: 'AtomixSkeleton(width: 200, height: 16)'),
       ],
     ),
-  ],
-)''',
-          ),
-        ],
-      ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Avatar Place',
+  path: '[Atoms]/Skeleton',
+  type: AtomixSkeleton,
+)
+Widget skeletonAvatar(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixSkeleton(width: 80, height: 80, isCircle: true),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: 'AtomixSkeleton(width: 80, height: 80, isCircle: true)',
+        ),
+      ],
     ),
   );
 }

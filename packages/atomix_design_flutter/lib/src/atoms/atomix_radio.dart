@@ -18,6 +18,9 @@ class AtomixRadio<T> extends StatelessWidget {
   /// Whether the radio is disabled.
   final bool isDisabled;
 
+  /// Custom active color for foundation override.
+  final Color? activeColor;
+
   const AtomixRadio({
     super.key,
     required this.value,
@@ -25,6 +28,7 @@ class AtomixRadio<T> extends StatelessWidget {
     required this.onChanged,
     this.label,
     this.isDisabled = false,
+    this.activeColor,
   });
 
   @override
@@ -33,7 +37,7 @@ class AtomixRadio<T> extends StatelessWidget {
       value: value,
       groupValue: groupValue,
       onChanged: isDisabled ? null : onChanged,
-      activeColor: AtomixColors.primary,
+      activeColor: activeColor ?? AtomixColors.primary,
     );
 
     if (label == null) return radio;

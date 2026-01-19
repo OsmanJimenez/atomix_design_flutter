@@ -3,8 +3,9 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixIcon)
+@widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Icon', type: AtomixIcon)
 Widget atomixIconPlayground(BuildContext context) {
   final icon = context.knobs.object.dropdown<IconData>(
     label: 'Icon > Type',
@@ -45,15 +46,7 @@ Widget atomixIconPlayground(BuildContext context) {
             AtomixColors.info,
             AtomixColors.warning,
           ],
-          labelBuilder: (color) {
-            if (color == AtomixColors.primary) return 'Primary';
-            if (color == AtomixColors.secondary) return 'Secondary';
-            if (color == AtomixColors.success) return 'Success';
-            if (color == AtomixColors.error) return 'Error';
-            if (color == AtomixColors.info) return 'Info';
-            if (color == AtomixColors.warning) return 'Warning';
-            return 'Custom';
-          },
+          labelBuilder: KnobHelpers.colorLabel,
         )
       : null;
 
@@ -81,7 +74,7 @@ Widget atomixIconPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Sizes', type: AtomixIcon)
+@widgetbook.UseCase(name: 'Sizes', path: '[Atoms]/Icon', type: AtomixIcon)
 Widget atomixIconSizes(BuildContext context) {
   return Center(
     child: Padding(
@@ -117,7 +110,7 @@ Widget atomixIconSizes(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Colors', type: AtomixIcon)
+@widgetbook.UseCase(name: 'Colors', path: '[Atoms]/Icon', type: AtomixIcon)
 Widget atomixIconColors(BuildContext context) {
   return Center(
     child: Padding(

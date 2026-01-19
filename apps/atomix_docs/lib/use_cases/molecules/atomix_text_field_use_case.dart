@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldPlayground(BuildContext context) {
   final label = context.knobs.string(
     label: 'TextField > Label',
@@ -118,7 +122,11 @@ Widget atomixTextFieldPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldDefault(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -137,7 +145,11 @@ Widget atomixTextFieldDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Helper Text', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'With Helper Text',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldWithHelper(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -161,7 +173,11 @@ Widget atomixTextFieldWithHelper(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Error', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'With Error',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldWithError(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -185,7 +201,11 @@ Widget atomixTextFieldWithError(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Prefix Icon', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'With Prefix Icon',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldWithPrefixIcon(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -209,7 +229,11 @@ Widget atomixTextFieldWithPrefixIcon(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Password', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'Password',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldPassword(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -235,7 +259,11 @@ Widget atomixTextFieldPassword(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Multiline', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'Multiline',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldMultiline(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -261,7 +289,11 @@ Widget atomixTextFieldMultiline(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Disabled', type: AtomixTextField)
+@widgetbook.UseCase(
+  name: 'Disabled',
+  path: '[Molecules]/TextField',
+  type: AtomixTextField,
+)
 Widget atomixTextFieldDisabled(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),

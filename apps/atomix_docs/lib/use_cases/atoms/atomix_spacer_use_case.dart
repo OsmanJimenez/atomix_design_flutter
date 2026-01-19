@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixSpacer)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Spacer',
+  type: AtomixSpacer,
+)
 Widget atomixSpacerPlayground(BuildContext context) {
   final spacing = context.knobs.object.dropdown<double>(
     label: 'Spacer > Foundation Spacing',
@@ -87,7 +91,11 @@ Widget atomixSpacerPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Vertical Scale', type: AtomixSpacer)
+@widgetbook.UseCase(
+  name: 'Vertical Scale',
+  path: '[Atoms]/Spacer',
+  type: AtomixSpacer,
+)
 Widget atomixSpacerVerticalScale(BuildContext context) {
   return Center(
     child: Padding(
@@ -119,7 +127,11 @@ Widget atomixSpacerVerticalScale(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Horizontal Scale', type: AtomixSpacer)
+@widgetbook.UseCase(
+  name: 'Horizontal Scale',
+  path: '[Atoms]/Spacer',
+  type: AtomixSpacer,
+)
 Widget atomixSpacerHorizontalScale(BuildContext context) {
   return Center(
     child: Padding(

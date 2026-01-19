@@ -3,7 +3,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/component_readme.dart';
 import 'playground_template_use_case.dart';
 
-@widgetbook.UseCase(name: 'README', type: AtomixTemplates)
+@widgetbook.UseCase(
+  name: 'README',
+  path: '[Templates]/README',
+  type: AtomixTemplates,
+)
 Widget templatesReadme(BuildContext context) {
   return const ComponentReadme(
     title: 'Templates',

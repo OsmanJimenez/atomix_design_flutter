@@ -16,12 +16,20 @@ class AtomixSwitch extends StatelessWidget {
   /// Whether the switch is disabled.
   final bool isDisabled;
 
+  /// Custom active color for foundation override.
+  final Color? activeColor;
+
+  /// Custom track color for foundation override.
+  final Color? trackColor;
+
   const AtomixSwitch({
     super.key,
     required this.value,
     required this.onChanged,
     this.label,
     this.isDisabled = false,
+    this.activeColor,
+    this.trackColor,
   });
 
   @override
@@ -29,8 +37,8 @@ class AtomixSwitch extends StatelessWidget {
     Widget toggle = CupertinoSwitch(
       value: value,
       onChanged: isDisabled ? null : onChanged,
-      activeColor: AtomixColors.primary,
-      trackColor: AtomixColors.border,
+      activeColor: activeColor ?? AtomixColors.primary,
+      trackColor: trackColor ?? AtomixColors.border,
     );
 
     if (label == null) return toggle;

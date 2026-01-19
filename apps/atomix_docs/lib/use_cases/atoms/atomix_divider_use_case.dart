@@ -3,8 +3,13 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixDivider)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Divider',
+  type: AtomixDivider,
+)
 Widget atomixDividerPlayground(BuildContext context) {
   final height = context.knobs.double.slider(
     label: 'Divider > Height',
@@ -46,8 +51,9 @@ Widget atomixDividerPlayground(BuildContext context) {
             AtomixColors.primary,
             AtomixColors.secondary,
             AtomixColors.textSecondary,
-            const Color(0xFFE5E7EB),
+            AtomixColors.border,
           ],
+          labelBuilder: KnobHelpers.colorLabel,
         )
       : null;
 
@@ -82,7 +88,11 @@ Widget atomixDividerPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixDivider)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Atoms]/Divider',
+  type: AtomixDivider,
+)
 Widget atomixDividerDefault(BuildContext context) {
   return const Center(
     child: Padding(
@@ -100,7 +110,11 @@ Widget atomixDividerDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Large Spacing', type: AtomixDivider)
+@widgetbook.UseCase(
+  name: 'Large Spacing',
+  path: '[Atoms]/Divider',
+  type: AtomixDivider,
+)
 Widget atomixDividerLarge(BuildContext context) {
   return const Center(
     child: Padding(
@@ -123,7 +137,11 @@ Widget atomixDividerLarge(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Indent', type: AtomixDivider)
+@widgetbook.UseCase(
+  name: 'With Indent',
+  path: '[Atoms]/Divider',
+  type: AtomixDivider,
+)
 Widget atomixDividerIndent(BuildContext context) {
   return const Center(
     child: Padding(

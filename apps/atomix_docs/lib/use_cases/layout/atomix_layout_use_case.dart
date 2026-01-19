@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Responsive Grid', type: AtomixGrid)
+@widgetbook.UseCase(
+  name: 'Responsive Grid',
+  path: '[Layout]/Grid',
+  type: AtomixGrid,
+)
 Widget atomixGridPlayground(BuildContext context) {
   final span1 = context.knobs.double
       .slider(
@@ -86,7 +90,11 @@ Widget atomixGridPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Layout Box', type: AtomixBox)
+@widgetbook.UseCase(
+  name: 'Responsive Box',
+  path: '[Layout]/Box',
+  type: AtomixBox,
+)
 Widget atomixBoxPlayground(BuildContext context) {
   final padding = context.knobs.object.dropdown<double>(
     label: 'Box > Padding',

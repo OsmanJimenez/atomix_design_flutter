@@ -3,7 +3,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/component_readme.dart';
 
-@widgetbook.UseCase(name: 'README', type: AtomixGrid)
+@widgetbook.UseCase(name: 'README', path: '[Layout]/README', type: AtomixGrid)
 Widget layoutReadme(BuildContext context) {
   return const ComponentReadme(
     title: 'Layout System',

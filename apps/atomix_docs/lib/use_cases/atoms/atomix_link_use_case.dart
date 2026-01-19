@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
+import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Link', type: AtomixLink)
 Widget linkPlayground(BuildContext context) {
   final text = context.knobs.string(
     label: 'Link > Text',
-    initialValue: 'Click here for details',
+    initialValue: 'Click here to learn more',
   );
 
   final underlineOnHover = context.knobs.boolean(
@@ -16,11 +17,45 @@ Widget linkPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final isDisabled = context.knobs.boolean(
+    label: 'Link > Is Disabled',
+    initialValue: false,
+  );
+
+  final useFoundationColor = context.knobs.boolean(
+    label: 'Foundation > Custom Color',
+    initialValue: false,
+  );
+
+  final foundationColor = useFoundationColor
+      ? context.knobs.object.dropdown<Color>(
+          label: 'Foundation > Color',
+          options: [
+            AtomixColors.primary,
+            AtomixColors.secondary,
+            AtomixColors.info,
+            AtomixColors.success,
+          ],
+          labelBuilder: KnobHelpers.colorLabel,
+        )
+      : null;
+
+  String colorName(Color? c) {
+    if (c == AtomixColors.primary) return 'AtomixColors.primary';
+    if (c == AtomixColors.secondary) return 'AtomixColors.secondary';
+    if (c == AtomixColors.info) return 'AtomixColors.info';
+    if (c == AtomixColors.success) return 'AtomixColors.success';
+    return 'null';
+  }
+
+  final colorStr = foundationColor != null
+      ? '\n  color: ${colorName(foundationColor)},'
+      : '';
+
   final code =
       '''AtomixLink(
   text: '$text',
-  underlineOnHover: $underlineOnHover,
-  onTap: () {},
+  underlineOnHover: $underlineOnHover,${isDisabled ? '\n  onTap: null,' : '\n  onTap: () {},'}$colorStr
 )''';
 
   return Center(
@@ -31,7 +66,8 @@ Widget linkPlayground(BuildContext context) {
           AtomixLink(
             text: text,
             underlineOnHover: underlineOnHover,
-            onTap: () {},
+            onTap: isDisabled ? null : () {},
+            color: foundationColor,
           ),
           const SizedBox(height: 32),
           CodeSnippet(code: code),
@@ -41,21 +77,17 @@ Widget linkPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(
-  name: 'Classic Link',
-  path: '[Atoms]/Link',
-  type: AtomixLink,
-)
-Widget linkClassic(BuildContext context) {
+@widgetbook.UseCase(name: 'Default', path: '[Atoms]/Link', type: AtomixLink)
+Widget linkDefault(BuildContext context) {
   return const Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixLink(text: 'Return to home', onTap: null),
+        AtomixLink(text: 'Standard Link', onTap: null),
         SizedBox(height: 24),
         CodeSnippet(
           code: '''AtomixLink(
-  text: 'Return to home',
+  text: 'Standard Link',
   onTap: () {},
 )''',
         ),
@@ -64,18 +96,23 @@ Widget linkClassic(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Disabled', path: '[Atoms]/Link', type: AtomixLink)
-Widget linkDisabled(BuildContext context) {
+@widgetbook.UseCase(
+  name: 'Underline on Hover',
+  path: '[Atoms]/Link',
+  type: AtomixLink,
+)
+Widget linkHover(BuildContext context) {
   return const Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixLink(text: 'No access available', onTap: null),
+        AtomixLink(text: 'Hover me (Web)', underlineOnHover: true, onTap: null),
         SizedBox(height: 24),
         CodeSnippet(
           code: '''AtomixLink(
-  text: 'No access',
-  onTap: null,
+  text: 'Hover me',
+  underlineOnHover: true,
+  onTap: () {},
 )''',
         ),
       ],

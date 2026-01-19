@@ -7,7 +7,11 @@ import '../../widgets/code_snippet.dart';
 /// Placeholder for Template documentation
 class AtomixTemplates {}
 
-@widgetbook.UseCase(name: 'Full Page Playground', type: AtomixTemplates)
+@widgetbook.UseCase(
+  name: 'Page Builder',
+  path: '[Templates]/Playground',
+  type: AtomixTemplates,
+)
 Widget playgroundTemplate(BuildContext context) {
   // --- PAGE CONFIGURATION ---
   final showCode = context.knobs.boolean(

@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixListTile)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Molecules]/ListTile',
+  type: AtomixListTile,
+)
 Widget atomixListTilePlayground(BuildContext context) {
   final title = context.knobs.string(
     label: 'ListTile > Title',
@@ -103,7 +107,11 @@ Widget atomixListTilePlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixListTile)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Molecules]/ListTile',
+  type: AtomixListTile,
+)
 Widget atomixListTileDefault(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -124,7 +132,11 @@ Widget atomixListTileDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Subtitle', type: AtomixListTile)
+@widgetbook.UseCase(
+  name: 'With Subtitle',
+  path: '[Molecules]/ListTile',
+  type: AtomixListTile,
+)
 Widget atomixListTileWithSubtitle(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -150,7 +162,11 @@ Widget atomixListTileWithSubtitle(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Selected', type: AtomixListTile)
+@widgetbook.UseCase(
+  name: 'Selected',
+  path: '[Molecules]/ListTile',
+  type: AtomixListTile,
+)
 Widget atomixListTileSelected(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -178,7 +194,11 @@ Widget atomixListTileSelected(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Disabled', type: AtomixListTile)
+@widgetbook.UseCase(
+  name: 'Disabled',
+  path: '[Molecules]/ListTile',
+  type: AtomixListTile,
+)
 Widget atomixListTileDisabled(BuildContext context) {
   return Center(
     child: SingleChildScrollView(

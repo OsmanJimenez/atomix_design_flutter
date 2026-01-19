@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixAppBar)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Organisms]/AppBar',
+  type: AtomixAppBar,
+)
 Widget atomixAppBarPlayground(BuildContext context) {
   final title = context.knobs.string(
     label: 'AppBar > Title',
@@ -106,7 +110,11 @@ Widget atomixAppBarPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixAppBar)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Organisms]/AppBar',
+  type: AtomixAppBar,
+)
 Widget atomixAppBarDefault(BuildContext context) {
   return Scaffold(
     appBar: const AtomixAppBar(title: 'Home'),
@@ -127,7 +135,11 @@ Widget atomixAppBarDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Leading Icon', type: AtomixAppBar)
+@widgetbook.UseCase(
+  name: 'With Leading Icon',
+  path: '[Organisms]/AppBar',
+  type: AtomixAppBar,
+)
 Widget atomixAppBarWithLeading(BuildContext context) {
   return Scaffold(
     appBar: AtomixAppBar(
@@ -154,7 +166,11 @@ Widget atomixAppBarWithLeading(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Actions', type: AtomixAppBar)
+@widgetbook.UseCase(
+  name: 'With Actions',
+  path: '[Organisms]/AppBar',
+  type: AtomixAppBar,
+)
 Widget atomixAppBarWithActions(BuildContext context) {
   return Scaffold(
     appBar: AtomixAppBar(
@@ -185,7 +201,11 @@ Widget atomixAppBarWithActions(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Centered Title', type: AtomixAppBar)
+@widgetbook.UseCase(
+  name: 'Centered Title',
+  path: '[Organisms]/AppBar',
+  type: AtomixAppBar,
+)
 Widget atomixAppBarCentered(BuildContext context) {
   return Scaffold(
     appBar: const AtomixAppBar(title: 'Profile', centerTitle: true),

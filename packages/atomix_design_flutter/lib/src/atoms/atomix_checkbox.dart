@@ -18,6 +18,15 @@ class AtomixCheckbox extends StatelessWidget {
   /// Whether the checkbox is disabled.
   final bool isDisabled;
 
+  /// Custom active color for foundation override.
+  final Color? activeColor;
+
+  /// Custom check color for foundation override.
+  final Color? checkColor;
+
+  /// Custom border radius for foundation override.
+  final BorderRadius? borderRadius;
+
   const AtomixCheckbox({
     super.key,
     required this.value,
@@ -25,22 +34,30 @@ class AtomixCheckbox extends StatelessWidget {
     this.label,
     this.isError = false,
     this.isDisabled = false,
+    this.activeColor,
+    this.checkColor,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
-    final activeColor = isError ? AtomixColors.error : AtomixColors.primary;
+    final defaultActiveColor = isError
+        ? AtomixColors.error
+        : AtomixColors.primary;
+    final finalActiveColor = activeColor ?? defaultActiveColor;
 
     Widget checkbox = Checkbox(
       value: value,
       onChanged: isDisabled ? null : onChanged,
-      activeColor: activeColor,
-      checkColor: AtomixColors.onPrimary,
+      activeColor: finalActiveColor,
+      checkColor: checkColor ?? AtomixColors.onPrimary,
       side: BorderSide(
         color: isError ? AtomixColors.error : AtomixColors.border,
         width: 2,
       ),
-      shape: RoundedRectangleBorder(borderRadius: AtomixRadius.xsBorderRadius),
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius ?? AtomixRadius.xsBorderRadius,
+      ),
     );
 
     if (label == null) return checkbox;

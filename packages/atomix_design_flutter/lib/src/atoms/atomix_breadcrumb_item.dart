@@ -12,11 +12,15 @@ class AtomixBreadcrumbItem extends StatelessWidget {
   /// Whether this is the current (last) item.
   final bool isLast;
 
+  /// Custom color for the breadcrumb item.
+  final Color? color;
+
   const AtomixBreadcrumbItem({
     super.key,
     required this.label,
     this.onTap,
     this.isLast = false,
+    this.color,
   });
 
   @override
@@ -27,9 +31,11 @@ class AtomixBreadcrumbItem extends StatelessWidget {
         AtomixLink(
           text: label,
           onTap: isLast ? null : onTap,
+          color:
+              color ??
+              (isLast ? AtomixColors.textPrimary : AtomixColors.primary),
           style: TextStyle(
             fontWeight: isLast ? FontWeight.bold : FontWeight.normal,
-            color: isLast ? AtomixColors.textPrimary : AtomixColors.primary,
           ),
         ),
         if (!isLast) ...[

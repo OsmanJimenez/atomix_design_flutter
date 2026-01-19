@@ -12,11 +12,15 @@ class AtomixTabIndicator extends StatelessWidget {
   /// Thickness of the indicator.
   final double height;
 
+  /// Custom border radius for foundation override.
+  final BorderRadius? borderRadius;
+
   const AtomixTabIndicator({
     super.key,
     required this.isActive,
     this.color,
     this.height = 3.0,
+    this.borderRadius,
   });
 
   @override
@@ -28,7 +32,8 @@ class AtomixTabIndicator extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: isActive ? (color ?? AtomixColors.primary) : Colors.transparent,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(height)),
+        borderRadius:
+            borderRadius ?? BorderRadius.vertical(top: Radius.circular(height)),
       ),
     );
   }

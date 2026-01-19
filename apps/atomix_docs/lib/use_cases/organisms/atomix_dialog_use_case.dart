@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixDialog)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Organisms]/Dialog',
+  type: AtomixDialog,
+)
 Widget atomixDialogPlayground(BuildContext context) {
   final title = context.knobs.string(
     label: 'Dialog > Title',
@@ -125,7 +129,11 @@ Widget atomixDialogPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Default', type: AtomixDialog)
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Organisms]/Dialog',
+  type: AtomixDialog,
+)
 Widget atomixDialogDefault(BuildContext context) {
   return Center(
     child: Padding(
@@ -172,7 +180,11 @@ Widget atomixDialogDefault(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'With Icon', type: AtomixDialog)
+@widgetbook.UseCase(
+  name: 'With Icon',
+  path: '[Organisms]/Dialog',
+  type: AtomixDialog,
+)
 Widget atomixDialogWithIcon(BuildContext context) {
   return Center(
     child: Padding(
@@ -213,7 +225,11 @@ Widget atomixDialogWithIcon(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Simple Dialog', type: AtomixDialog)
+@widgetbook.UseCase(
+  name: 'Simple Dialog',
+  path: '[Organisms]/Dialog',
+  type: AtomixDialog,
+)
 Widget atomixDialogSimple(BuildContext context) {
   return Center(
     child: Padding(

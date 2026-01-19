@@ -4,7 +4,11 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Playground', type: AtomixCard)
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Organisms]/Card',
+  type: AtomixCard,
+)
 Widget atomixCardPlayground(BuildContext context) {
   final variant = context.knobs.object.dropdown<AtomixCardVariant>(
     label: 'Card > Variant',
@@ -157,7 +161,7 @@ Widget atomixCardPlayground(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Filled', type: AtomixCard)
+@widgetbook.UseCase(name: 'Filled', path: '[Organisms]/Card', type: AtomixCard)
 Widget atomixCardFilled(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -198,7 +202,11 @@ Widget atomixCardFilled(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Outlined', type: AtomixCard)
+@widgetbook.UseCase(
+  name: 'Outlined',
+  path: '[Organisms]/Card',
+  type: AtomixCard,
+)
 Widget atomixCardOutlined(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -239,7 +247,11 @@ Widget atomixCardOutlined(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Elevated', type: AtomixCard)
+@widgetbook.UseCase(
+  name: 'Elevated',
+  path: '[Organisms]/Card',
+  type: AtomixCard,
+)
 Widget atomixCardElevated(BuildContext context) {
   return Center(
     child: SingleChildScrollView(
@@ -280,7 +292,11 @@ Widget atomixCardElevated(BuildContext context) {
   );
 }
 
-@widgetbook.UseCase(name: 'Tappable', type: AtomixCard)
+@widgetbook.UseCase(
+  name: 'Tappable',
+  path: '[Organisms]/Card',
+  type: AtomixCard,
+)
 Widget atomixCardTappable(BuildContext context) {
   return Center(
     child: SingleChildScrollView(

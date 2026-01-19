@@ -21,6 +21,12 @@ class AtomixPriceText extends StatelessWidget {
   /// Style specifically for the currency symbol.
   final TextStyle? symbolStyle;
 
+  /// Custom color for the price.
+  final Color? color;
+
+  /// Custom color for the symbol.
+  final Color? symbolColor;
+
   const AtomixPriceText({
     super.key,
     required this.price,
@@ -29,6 +35,8 @@ class AtomixPriceText extends StatelessWidget {
     this.decimalPlaces = 2,
     this.style,
     this.symbolStyle,
+    this.color,
+    this.symbolColor,
   });
 
   @override
@@ -41,9 +49,11 @@ class AtomixPriceText extends StatelessWidget {
           style ??
           Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
-            color: AtomixColors.textPrimary,
+            color: color ?? AtomixColors.textPrimary,
           ),
     );
+
+    final finalSymbolColor = symbolColor ?? color ?? AtomixColors.textSecondary;
 
     final symbolPart = AtomixText(
       currency,
@@ -51,7 +61,7 @@ class AtomixPriceText extends StatelessWidget {
           symbolStyle ??
           (style ?? Theme.of(context).textTheme.titleLarge)?.copyWith(
             fontWeight: FontWeight.w400,
-            color: AtomixColors.textSecondary,
+            color: finalSymbolColor,
             fontSize: (style?.fontSize ?? 20) * 0.7,
           ),
     );

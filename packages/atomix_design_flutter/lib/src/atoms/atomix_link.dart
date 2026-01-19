@@ -16,12 +16,16 @@ class AtomixLink extends StatefulWidget {
   /// For mobile, it defaults to always visible or custom.
   final bool underlineOnHover;
 
+  /// Custom color for the link.
+  final Color? color;
+
   const AtomixLink({
     super.key,
     required this.text,
     this.onTap,
     this.style,
     this.underlineOnHover = false,
+    this.color,
   });
 
   @override
@@ -34,6 +38,9 @@ class _AtomixLinkState extends State<AtomixLink> {
   @override
   Widget build(BuildContext context) {
     final bool showUnderline = !widget.underlineOnHover || _isHovered;
+    final Color defaultColor = widget.onTap == null
+        ? AtomixColors.textDisabled
+        : AtomixColors.primary;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -44,13 +51,11 @@ class _AtomixLinkState extends State<AtomixLink> {
         child: AtomixText(
           widget.text,
           style: (widget.style ?? const TextStyle()).copyWith(
-            color: widget.onTap == null
-                ? AtomixColors.textDisabled
-                : AtomixColors.primary,
+            color: widget.color ?? defaultColor,
             decoration: showUnderline
                 ? TextDecoration.underline
                 : TextDecoration.none,
-            decorationColor: AtomixColors.primary,
+            decorationColor: widget.color ?? defaultColor,
           ),
         ),
       ),

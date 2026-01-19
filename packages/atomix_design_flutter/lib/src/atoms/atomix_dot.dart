@@ -12,21 +12,30 @@ class AtomixDot extends StatelessWidget {
   /// Whether the dot should have a pulsing animation.
   final bool isPulsing;
 
+  /// Custom border radius for foundation override.
+  final BorderRadius? borderRadius;
+
   const AtomixDot({
     super.key,
     this.color = AtomixColors.primary,
     this.size = 8,
     this.isPulsing = false,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (isPulsing) return _PulsingDot(color: color, size: size);
+    if (isPulsing) {
+      return _PulsingDot(color: color, size: size, borderRadius: borderRadius);
+    }
 
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: borderRadius ?? BorderRadius.circular(size),
+      ),
     );
   }
 }
@@ -34,8 +43,13 @@ class AtomixDot extends StatelessWidget {
 class _PulsingDot extends StatefulWidget {
   final Color color;
   final double size;
+  final BorderRadius? borderRadius;
 
-  const _PulsingDot({required this.color, required this.size});
+  const _PulsingDot({
+    required this.color,
+    required this.size,
+    this.borderRadius,
+  });
 
   @override
   State<_PulsingDot> createState() => _PulsingDotState();
@@ -74,7 +88,8 @@ class _PulsingDotState extends State<_PulsingDot>
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(widget.size),
             color: widget.color.withValues(alpha: _animation.value),
             boxShadow: [
               BoxShadow(

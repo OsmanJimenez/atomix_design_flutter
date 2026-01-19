@@ -12,6 +12,12 @@ class AtomixCounter extends StatelessWidget {
   /// Color of the counter background.
   final Color? backgroundColor;
 
+  /// Color of the counter text.
+  final Color? textColor;
+
+  /// Custom border radius for foundation override.
+  final BorderRadius? borderRadius;
+
   /// Custom size for the counter.
   final double size;
 
@@ -20,6 +26,8 @@ class AtomixCounter extends StatelessWidget {
     required this.count,
     this.maxCount = 99,
     this.backgroundColor,
+    this.textColor,
+    this.borderRadius,
     this.size = 20,
   });
 
@@ -36,13 +44,13 @@ class AtomixCounter extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: backgroundColor ?? AtomixColors.primary,
-        borderRadius: BorderRadius.circular(size),
+        borderRadius: borderRadius ?? BorderRadius.circular(size),
       ),
       child: Center(
         child: AtomixText(
           displayCount,
           style: TextStyle(
-            color: AtomixColors.onPrimary,
+            color: textColor ?? AtomixColors.onPrimary,
             fontSize: size * 0.5,
             fontWeight: FontWeight.bold,
           ),

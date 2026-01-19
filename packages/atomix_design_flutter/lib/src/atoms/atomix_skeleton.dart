@@ -15,12 +15,16 @@ class AtomixSkeleton extends StatelessWidget {
   /// Whether the skeleton is circular.
   final bool isCircle;
 
+  /// Custom color for the skeleton.
+  final Color? color;
+
   const AtomixSkeleton({
     super.key,
     this.width,
     this.height,
     this.borderRadius,
     this.isCircle = false,
+    this.color,
   });
 
   @override
@@ -29,7 +33,7 @@ class AtomixSkeleton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AtomixColors.border.withValues(alpha: 0.5),
+        color: color ?? AtomixColors.border.withValues(alpha: 0.5),
         shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
         borderRadius: isCircle
             ? null
