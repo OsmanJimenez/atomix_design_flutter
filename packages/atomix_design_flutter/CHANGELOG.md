@@ -1,3 +1,10 @@
+## 0.4.1 - 2026-01-18
+
+### Changed
+- **Documentation Standardization**: All 24 atomic components now follow the "Playground + Specific Scenarios" standard.
+- **Improved UX**: Individual use case files for every widget for better navigation in Widgetbook.
+- **Code Snippets**: Updated all documentation scenarios with accurate, copy-pasteable code snippets.
+
 ## 0.4.0 - 2026-01-18
 
 ### Added

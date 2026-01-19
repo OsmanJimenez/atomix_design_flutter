@@ -4,82 +4,146 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Radio', path: '[Atoms]', type: AtomixRadio)
-Widget radioUseCase(BuildContext context) {
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Radio',
+  type: AtomixRadio,
+)
+Widget radioPlayground(BuildContext context) {
   final isDisabled = context.knobs.boolean(
-    label: 'Is Disabled',
+    label: 'Radio > Is Disabled',
     initialValue: false,
   );
 
-  return _RadioPlayground(isDisabled: isDisabled);
+  return _RadioPlaygroundWrapper(isDisabled: isDisabled);
 }
 
-class _RadioPlayground extends StatefulWidget {
+class _RadioPlaygroundWrapper extends StatefulWidget {
   final bool isDisabled;
 
-  const _RadioPlayground({required this.isDisabled});
+  const _RadioPlaygroundWrapper({required this.isDisabled});
 
   @override
-  State<_RadioPlayground> createState() => _RadioPlaygroundState();
+  State<_RadioPlaygroundWrapper> createState() =>
+      _RadioPlaygroundWrapperState();
 }
 
-class _RadioPlaygroundState extends State<_RadioPlayground> {
+class _RadioPlaygroundWrapperState extends State<_RadioPlaygroundWrapper> {
   String? _selectedValue = 'Option 1';
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AtomixSpacing.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AtomixText(
-            'AtomixRadio',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const AtomixSpacer.md(),
-          const AtomixText('A custom radio button for exclusive selection.'),
-          const AtomixSpacer.xl(),
-          Column(
-            children: [
-              AtomixRadio<String>(
-                value: 'Option 1',
-                groupValue: _selectedValue,
-                label: 'Option One',
-                isDisabled: widget.isDisabled,
-                onChanged: (val) => setState(() => _selectedValue = val),
-              ),
-              AtomixRadio<String>(
-                value: 'Option 2',
-                groupValue: _selectedValue,
-                label: 'Option Two',
-                isDisabled: widget.isDisabled,
-                onChanged: (val) => setState(() => _selectedValue = val),
-              ),
-              AtomixRadio<String>(
-                value: 'Option 3',
-                groupValue: _selectedValue,
-                label: 'Option Three',
-                isDisabled: widget.isDisabled,
-                onChanged: (val) => setState(() => _selectedValue = val),
-              ),
-            ],
-          ),
-          const AtomixSpacer.xl(),
-          CodeSnippet(
-            code:
-                '''AtomixRadio<String>(
+    final code =
+        '''AtomixRadio<String>(
   value: 'Option 1',
   groupValue: '$_selectedValue',
   label: 'Option One',
   isDisabled: ${widget.isDisabled},
   onChanged: (val) {
-    // Handle state
+    setState(() => _selectedValue = val);
   },
+)''';
+
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                AtomixRadio<String>(
+                  value: 'Option 1',
+                  groupValue: _selectedValue,
+                  label: 'Option One',
+                  isDisabled: widget.isDisabled,
+                  onChanged: (val) => setState(() => _selectedValue = val),
+                ),
+                AtomixRadio<String>(
+                  value: 'Option 2',
+                  groupValue: _selectedValue,
+                  label: 'Option Two',
+                  isDisabled: widget.isDisabled,
+                  onChanged: (val) => setState(() => _selectedValue = val),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+            CodeSnippet(code: code),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+@widgetbook.UseCase(name: 'Default', path: '[Atoms]/Radio', type: AtomixRadio)
+Widget radioDefault(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixRadio<int>(
+            value: 1,
+            groupValue: 1,
+            label: 'Selected option',
+            onChanged: null,
+          ),
+          SizedBox(height: 12),
+          AtomixRadio<int>(
+            value: 2,
+            groupValue: 1,
+            label: 'Unselected option',
+            onChanged: null,
+          ),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixRadio<int>(
+  value: 1,
+  groupValue: 1,
+  label: 'Selected option',
+  onChanged: (val) {},
 )''',
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+@widgetbook.UseCase(name: 'Disabled', path: '[Atoms]/Radio', type: AtomixRadio)
+Widget radioDisabled(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixRadio<int>(
+            value: 1,
+            groupValue: 1,
+            label: 'Disabled selected',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 12),
+          AtomixRadio<int>(
+            value: 2,
+            groupValue: 1,
+            label: 'Disabled unselected',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixRadio<int>(
+  value: 1,
+  groupValue: 1,
+  isDisabled: true,
+  onChanged: (val) {},
+)''',
+          ),
+        ],
+      ),
+    ),
+  );
 }

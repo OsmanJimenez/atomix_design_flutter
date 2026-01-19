@@ -4,82 +4,95 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Dot (Status)', path: '[Atoms]', type: AtomixDot)
-Widget dotUseCase(BuildContext context) {
+@widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Dot', type: AtomixDot)
+Widget dotPlayground(BuildContext context) {
   final size = context.knobs.double.slider(
-    label: 'Size',
+    label: 'Dot > Size',
     min: 4,
     max: 24,
     initialValue: 12,
   );
 
   final isPulsing = context.knobs.boolean(
-    label: 'Is Pulsing',
+    label: 'Dot > Is Pulsing',
     initialValue: true,
   );
 
-  return Padding(
-    padding: const EdgeInsets.all(AtomixSpacing.lg),
-    child: Column(
-      children: [
-        const AtomixText(
-          'AtomixDot',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        const AtomixSpacer.md(),
-        const AtomixText(
-          'Small status indicators with optional pulsing animation.',
-        ),
-        const AtomixSpacer.xl(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                AtomixDot(
-                  size: size,
-                  color: AtomixColors.success,
-                  isPulsing: isPulsing,
-                ),
-                const AtomixSpacer.xs(),
-                const AtomixText('Online'),
-              ],
-            ),
-            const AtomixSpacer.xl(),
-            Column(
-              children: [
-                AtomixDot(
-                  size: size,
-                  color: AtomixColors.error,
-                  isPulsing: false,
-                ),
-                const AtomixSpacer.xs(),
-                const AtomixText('Offline'),
-              ],
-            ),
-            const AtomixSpacer.xl(),
-            Column(
-              children: [
-                AtomixDot(
-                  size: size,
-                  color: AtomixColors.warning,
-                  isPulsing: isPulsing,
-                ),
-                const AtomixSpacer.xs(),
-                const AtomixText('Away'),
-              ],
-            ),
-          ],
-        ),
-        const AtomixSpacer.xl(),
-        CodeSnippet(
-          code:
-              '''AtomixDot(
+  final color = context.knobs.object.dropdown<Color>(
+    label: 'Dot > Color',
+    options: [
+      AtomixColors.success,
+      AtomixColors.error,
+      AtomixColors.warning,
+      AtomixColors.primary,
+    ],
+  );
+
+  final code =
+      '''AtomixDot(
   size: $size,
-  color: AtomixColors.success,
+  color: ${color == AtomixColors.success ? 'AtomixColors.success' : 'CustomColor'},
   isPulsing: $isPulsing,
+)''';
+
+  return Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          AtomixDot(size: size, color: color, isPulsing: isPulsing),
+          const SizedBox(height: 32),
+          CodeSnippet(code: code),
+        ],
+      ),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Pulsing Status',
+  path: '[Atoms]/Dot',
+  type: AtomixDot,
+)
+Widget dotPulsing(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixDot(size: 16, color: AtomixColors.success, isPulsing: true),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixDot(
+  size: 16,
+  color: AtomixColors.success,
+  isPulsing: true,
 )''',
         ),
+      ],
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Static Indicators',
+  path: '[Atoms]/Dot',
+  type: AtomixDot,
+)
+Widget dotStatic(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Wrap(
+          spacing: 16,
+          children: [
+            AtomixDot(color: AtomixColors.error),
+            AtomixDot(color: AtomixColors.warning),
+            AtomixDot(color: AtomixColors.textDisabled),
+          ],
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(code: '''AtomixDot(color: AtomixColors.error)'''),
       ],
     ),
   );

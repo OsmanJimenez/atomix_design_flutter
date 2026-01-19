@@ -4,70 +4,132 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Switch', path: '[Atoms]', type: AtomixSwitch)
-Widget switchUseCase(BuildContext context) {
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Switch',
+  type: AtomixSwitch,
+)
+Widget switchPlayground(BuildContext context) {
   final label = context.knobs.string(
-    label: 'Label',
+    label: 'Switch > Label',
     initialValue: 'Notifications',
   );
 
   final isDisabled = context.knobs.boolean(
-    label: 'Is Disabled',
+    label: 'Switch > Is Disabled',
     initialValue: false,
   );
 
-  return _SwitchPlayground(label: label, isDisabled: isDisabled);
+  return _SwitchPlaygroundWrapper(label: label, isDisabled: isDisabled);
 }
 
-class _SwitchPlayground extends StatefulWidget {
+class _SwitchPlaygroundWrapper extends StatefulWidget {
   final String label;
   final bool isDisabled;
 
-  const _SwitchPlayground({required this.label, required this.isDisabled});
+  const _SwitchPlaygroundWrapper({
+    required this.label,
+    required this.isDisabled,
+  });
 
   @override
-  State<_SwitchPlayground> createState() => _SwitchPlaygroundState();
+  State<_SwitchPlaygroundWrapper> createState() =>
+      _SwitchPlaygroundWrapperState();
 }
 
-class _SwitchPlaygroundState extends State<_SwitchPlayground> {
+class _SwitchPlaygroundWrapperState extends State<_SwitchPlaygroundWrapper> {
   bool _value = true;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AtomixSpacing.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AtomixText(
-            'AtomixSwitch',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const AtomixSpacer.md(),
-          const AtomixText(
-            'A custom toggle switch with iOS-style behavior and design system colors.',
-          ),
-          const AtomixSpacer.xl(),
-          AtomixSwitch(
-            value: _value,
-            onChanged: (val) => setState(() => _value = val),
-            label: widget.label,
-            isDisabled: widget.isDisabled,
-          ),
-          const AtomixSpacer.xl(),
-          CodeSnippet(
-            code:
-                '''AtomixSwitch(
+    final code =
+        '''AtomixSwitch(
   value: $_value,
   label: '${widget.label}',
   isDisabled: ${widget.isDisabled},
   onChanged: (val) {
-    // Handle state
+    setState(() => _value = val);
   },
+)''';
+
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            AtomixSwitch(
+              value: _value,
+              onChanged: (val) => setState(() => _value = val),
+              label: widget.label,
+              isDisabled: widget.isDisabled,
+            ),
+            const SizedBox(height: 32),
+            CodeSnippet(code: code),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+@widgetbook.UseCase(name: 'States', path: '[Atoms]/Switch', type: AtomixSwitch)
+Widget switchStates(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixSwitch(value: true, label: 'Switch is ON', onChanged: null),
+          SizedBox(height: 12),
+          AtomixSwitch(value: false, label: 'Switch is OFF', onChanged: null),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixSwitch(
+  value: true,
+  label: 'Switch is ON',
+  onChanged: (val) {},
 )''',
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Disabled',
+  path: '[Atoms]/Switch',
+  type: AtomixSwitch,
+)
+Widget switchDisabled(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixSwitch(
+            value: true,
+            label: 'Disabled Active',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 12),
+          AtomixSwitch(
+            value: false,
+            label: 'Disabled Inactive',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixSwitch(
+  value: true,
+  isDisabled: true,
+  onChanged: (val) {},
+)''',
+          ),
+        ],
+      ),
+    ),
+  );
 }

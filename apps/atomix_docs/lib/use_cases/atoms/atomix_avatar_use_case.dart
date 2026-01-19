@@ -4,52 +4,121 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Avatar', path: '[Atoms]', type: AtomixAvatar)
-Widget avatarUseCase(BuildContext context) {
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Avatar',
+  type: AtomixAvatar,
+)
+Widget avatarPlayground(BuildContext context) {
   final size = context.knobs.double.slider(
-    label: 'Size',
+    label: 'Avatar > Size',
     min: 20,
     max: 200,
     initialValue: 80,
   );
 
-  final initials = context.knobs.string(label: 'Initials', initialValue: 'OJ');
+  final initials = context.knobs.string(
+    label: 'Avatar > Initials',
+    initialValue: 'OJ',
+  );
 
   final imageUrl = context.knobs.string(
-    label: 'Image URL',
+    label: 'Avatar > Image URL',
     initialValue: 'https://i.pravatar.cc/300',
   );
 
   final useImage = context.knobs.boolean(
-    label: 'Use Image',
+    label: 'Avatar > Use Image',
     initialValue: true,
   );
 
-  return Padding(
-    padding: const EdgeInsets.all(AtomixSpacing.lg),
-    child: Column(
-      children: [
-        const AtomixText(
-          'AtomixAvatar',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        const AtomixSpacer.md(),
-        const AtomixText(
-          'Circular user representation with initials or image support.',
-        ),
-        const AtomixSpacer.xl(),
-        AtomixAvatar(
-          size: size,
-          initials: initials,
-          imageUrl: useImage ? imageUrl : null,
-        ),
-        const AtomixSpacer.xl(),
-        CodeSnippet(
-          code:
-              '''AtomixAvatar(
+  final code =
+      '''AtomixAvatar(
   size: $size,
   initials: '$initials',
   ${useImage ? "imageUrl: '$imageUrl'," : "// No image"}
+)''';
+
+  return Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          AtomixAvatar(
+            size: size,
+            initials: initials,
+            imageUrl: useImage ? imageUrl : null,
+          ),
+          const SizedBox(height: 32),
+          CodeSnippet(code: code),
+        ],
+      ),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'With Image',
+  path: '[Atoms]/Avatar',
+  type: AtomixAvatar,
+)
+Widget avatarImage(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixAvatar(size: 100, imageUrl: 'https://i.pravatar.cc/300'),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixAvatar(
+  size: 100,
+  imageUrl: 'https://i.pravatar.cc/300',
+)''',
+        ),
+      ],
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'With Initials',
+  path: '[Atoms]/Avatar',
+  type: AtomixAvatar,
+)
+Widget avatarInitials(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixAvatar(size: 100, initials: 'AD'),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixAvatar(
+  size: 100,
+  initials: 'AD',
+)''',
+        ),
+      ],
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Small Size',
+  path: '[Atoms]/Avatar',
+  type: AtomixAvatar,
+)
+Widget avatarSmall(BuildContext context) {
+  return const Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixAvatar(size: 32, imageUrl: 'https://i.pravatar.cc/100'),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixAvatar(
+  size: 32,
+  imageUrl: 'https://...',
 )''',
         ),
       ],

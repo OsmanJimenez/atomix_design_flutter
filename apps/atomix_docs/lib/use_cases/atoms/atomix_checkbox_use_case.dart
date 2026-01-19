@@ -4,78 +4,58 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
 
-@widgetbook.UseCase(name: 'Checkbox', path: '[Atoms]', type: AtomixCheckbox)
-Widget checkboxUseCase(BuildContext context) {
+@widgetbook.UseCase(
+  name: 'Playground',
+  path: '[Atoms]/Checkbox',
+  type: AtomixCheckbox,
+)
+Widget checkboxPlayground(BuildContext context) {
   final label = context.knobs.string(
-    label: 'Label',
+    label: 'Checkbox > Label',
     initialValue: 'Accept Terms',
-    description: 'The text to show next to the checkbox',
   );
 
   final isError = context.knobs.boolean(
-    label: 'Is Error',
+    label: 'Checkbox > Is Error',
     initialValue: false,
-    description: 'Toggle error state',
   );
 
   final isDisabled = context.knobs.boolean(
-    label: 'Is Disabled',
+    label: 'Checkbox > Is Disabled',
     initialValue: false,
-    description: 'Toggle disabled state',
   );
 
-  return _CheckboxPlayground(
+  return _CheckboxPlaygroundWrapper(
     label: label,
     isError: isError,
     isDisabled: isDisabled,
   );
 }
 
-class _CheckboxPlayground extends StatefulWidget {
+class _CheckboxPlaygroundWrapper extends StatefulWidget {
   final String label;
   final bool isError;
   final bool isDisabled;
 
-  const _CheckboxPlayground({
+  const _CheckboxPlaygroundWrapper({
     required this.label,
     required this.isError,
     required this.isDisabled,
   });
 
   @override
-  State<_CheckboxPlayground> createState() => _CheckboxPlaygroundState();
+  State<_CheckboxPlaygroundWrapper> createState() =>
+      _CheckboxPlaygroundWrapperState();
 }
 
-class _CheckboxPlaygroundState extends State<_CheckboxPlayground> {
+class _CheckboxPlaygroundWrapperState
+    extends State<_CheckboxPlaygroundWrapper> {
   bool _value = false;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AtomixSpacing.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AtomixText(
-            'AtomixCheckbox',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const AtomixSpacer.md(),
-          const AtomixText(
-            'A custom checkbox with optional label and design system states.',
-          ),
-          const AtomixSpacer.xl(),
-          AtomixCheckbox(
-            value: _value,
-            onChanged: (val) => setState(() => _value = val ?? false),
-            label: widget.label,
-            isError: widget.isError,
-            isDisabled: widget.isDisabled,
-          ),
-          const AtomixSpacer.xl(),
-          CodeSnippet(
-            code:
-                '''AtomixCheckbox(
+    final code =
+        '''AtomixCheckbox(
   value: $_value,
   label: '${widget.label}',
   isError: ${widget.isError},
@@ -83,10 +63,122 @@ class _CheckboxPlaygroundState extends State<_CheckboxPlayground> {
   onChanged: (val) {
     // Handle state
   },
+)''';
+
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            AtomixCheckbox(
+              value: _value,
+              onChanged: (val) => setState(() => _value = val ?? false),
+              label: widget.label,
+              isError: widget.isError,
+              isDisabled: widget.isDisabled,
+            ),
+            const SizedBox(height: 32),
+            CodeSnippet(code: code),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+@widgetbook.UseCase(
+  name: 'Default',
+  path: '[Atoms]/Checkbox',
+  type: AtomixCheckbox,
+)
+Widget checkboxDefault(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixCheckbox(value: true, label: 'Checked state', onChanged: null),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixCheckbox(
+  value: true,
+  label: 'Checked state',
+  onChanged: (val) {},
 )''',
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Error',
+  path: '[Atoms]/Checkbox',
+  type: AtomixCheckbox,
+)
+Widget checkboxError(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixCheckbox(
+            value: false,
+            label: 'Error state',
+            isError: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixCheckbox(
+  value: false,
+  label: 'Error state',
+  isError: true,
+  onChanged: (val) {},
+)''',
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Disabled',
+  path: '[Atoms]/Checkbox',
+  type: AtomixCheckbox,
+)
+Widget checkboxDisabled(BuildContext context) {
+  return const Center(
+    child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          AtomixCheckbox(
+            value: true,
+            label: 'Disabled checked',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 12),
+          AtomixCheckbox(
+            value: false,
+            label: 'Disabled unchecked',
+            isDisabled: true,
+            onChanged: null,
+          ),
+          SizedBox(height: 24),
+          CodeSnippet(
+            code: '''AtomixCheckbox(
+  value: true,
+  label: 'Disabled checked',
+  isDisabled: true,
+  onChanged: (val) {},
+)''',
+          ),
+        ],
+      ),
+    ),
+  );
 }
