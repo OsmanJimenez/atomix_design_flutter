@@ -22,15 +22,10 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Install Dependencies (Package)
+      - name: Install Dependencies
         run: |
-          cd packages/atomix_design_flutter
-          flutter pub get
-
-      - name: Install Dependencies (Docs App)
-        run: |
-          cd apps/atomix_docs
-          flutter pub get
+          cd packages/atomix_design_flutter && flutter pub get
+          cd ../../apps/atomix_docs && flutter pub get
 
       - name: Generate Widgetbook Code
         run: |
@@ -41,6 +36,9 @@ jobs:
         run: |
           cd apps/atomix_docs
           flutter build web --base-href "/atomix_design_flutter/" --release
+
+      - name: Disable Jekyll
+        run: touch ./apps/atomix_docs/build/web/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
