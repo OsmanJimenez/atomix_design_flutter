@@ -142,6 +142,8 @@ import 'package:atomix_docs/use_cases/organisms/atomix_card_use_case.dart'
     as _atomix_docs_use_cases_organisms_atomix_card_use_case;
 import 'package:atomix_docs/use_cases/organisms/atomix_dialog_use_case.dart'
     as _atomix_docs_use_cases_organisms_atomix_dialog_use_case;
+import 'package:atomix_docs/use_cases/organisms/atomix_form_use_case.dart'
+    as _atomix_docs_use_cases_organisms_atomix_form_use_case;
 import 'package:atomix_docs/use_cases/templates/playground_template_use_case.dart'
     as _atomix_docs_use_cases_templates_playground_template_use_case;
 import 'package:atomix_docs/use_cases/templates/templates_readme.dart'
@@ -1427,6 +1429,21 @@ final directories = <_widgetbook.WidgetbookNode>[
     name: 'Molecules',
     children: [
       _widgetbook.WidgetbookFolder(
+        name: 'AtomixTextFormField',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'AtomixTextFormField',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Playground',
+                builder: _atomix_docs_use_cases_organisms_atomix_form_use_case
+                    .buildTextFormFieldPlayground,
+              ),
+            ],
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookFolder(
         name: 'Avatar Group',
         children: [
           _widgetbook.WidgetbookComponent(
@@ -1687,6 +1704,26 @@ final directories = <_widgetbook.WidgetbookNode>[
                 builder:
                     _atomix_docs_use_cases_organisms_atomix_app_bar_use_case
                         .atomixAppBarWithLeading,
+              ),
+            ],
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookFolder(
+        name: 'AtomixForm',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'AtomixForm',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Full Registration Form',
+                builder: _atomix_docs_use_cases_organisms_atomix_form_use_case
+                    .buildRegistrationFormUseCase,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Playground',
+                builder: _atomix_docs_use_cases_organisms_atomix_form_use_case
+                    .buildFormPlayground,
               ),
             ],
           ),

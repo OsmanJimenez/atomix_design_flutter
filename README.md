@@ -47,7 +47,8 @@ Simple, single-purpose components:
 Combinations of atoms forming functional components:
 
 - `AtomixButton` - Buttons with variants (primary, secondary, tertiary), sizes, and states
-- `AtomixTextField` - Text inputs with validation support
+- `AtomixTextField` - Simple text inputs
+- `AtomixTextFormField` - Text inputs with native validation support
 - `AtomixChip` - Chips with selection states
 - `AtomixListTile` - List items with leading/trailing elements
 
@@ -59,6 +60,7 @@ Complex, feature-rich components:
 - `AtomixCard` - Cards with variants (filled, outlined, elevated)
 - `AtomixDialog` - Modal dialogs
 - `AtomixBottomSheet` - Bottom sheets with drag handle
+- `AtomixForm` - Flexible form layout and management
 
 ## 📦 Installation
 
@@ -314,13 +316,15 @@ atomix_design_flutter/
 | | AtomixStepIndicator | Progress step indicators |
 | | AtomixStroke | Bordered container with child support |
 | **Molecules** | AtomixButton | Buttons with variants and states |
-| | AtomixTextField | Text inputs with validation |
+| | AtomixTextField | Simple text inputs |
+| | AtomixTextFormField | Text inputs with native validation |
 | | AtomixChip | Selectable chips |
 | | AtomixListTile | List items |
 | **Organisms** | AtomixAppBar | Application bar |
 | | AtomixCard | Cards with variants |
 | | AtomixDialog | Modal dialogs |
 | | AtomixBottomSheet | Bottom sheets |
+| | AtomixForm | Flexible form layout and management |
 
 ## 🚀 Roadmap
 

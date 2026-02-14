@@ -59,6 +59,7 @@ export 'src/atoms/atomix_stroke.dart';
 export 'src/molecules/atomix_avatar_group.dart';
 export 'src/molecules/atomix_button.dart';
 export 'src/molecules/atomix_text_field.dart';
+export 'src/molecules/atomix_text_form_field.dart';
 export 'src/molecules/atomix_chip.dart';
 export 'src/molecules/atomix_list_tile.dart';
 
@@ -67,6 +68,7 @@ export 'src/organisms/atomix_app_bar.dart';
 export 'src/organisms/atomix_card.dart';
 export 'src/organisms/atomix_dialog.dart';
 export 'src/organisms/atomix_bottom_sheet.dart';
+export 'src/organisms/atomix_form.dart';
 
 // Layout
 export 'src/layout/atomix_box.dart';

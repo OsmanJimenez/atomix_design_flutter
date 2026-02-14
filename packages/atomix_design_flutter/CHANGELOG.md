@@ -4,6 +4,9 @@
 - **21 New Atoms**: Significantly expanded the atomic library with:
   - `AtomixActionIcon`, `AtomixBackdrop`, `AtomixBullet`, `AtomixCaption`, `AtomixCircle`, `AtomixColorBox`, `AtomixCornerIndicator`, `AtomixDataPoint`, `AtomixFade`, `AtomixGradient`, `AtomixHandle`, `AtomixHeading`, `AtomixIndicator`, `AtomixKey`, `AtomixMask`, `AtomixOverline`, `AtomixPlaceholder`, `AtomixPulse`, `AtomixStepIndicator`, `AtomixStroke`.
 - **Expanded Documentation**: All new components now feature multiple scenarios (Small, Large, Success, Error, States, etc.) in Widgetbook.
+- **Form System**: Introduced a professional form management library:
+  - `AtomixForm` (Organism): Managed layout with `AtomixFormSection` for grouping.
+  - `AtomixTextFormField` (Molecule): Native Flutter validation support with Atomix styling.
 - **Improved Foundation**:
   - Added `outline`, `outlineDark`, `surfaceVariant`, and `surfaceVariantDark` semantic colors to `AtomixColors`.
   - Added `child` support to `AtomixStroke`.
