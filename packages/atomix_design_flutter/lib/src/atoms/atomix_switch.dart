@@ -37,8 +37,8 @@ class AtomixSwitch extends StatelessWidget {
     Widget toggle = CupertinoSwitch(
       value: value,
       onChanged: isDisabled ? null : onChanged,
-      activeColor: activeColor ?? AtomixColors.primary,
-      trackColor: trackColor ?? AtomixColors.border,
+      activeTrackColor: activeColor ?? AtomixColors.primary,
+      inactiveTrackColor: trackColor ?? AtomixColors.border,
     );
 
     if (label == null) return toggle;

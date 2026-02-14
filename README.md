@@ -4,6 +4,7 @@ A modern, scalable Design System for Flutter built with **Atomic Design** princi
 
 ## ✨ Features
 
+- [x] **Live Documentation** - [Interactive Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)
 - 🎨 **Material 3 Foundation** - Built on top of Flutter's Material Design 3
 - ⚛️ **Atomic Design Architecture** - Organized into Atoms, Molecules, and Organisms
 - 🌓 **Light & Dark Themes** - Full support for both themes with seamless switching

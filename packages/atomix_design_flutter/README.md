@@ -135,10 +135,10 @@ final customTheme = AtomixTheme.themeData(
 );
 ```
 
-## 📖 Documentation
+## 📚 Documentation
 
 For complete documentation, examples, and interactive component gallery:
-- **[Interactive Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)** - Live component demos
+- **[Interactive Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)** - Live component demos (Hosted on GitHub Pages)
 - **[API Documentation](https://pub.dev/documentation/atomix_design_flutter/latest/)** - Complete API reference
 - **[GitHub Repository](https://github.com/OsmanJimenez/atomix_design_flutter)** - Source code and examples
 

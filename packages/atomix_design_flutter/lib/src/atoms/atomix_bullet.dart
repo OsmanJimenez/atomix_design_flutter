@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_radius.dart';
 
 /// Atomix bullet component.
 ///

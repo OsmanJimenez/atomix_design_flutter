@@ -34,8 +34,11 @@ class AtomixRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget radio = Radio<T>(
+      // ignore: deprecated_member_use
       value: value,
+      // ignore: deprecated_member_use
       groupValue: groupValue,
+      // ignore: deprecated_member_use
       onChanged: isDisabled ? null : onChanged,
       activeColor: activeColor ?? AtomixColors.primary,
     );
