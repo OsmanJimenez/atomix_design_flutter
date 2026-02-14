@@ -56,6 +56,7 @@ export 'src/atoms/atomix_step_indicator.dart';
 export 'src/atoms/atomix_stroke.dart';
 
 // Molecules
+export 'src/molecules/atomix_avatar_group.dart';
 export 'src/molecules/atomix_button.dart';
 export 'src/molecules/atomix_text_field.dart';
 export 'src/molecules/atomix_chip.dart';

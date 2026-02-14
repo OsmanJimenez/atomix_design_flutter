@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
@@ -9,7 +10,16 @@ import '../../widgets/code_snippet.dart';
   type: AtomixPulse,
 )
 Widget atomixPulsePlayground(BuildContext context) {
-  final code = '''AtomixPulse(
+  final duration = context.knobs.double.slider(
+    label: 'Duration (ms)',
+    initialValue: 1000,
+    min: 200,
+    max: 3000,
+  );
+
+  final code =
+      '''AtomixPulse(
+  duration: Duration(milliseconds: ${duration.toInt()}),
   child: AtomixBadge(label: 'Pulsing'),
 )''';
 
@@ -17,7 +27,10 @@ Widget atomixPulsePlayground(BuildContext context) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const AtomixPulse(child: AtomixBadge(label: 'Pulsing')),
+        AtomixPulse(
+          duration: Duration(milliseconds: duration.toInt()),
+          child: const AtomixBadge(label: 'Pulsing'),
+        ),
         const SizedBox(height: 32),
         CodeSnippet(code: code),
       ],

@@ -14,6 +14,8 @@ import 'package:atomix_docs/use_cases/atoms/atomix_action_icon_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_action_icon_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_avatar_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_avatar_use_case;
+import 'package:atomix_docs/use_cases/atoms/atomix_backdrop_use_case.dart'
+    as _atomix_docs_use_cases_atoms_atomix_backdrop_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_badge_use_case.dart'
     as _atomix_docs_use_cases_atoms_atomix_badge_use_case;
 import 'package:atomix_docs/use_cases/atoms/atomix_breadcrumb_item_use_case.dart'
@@ -122,6 +124,8 @@ import 'package:atomix_docs/use_cases/layout/atomix_layout_use_case.dart'
     as _atomix_docs_use_cases_layout_atomix_layout_use_case;
 import 'package:atomix_docs/use_cases/layout/layout_readme.dart'
     as _atomix_docs_use_cases_layout_layout_readme;
+import 'package:atomix_docs/use_cases/molecules/atomix_avatar_group_use_case.dart'
+    as _atomix_docs_use_cases_molecules_atomix_avatar_group_use_case;
 import 'package:atomix_docs/use_cases/molecules/atomix_button_use_case.dart'
     as _atomix_docs_use_cases_molecules_atomix_button_use_case;
 import 'package:atomix_docs/use_cases/molecules/atomix_chip_use_case.dart'
@@ -201,6 +205,31 @@ final directories = <_widgetbook.WidgetbookNode>[
                 name: 'With Initials',
                 builder: _atomix_docs_use_cases_atoms_atomix_avatar_use_case
                     .avatarWithInitials,
+              ),
+            ],
+          ),
+        ],
+      ),
+      _widgetbook.WidgetbookFolder(
+        name: 'Backdrop',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'AtomixBackdrop',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Dark',
+                builder: _atomix_docs_use_cases_atoms_atomix_backdrop_use_case
+                    .atomixBackdropDark,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Light',
+                builder: _atomix_docs_use_cases_atoms_atomix_backdrop_use_case
+                    .atomixBackdropLight,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Playground',
+                builder: _atomix_docs_use_cases_atoms_atomix_backdrop_use_case
+                    .atomixBackdropPlayground,
               ),
             ],
           ),
@@ -1397,6 +1426,34 @@ final directories = <_widgetbook.WidgetbookNode>[
   _widgetbook.WidgetbookCategory(
     name: 'Molecules',
     children: [
+      _widgetbook.WidgetbookFolder(
+        name: 'Avatar Group',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'AtomixAvatarGroup',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Excess (Remaining Count)',
+                builder:
+                    _atomix_docs_use_cases_molecules_atomix_avatar_group_use_case
+                        .atomixAvatarGroupExcess,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Playground',
+                builder:
+                    _atomix_docs_use_cases_molecules_atomix_avatar_group_use_case
+                        .atomixAvatarGroupPlayground,
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Small',
+                builder:
+                    _atomix_docs_use_cases_molecules_atomix_avatar_group_use_case
+                        .atomixAvatarGroupSmall,
+              ),
+            ],
+          ),
+        ],
+      ),
       _widgetbook.WidgetbookFolder(
         name: 'Button',
         children: [

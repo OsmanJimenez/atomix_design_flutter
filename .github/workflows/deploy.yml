@@ -1,0 +1,48 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies (Package)
+        run: |
+          cd packages/atomix_design_flutter
+          flutter pub get
+
+      - name: Install Dependencies (Docs App)
+        run: |
+          cd apps/atomix_docs
+          flutter pub get
+
+      - name: Generate Widgetbook Code
+        run: |
+          cd apps/atomix_docs
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Build Web Documentation
+        run: |
+          cd apps/atomix_docs
+          flutter build web --base-href "/atomix_design_flutter/" --release
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apps/atomix_docs/build/web
+          publish_branch: gh-pages
+          commit_message: "docs: deploy version ${{ github.sha }} [skip ci]"

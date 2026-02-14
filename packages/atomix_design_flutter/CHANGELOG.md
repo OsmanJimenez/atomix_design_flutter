@@ -7,6 +7,7 @@
 - **Improved Foundation**:
   - Added `outline`, `outlineDark`, `surfaceVariant`, and `surfaceVariantDark` semantic colors to `AtomixColors`.
   - Added `child` support to `AtomixStroke`.
+- **CI/CD Automation**: Added GitHub Actions workflow to automatically build and deploy the documentation app to GitHub Pages on every push to `main`.
 
 ### Fixed
 - Fixed parameter naming consistency in `AtomixAvatar` (renamed `name` to `initials`).
