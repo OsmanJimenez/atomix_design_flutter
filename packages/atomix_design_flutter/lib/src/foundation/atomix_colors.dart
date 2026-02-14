@@ -25,6 +25,10 @@ class AtomixColors {
   static const Color onSurface = Color(0xFF1F2937);
   static const Color onSurfaceDark = Color(0xFFE5E7EB);
 
+  // Surface Variant colors
+  static const Color surfaceVariant = Color(0xFFF3F4F6);
+  static const Color surfaceVariantDark = Color(0xFF374151);
+
   // Background colors
   static const Color background = Color(0xFFF9FAFB);
   static const Color backgroundDark = Color(0xFF111827);
@@ -70,6 +74,10 @@ class AtomixColors {
   // Border colors
   static const Color border = Color(0xFFE5E7EB);
   static const Color borderDark = Color(0xFF374151);
+
+  // Outline colors
+  static const Color outline = Color(0xFFD1D5DB);
+  static const Color outlineDark = Color(0xFF4B5563);
 
   // Divider colors
   static const Color divider = Color(0xFFE5E7EB);

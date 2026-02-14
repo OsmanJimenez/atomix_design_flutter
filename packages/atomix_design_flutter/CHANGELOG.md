@@ -1,3 +1,16 @@
+## 0.6.0 - 2026-02-14
+
+### Added
+- **21 New Atoms**: Significantly expanded the atomic library with:
+  - `AtomixActionIcon`, `AtomixBackdrop`, `AtomixBullet`, `AtomixCaption`, `AtomixCircle`, `AtomixColorBox`, `AtomixCornerIndicator`, `AtomixDataPoint`, `AtomixFade`, `AtomixGradient`, `AtomixHandle`, `AtomixHeading`, `AtomixIndicator`, `AtomixKey`, `AtomixMask`, `AtomixOverline`, `AtomixPlaceholder`, `AtomixPulse`, `AtomixStepIndicator`, `AtomixStroke`.
+- **Expanded Documentation**: All new components now feature multiple scenarios (Small, Large, Success, Error, States, etc.) in Widgetbook.
+- **Improved Foundation**:
+  - Added `outline`, `outlineDark`, `surfaceVariant`, and `surfaceVariantDark` semantic colors to `AtomixColors`.
+  - Added `child` support to `AtomixStroke`.
+
+### Fixed
+- Fixed parameter naming consistency in `AtomixAvatar` (renamed `name` to `initials`).
+
 ## 0.5.0 - 2026-01-19
 
 ### Added

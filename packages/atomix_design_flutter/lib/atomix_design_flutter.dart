@@ -34,6 +34,26 @@ export 'src/atoms/atomix_tooltip.dart';
 export 'src/atoms/atomix_thumbnail.dart';
 export 'src/atoms/atomix_breadcrumb_item.dart';
 export 'src/atoms/atomix_tab_indicator.dart';
+export 'src/atoms/atomix_action_icon.dart';
+export 'src/atoms/atomix_backdrop.dart';
+export 'src/atoms/atomix_bullet.dart';
+export 'src/atoms/atomix_caption.dart';
+export 'src/atoms/atomix_circle.dart';
+export 'src/atoms/atomix_color_box.dart';
+export 'src/atoms/atomix_corner_indicator.dart';
+export 'src/atoms/atomix_data_point.dart';
+export 'src/atoms/atomix_fade.dart';
+export 'src/atoms/atomix_gradient.dart';
+export 'src/atoms/atomix_handle.dart';
+export 'src/atoms/atomix_heading.dart';
+export 'src/atoms/atomix_indicator.dart';
+export 'src/atoms/atomix_key.dart';
+export 'src/atoms/atomix_mask.dart';
+export 'src/atoms/atomix_overline.dart';
+export 'src/atoms/atomix_placeholder.dart';
+export 'src/atoms/atomix_pulse.dart';
+export 'src/atoms/atomix_step_indicator.dart';
+export 'src/atoms/atomix_stroke.dart';
 
 // Molecules
 export 'src/molecules/atomix_button.dart';

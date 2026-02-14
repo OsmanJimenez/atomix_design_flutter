@@ -40,11 +40,7 @@ packages/atomix_design_flutter/
 
 Simple, single-purpose components:
 
-- `AtomixText` - Text with consistent typography
-- `AtomixIcon` - Icons with design system styling
-- `AtomixDivider` - Visual separators
-- `AtomixSpacer` - Spacing with design tokens
-- `AtomixBadge` - Status badges (neutral, success, warning, error, info)
+- `AtomixText`, `AtomixIcon`, `AtomixDivider`, `AtomixSpacer`, `AtomixBadge`, `AtomixActionIcon`, `AtomixBackdrop`, `AtomixBullet`, `AtomixCaption`, `AtomixCircle`, `AtomixColorBox`, `AtomixCornerIndicator`, `AtomixDataPoint`, `AtomixFade`, `AtomixGradient`, `AtomixHandle`, `AtomixHeading`, `AtomixIndicator`, `AtomixKey`, `AtomixMask`, `AtomixOverline`, `AtomixPlaceholder`, `AtomixPulse`, `AtomixStepIndicator`, `AtomixStroke`.
 
 ### Molecules
 
@@ -297,6 +293,26 @@ atomix_design_flutter/
 | | AtomixDivider | Visual separators |
 | | AtomixSpacer | Spacing helpers |
 | | AtomixBadge | Status badges with variants |
+| | AtomixActionIcon | Clickable icons with tooltips |
+| | AtomixBackdrop | Background overlays for modals |
+| | AtomixBullet | Small indicators for lists |
+| | AtomixCaption | Styled small descriptive text |
+| | AtomixCircle | Circular container atom |
+| | AtomixColorBox | Color preview component |
+| | AtomixCornerIndicator | Anchored indicators for corners |
+| | AtomixDataPoint | Label-value pair display |
+| | AtomixFade | Entry fade-in animation |
+| | AtomixGradient | Customizable gradient containers |
+| | AtomixHandle | Drag handles for sheets/lists |
+| | AtomixHeading | Standardized heading text |
+| | AtomixIndicator | Multi-state pill indicators |
+| | AtomixKey | Keyboard key representation |
+| | AtomixMask | Shape-clipping container |
+| | AtomixOverline | Styled all-caps labels |
+| | AtomixPlaceholder | Content loading placeholders |
+| | AtomixPulse | Visual pulsating animation |
+| | AtomixStepIndicator | Progress step indicators |
+| | AtomixStroke | Bordered container with child support |
 | **Molecules** | AtomixButton | Buttons with variants and states |
 | | AtomixTextField | Text inputs with validation |
 | | AtomixChip | Selectable chips |
