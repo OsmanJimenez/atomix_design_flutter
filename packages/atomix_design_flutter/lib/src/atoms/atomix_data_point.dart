@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'atomix_text.dart';
+import '../theme/atomix_theme.dart';
 import '../foundation/atomix_spacing.dart';
 
 /// Atomix data point component.
@@ -25,17 +26,17 @@ class AtomixDataPoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final typography = AtomixTheme.of(context).typography;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         AtomixText(
           '$label:',
-          style: textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold),
+          style: typography.labelSmall.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(width: spacing),
-        AtomixText(value, style: textTheme.bodySmall),
+        AtomixText(value, style: typography.bodySmall),
       ],
     );
   }

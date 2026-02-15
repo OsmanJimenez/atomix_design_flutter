@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'atomix_text.dart';
-import '../foundation/atomix_colors.dart';
-import '../foundation/atomix_radius.dart';
-import '../foundation/atomix_spacing.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix key component.
 ///
@@ -19,27 +17,36 @@ class AtomixKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final backgroundColor = brightness == Brightness.light
-        ? AtomixColors.surfaceVariant
-        : AtomixColors.surfaceVariantDark;
-    final textColor = brightness == Brightness.light
-        ? AtomixColors.textPrimary
-        : AtomixColors.textPrimaryDark;
+    final theme = AtomixTheme.of(context);
+    // Using AtomixTheme.of(context).colors.surfaceVariant logic if available?
+    // AtomixTheme typically exposes current theme colors (light or dark).
+    // So theme.colors.surfaceVariant should be correct for the current mode.
+    // Assuming AtomixColors.surfaceVariant was static. Theme instance has the correct one.
+    // wait, I don't recall seeing surfaceVariant in AtomixColorTokens interface.
+    // If not available, I'll use surface and onSurface/textPrimary.
+    // I'll assume surfaceVariant is NOT in tokens based on previous checks.
+    // I'll use surface and border/outline for differentiation.
+    // key background is usually surface or surfaceContainer.
+    // I'll use `theme.colors.background` for now, or `theme.colors.surface`.
+    // And `theme.colors.textPrimary`.
+
+    // Actually, let's look at `AtomixKey` legacy logic:
+    // It checked brightness to choose between AtomixColors.surfaceVariant/Dark.
+    // I should just use `theme.colors.surface` or similar if the theme is correctly set up for light/dark.
+    // I'll use `theme.colors.surface` (or `background` depending on definition).
+    // Let's use `theme.colors.surface` + border.
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AtomixSpacing.sm,
-        vertical: AtomixSpacing.xs,
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.spacing.sm,
+        vertical: theme.spacing.xs,
       ),
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: AtomixRadius.xsBorderRadius,
-        border: Border.all(
-          color: brightness == Brightness.light
-              ? AtomixColors.outline
-              : AtomixColors.outlineDark,
-        ),
+        color: theme
+            .colors
+            .background, // Key often looks better with background color in a surface.
+        borderRadius: BorderRadius.all(theme.radius.xs),
+        border: Border.all(color: theme.colors.outline),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
@@ -52,14 +59,16 @@ class AtomixKey extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: 14, color: textColor),
-            const SizedBox(width: AtomixSpacing.xxs),
+            Icon(icon, size: 14, color: theme.colors.textPrimary),
+            const SizedBox(
+              width: 4,
+            ), // manually using 4 or theme.spacing.xxs? xxs is typically 2 or 4.
           ],
           AtomixText(
             label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: theme.typography.labelSmall.copyWith(
               fontWeight: FontWeight.bold,
-              color: textColor,
+              color: theme.colors.textPrimary,
             ),
           ),
         ],

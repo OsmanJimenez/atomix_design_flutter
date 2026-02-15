@@ -54,7 +54,20 @@ Widget atomixBackdropPlayground(BuildContext context) {
   type: AtomixBackdrop,
 )
 Widget atomixBackdropLight(BuildContext context) {
-  return const AtomixBackdrop(opacity: 0.2, color: Colors.white);
+  return Stack(
+    children: [
+      const Center(child: Text('Content')),
+      const AtomixBackdrop(opacity: 0.2, color: Colors.white),
+      const Positioned(
+        bottom: 20,
+        left: 20,
+        right: 20,
+        child: CodeSnippet(
+          code: 'AtomixBackdrop(opacity: 0.2, color: Colors.white)',
+        ),
+      ),
+    ],
+  );
 }
 
 @widgetbook.UseCase(
@@ -63,5 +76,18 @@ Widget atomixBackdropLight(BuildContext context) {
   type: AtomixBackdrop,
 )
 Widget atomixBackdropDark(BuildContext context) {
-  return const AtomixBackdrop(opacity: 0.8, color: Colors.black);
+  return Stack(
+    children: [
+      const Center(child: Text('Content')),
+      const AtomixBackdrop(opacity: 0.8, color: Colors.black),
+      const Positioned(
+        bottom: 20,
+        left: 20,
+        right: 20,
+        child: CodeSnippet(
+          code: 'AtomixBackdrop(opacity: 0.8, color: Colors.black)',
+        ),
+      ),
+    ],
+  );
 }

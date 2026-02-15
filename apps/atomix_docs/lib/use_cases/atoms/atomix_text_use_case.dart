@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Text', type: AtomixText)
 Widget atomixTextPlayground(BuildContext context) {
@@ -38,6 +38,8 @@ Widget atomixTextPlayground(BuildContext context) {
     labelBuilder: (value) => value.toString().split('.').last,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final useFoundationColor = context.knobs.boolean(
     label: 'Foundation > Custom Color',
     initialValue: false,
@@ -47,13 +49,20 @@ Widget atomixTextPlayground(BuildContext context) {
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.textSecondary,
-            AtomixColors.success,
-            AtomixColors.error,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.textSecondary,
+            theme.colors.success,
+            theme.colors.error,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.textSecondary) return 'Text Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.error) return 'Error';
+            return 'Custom';
+          },
         )
       : null;
 

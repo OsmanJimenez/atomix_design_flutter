@@ -33,17 +33,18 @@ class AtomixTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveColor = color ?? AtomixColors.primary;
+    final theme = AtomixTheme.of(context);
+    final effectiveColor = color ?? theme.colors.primary;
     final finalTextColor = textColor ?? effectiveColor;
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AtomixSpacing.sm,
-        vertical: AtomixSpacing.xs / 2,
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.spacing.sm,
+        vertical: theme.spacing.xs / 2,
       ),
       decoration: BoxDecoration(
         color: backgroundColor ?? effectiveColor.withValues(alpha: 0.1),
-        borderRadius: borderRadius ?? AtomixRadius.xsBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.xs),
         border: Border.all(color: effectiveColor.withValues(alpha: 0.2)),
       ),
       child: Row(
@@ -51,7 +52,7 @@ class AtomixTag extends StatelessWidget {
         children: [
           if (icon != null) ...[
             Icon(icon, size: 12, color: finalTextColor),
-            const AtomixSpacer.xs(),
+            AtomixSpacer.xs(),
           ],
           AtomixText(
             label.toUpperCase(),

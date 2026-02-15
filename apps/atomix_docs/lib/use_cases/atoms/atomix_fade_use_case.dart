@@ -39,9 +39,21 @@ Widget atomixFadePlayground(BuildContext context) {
 Widget atomixFadeSlow(BuildContext context) {
   return Center(
     key: UniqueKey(),
-    child: const AtomixFade(
-      duration: Duration(seconds: 2),
-      child: AtomixBadge(label: 'I am taking my time'),
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixFade(
+          duration: Duration(seconds: 2),
+          child: AtomixBadge(label: 'I am taking my time'),
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixFade(
+  duration: Duration(seconds: 2),
+  child: AtomixBadge(label: 'I am taking my time'),
+)''',
+        ),
+      ],
     ),
   );
 }

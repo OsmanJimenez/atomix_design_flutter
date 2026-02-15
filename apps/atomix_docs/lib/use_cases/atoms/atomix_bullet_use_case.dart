@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -40,17 +41,34 @@ Widget atomixBulletPlayground(BuildContext context) {
   type: AtomixBullet,
 )
 Widget atomixBulletStatusColors(BuildContext context) {
-  return const Center(
-    child: Row(
+  return Center(
+    child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixBullet(color: AtomixColors.success),
-        SizedBox(width: 8),
-        AtomixBullet(color: AtomixColors.warning),
-        SizedBox(width: 8),
-        AtomixBullet(color: AtomixColors.error),
-        SizedBox(width: 8),
-        AtomixBullet(color: AtomixColors.info),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AtomixBullet(color: AtomixTheme.of(context).colors.success),
+            const SizedBox(width: 8),
+            AtomixBullet(color: AtomixTheme.of(context).colors.warning),
+            const SizedBox(width: 8),
+            AtomixBullet(color: AtomixTheme.of(context).colors.error),
+            const SizedBox(width: 8),
+            AtomixBullet(color: AtomixTheme.of(context).colors.info),
+          ],
+        ),
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+Row(
+  children: [
+    AtomixBullet(color: theme.colors.success),
+    AtomixBullet(color: theme.colors.warning),
+    AtomixBullet(color: theme.colors.error),
+    AtomixBullet(color: theme.colors.info),
+  ],
+)''',
+        ),
       ],
     ),
   );

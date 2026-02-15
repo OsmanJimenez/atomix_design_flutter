@@ -35,6 +35,7 @@ class AtomixCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     if (count <= 0) return const SizedBox.shrink();
 
+    final theme = AtomixTheme.of(context);
     final displayCount = count > maxCount ? '$maxCount+' : '$count';
 
     return Container(
@@ -43,14 +44,14 @@ class AtomixCounter extends StatelessWidget {
       constraints: BoxConstraints(minWidth: size),
       padding: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: backgroundColor ?? AtomixColors.primary,
+        color: backgroundColor ?? theme.colors.primary,
         borderRadius: borderRadius ?? BorderRadius.circular(size),
       ),
       child: Center(
         child: AtomixText(
           displayCount,
           style: TextStyle(
-            color: textColor ?? AtomixColors.onPrimary,
+            color: textColor ?? theme.colors.onPrimary,
             fontSize: size * 0.5,
             fontWeight: FontWeight.bold,
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix gradient component.
 ///
@@ -40,12 +40,13 @@ class AtomixGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
         gradient: LinearGradient(begin: begin, end: end, colors: colors),
-        borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
       ),
       child: child,
     );

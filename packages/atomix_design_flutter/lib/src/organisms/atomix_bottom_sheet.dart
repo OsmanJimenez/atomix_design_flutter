@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_spacing.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix bottom sheet component.
 ///
@@ -50,14 +49,13 @@ class AtomixBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = AtomixTheme.of(context);
 
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor ?? Theme.of(context).colorScheme.surface,
+        color: backgroundColor ?? theme.colors.background,
         borderRadius:
-            borderRadius ??
-            const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg)),
+            borderRadius ?? BorderRadius.vertical(top: theme.radius.lg),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -66,26 +64,29 @@ class AtomixBottomSheet extends StatelessWidget {
           if (showHandle)
             Center(
               child: Container(
-                margin: const EdgeInsets.symmetric(vertical: AtomixSpacing.sm),
+                margin: EdgeInsets.symmetric(vertical: theme.spacing.sm),
                 width: 32,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                  borderRadius: AtomixRadius.fullBorderRadius,
+                  color: theme.colors.textSecondary.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.all(theme.radius.full),
                 ),
               ),
             ),
           if (title != null)
             Padding(
               padding: EdgeInsets.fromLTRB(
-                AtomixSpacing.xl,
-                showHandle ? 0 : AtomixSpacing.xl,
-                AtomixSpacing.xl,
-                AtomixSpacing.md,
+                theme.spacing.xl,
+                showHandle ? 0 : theme.spacing.xl,
+                theme.spacing.xl,
+                theme.spacing.md,
               ),
-              child: Text(title!, style: textTheme.titleLarge),
+              child: Text(
+                title!,
+                style: theme.typography.headlineSmall.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           Flexible(
             child: Padding(

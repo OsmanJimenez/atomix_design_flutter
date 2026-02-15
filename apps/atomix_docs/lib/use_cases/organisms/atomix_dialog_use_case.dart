@@ -39,17 +39,19 @@ Widget atomixDialogPlayground(BuildContext context) {
         )
       : null;
 
+  final theme = AtomixTheme.of(context);
+
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
-      AtomixRadius.xlBorderRadius,
-      AtomixRadius.fullBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
+      BorderRadius.all(theme.radius.xl),
+      BorderRadius.all(theme.radius.full),
     ],
-    initialOption: AtomixRadius.lgBorderRadius,
+    initialOption: BorderRadius.all(theme.radius.lg),
   );
 
   final useFoundationColor = context.knobs.boolean(
@@ -61,8 +63,8 @@ Widget atomixDialogPlayground(BuildContext context) {
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Background Color',
           options: [
-            AtomixColors.surface,
-            AtomixColors.primary.withValues(alpha: 0.05),
+            theme.colors.surface,
+            theme.colors.primary.withValues(alpha: 0.05),
             const Color(0xFFF9FAFB),
           ],
         )
@@ -72,7 +74,7 @@ Widget atomixDialogPlayground(BuildContext context) {
   final iconStr = showIcon
       ? '\n    icon: Icons.${iconData.toString().split('(').last.split(')').first},'
       : '';
-  final radiusStr = foundationRadius != AtomixRadius.lgBorderRadius
+  final radiusStr = foundationRadius != BorderRadius.all(theme.radius.lg)
       ? '\n    borderRadius: ...,'
       : '';
   final colorStr = useFoundationColor ? '\n    backgroundColor: ...,' : '';

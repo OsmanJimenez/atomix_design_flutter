@@ -49,19 +49,21 @@ Widget atomixAppBarPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Background Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.surface,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.surface,
             const Color(0xFF1E1E1E),
           ],
           labelBuilder: (color) {
-            if (color == AtomixColors.primary) return 'Primary';
-            if (color == AtomixColors.secondary) return 'Secondary';
-            if (color == AtomixColors.surface) return 'Surface';
+            if (color == theme.colors.primary) return 'Primary';
+            if (color == theme.colors.secondary) return 'Secondary';
+            if (color == theme.colors.surface) return 'Surface';
             return 'Dark Custom';
           },
         )

@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -36,28 +36,38 @@ Widget labelPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.warning,
-            AtomixColors.error,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.warning,
+            theme.colors.error,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
   String colorName(Color? color) {
-    if (color == AtomixColors.primary) return 'AtomixColors.primary';
-    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (color == AtomixColors.success) return 'AtomixColors.success';
-    if (color == AtomixColors.warning) return 'AtomixColors.warning';
-    if (color == AtomixColors.error) return 'AtomixColors.error';
-    if (color == AtomixColors.info) return 'AtomixColors.info';
+    if (color == theme.colors.primary) return 'theme.colors.primary';
+    if (color == theme.colors.secondary) return 'theme.colors.secondary';
+    if (color == theme.colors.success) return 'theme.colors.success';
+    if (color == theme.colors.warning) return 'theme.colors.warning';
+    if (color == theme.colors.error) return 'theme.colors.error';
+    if (color == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
@@ -66,7 +76,8 @@ Widget labelPlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixLabel(
+      '''final theme = AtomixTheme.of(context);
+AtomixLabel(
   label: '$labelText',
   subLabel: ${subLabel.isEmpty ? 'null' : "'$subLabel'"},
   isRequired: $isRequired,

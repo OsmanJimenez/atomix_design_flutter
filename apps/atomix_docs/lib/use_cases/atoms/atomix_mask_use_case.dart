@@ -49,14 +49,26 @@ class CircleClipper extends CustomClipper<Path> {
 )
 Widget atomixMaskCircular(BuildContext context) {
   return Center(
-    child: AtomixMask(
-      clipper: CircleClipper(),
-      child: Image.network(
-        'https://placeholder.com/200',
-        width: 200,
-        height: 200,
-        fit: BoxFit.cover,
-      ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixMask(
+          clipper: CircleClipper(),
+          child: Image.network(
+            'https://placeholder.com/200',
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''AtomixMask(
+  clipper: CircleClipper(),
+  child: Image.network('...', width: 200, height: 200),
+)''',
+        ),
+      ],
     ),
   );
 }

@@ -34,34 +34,36 @@ class AtomixSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+
     Widget toggle = CupertinoSwitch(
       value: value,
       onChanged: isDisabled ? null : onChanged,
-      activeTrackColor: activeColor ?? AtomixColors.primary,
-      inactiveTrackColor: trackColor ?? AtomixColors.border,
+      activeTrackColor: activeColor ?? theme.colors.primary,
+      inactiveTrackColor: trackColor ?? theme.colors.border,
     );
 
     if (label == null) return toggle;
 
     return InkWell(
       onTap: isDisabled ? null : () => onChanged?.call(!value),
-      borderRadius: AtomixRadius.smBorderRadius,
+      borderRadius: BorderRadius.all(theme.radius.sm),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AtomixSpacing.xs,
-          horizontal: AtomixSpacing.sm,
+        padding: EdgeInsets.symmetric(
+          vertical: theme.spacing.xs,
+          horizontal: theme.spacing.sm,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             toggle,
-            const AtomixSpacer.sm(),
+            AtomixSpacer.horizontal(theme.spacing.sm),
             AtomixText(
               label!,
               style: TextStyle(
                 color: isDisabled
-                    ? AtomixColors.textDisabled
-                    : AtomixColors.textPrimary,
+                    ? theme.colors.textDisabled
+                    : theme.colors.textPrimary,
               ),
             ),
           ],

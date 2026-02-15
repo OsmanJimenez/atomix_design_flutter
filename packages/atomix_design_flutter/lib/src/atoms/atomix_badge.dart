@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_colors.dart';
-import '../foundation/atomix_spacing.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
+import '../theme/atomix_theme_data.dart';
+// import '../foundation/atomix_colors.dart';
+// import '../foundation/atomix_spacing.dart';
+// import '../foundation/atomix_radius.dart';
 
 /// Badge variant types.
 enum AtomixBadgeVariant {
@@ -63,86 +65,71 @@ class AtomixBadge extends StatelessWidget {
   /// Optional border radius override.
   final BorderRadius? borderRadius;
 
-  Color _getBackgroundColor(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-
+  Color _getBackgroundColor(AtomixThemeData theme, Brightness brightness) {
+    final alpha = brightness == Brightness.light ? 0.1 : 0.2;
     switch (variant) {
       case AtomixBadgeVariant.success:
-        return brightness == Brightness.light
-            ? AtomixColors.success.withValues(alpha: 0.1)
-            : AtomixColors.successDark.withValues(alpha: 0.2);
+        return theme.colors.success.withValues(alpha: alpha);
       case AtomixBadgeVariant.warning:
-        return brightness == Brightness.light
-            ? AtomixColors.warning.withValues(alpha: 0.1)
-            : AtomixColors.warningDark.withValues(alpha: 0.2);
+        return theme.colors.warning.withValues(alpha: alpha);
       case AtomixBadgeVariant.error:
-        return brightness == Brightness.light
-            ? AtomixColors.error.withValues(alpha: 0.1)
-            : AtomixColors.errorDark.withValues(alpha: 0.2);
+        return theme.colors.error.withValues(alpha: alpha);
       case AtomixBadgeVariant.info:
-        return brightness == Brightness.light
-            ? AtomixColors.info.withValues(alpha: 0.1)
-            : AtomixColors.infoDark.withValues(alpha: 0.2);
+        return theme.colors.info.withValues(alpha: alpha);
       case AtomixBadgeVariant.neutral:
-        return brightness == Brightness.light
-            ? AtomixColors.textTertiary.withValues(alpha: 0.1)
-            : AtomixColors.textTertiaryDark.withValues(alpha: 0.2);
+        return theme.colors.textTertiary.withValues(alpha: alpha);
     }
   }
 
-  Color _getTextColor(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-
+  Color _getTextColor(AtomixThemeData theme) {
+    // For tinted badges, we use the base color as text color usually, or a darker version?
+    // Current tokens don't support "SuccessDark", so we use the base success color.
+    // Ideally, we'd have onSuccessContainer.
     switch (variant) {
       case AtomixBadgeVariant.success:
-        return brightness == Brightness.light
-            ? AtomixColors.successDark
-            : AtomixColors.successLight;
+        return theme.colors.success;
       case AtomixBadgeVariant.warning:
-        return brightness == Brightness.light
-            ? AtomixColors.warningDark
-            : AtomixColors.warningLight;
+        return theme.colors.warning;
       case AtomixBadgeVariant.error:
-        return brightness == Brightness.light
-            ? AtomixColors.errorDark
-            : AtomixColors.errorLight;
+        return theme.colors.error;
       case AtomixBadgeVariant.info:
-        return brightness == Brightness.light
-            ? AtomixColors.infoDark
-            : AtomixColors.infoLight;
+        return theme.colors.info;
       case AtomixBadgeVariant.neutral:
-        return brightness == Brightness.light
-            ? AtomixColors.textPrimary
-            : AtomixColors.textPrimaryDark;
+        return theme.colors.textPrimary;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final finalTextColor = textColor ?? _getTextColor(context);
+    final theme = AtomixTheme.of(context);
+    final brightness = Theme.of(
+      context,
+    ).brightness; // Or theme.brightness if available in our data? No.
+
+    final finalTextColor = textColor ?? _getTextColor(theme);
     final finalBackgroundColor =
-        backgroundColor ?? _getBackgroundColor(context);
-    final textTheme = Theme.of(context).textTheme;
+        backgroundColor ?? _getBackgroundColor(theme, brightness);
+    final textTheme = theme.typography;
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AtomixSpacing.sm,
-        vertical: AtomixSpacing.xxs,
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.spacing.sm,
+        vertical: theme.spacing.xxs,
       ),
       decoration: BoxDecoration(
         color: finalBackgroundColor,
-        borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
             Icon(icon, size: 14, color: finalTextColor),
-            const SizedBox(width: AtomixSpacing.xxs),
+            SizedBox(width: theme.spacing.xxs),
           ],
           Text(
             label,
-            style: textTheme.labelSmall?.copyWith(
+            style: textTheme.labelSmall.copyWith(
               color: finalTextColor,
               fontWeight: FontWeight.w600,
             ),

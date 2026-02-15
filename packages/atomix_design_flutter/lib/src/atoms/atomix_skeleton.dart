@@ -25,20 +25,35 @@ class AtomixSkeleton extends StatelessWidget {
     this.borderRadius,
     this.isCircle = false,
     this.color,
+    this.animate = true,
   });
+
+  /// Whether to animate the skeleton (shimmer effect).
+  final bool animate;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final theme = AtomixTheme.of(context);
+    final container = Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: color ?? AtomixColors.border.withValues(alpha: 0.5),
+        color: color ?? theme.colors.border.withValues(alpha: 0.5),
         shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
         borderRadius: isCircle
             ? null
-            : (borderRadius ?? AtomixRadius.smBorderRadius),
+            : (borderRadius ?? BorderRadius.all(theme.radius.sm)),
       ),
     );
+
+    if (animate) {
+      return AtomixShimmer(
+        baseColor: color ?? theme.colors.border.withValues(alpha: 0.5),
+        highlightColor: theme.colors.surface,
+        child: container,
+      );
+    }
+
+    return container;
   }
 }

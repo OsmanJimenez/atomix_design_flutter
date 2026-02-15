@@ -33,12 +33,13 @@ class AtomixLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     final defaultLabelColor = isError
-        ? AtomixColors.error
-        : AtomixColors.textPrimary;
+        ? theme.colors.error
+        : theme.colors.textPrimary;
     final defaultSubLabelColor = isError
-        ? AtomixColors.error
-        : AtomixColors.textSecondary;
+        ? theme.colors.error
+        : theme.colors.textSecondary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,23 +50,20 @@ class AtomixLabel extends StatelessWidget {
           children: [
             AtomixText(
               label,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              style: theme.typography.labelLarge.copyWith(
                 fontWeight: FontWeight.w600,
                 color: labelColor ?? defaultLabelColor,
               ),
             ),
             if (isRequired)
-              const AtomixText(
-                ' *',
-                style: TextStyle(color: AtomixColors.error),
-              ),
+              AtomixText(' *', style: TextStyle(color: theme.colors.error)),
           ],
         ),
         if (subLabel != null) ...[
-          const AtomixSpacer.xs(),
+          AtomixSpacer.xs(),
           AtomixText(
             subLabel!,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: theme.typography.labelSmall.copyWith(
               color: subLabelColor ?? defaultSubLabelColor,
             ),
           ),

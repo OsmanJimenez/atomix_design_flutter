@@ -57,7 +57,22 @@ Widget atomixActionIconPlayground(BuildContext context) {
 )
 Widget atomixActionIconSmall(BuildContext context) {
   return const Center(
-    child: AtomixActionIcon(icon: Icons.edit, size: 16, tooltip: 'Edit'),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixActionIcon(
+          icon: Icons.edit,
+          size: 16,
+          tooltip: 'Edit',
+          onPressed: null,
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code:
+              "AtomixActionIcon(icon: Icons.edit, size: 16, tooltip: 'Edit', onPressed: () {})",
+        ),
+      ],
+    ),
   );
 }
 
@@ -68,10 +83,25 @@ Widget atomixActionIconSmall(BuildContext context) {
 )
 Widget atomixActionIconCustomColor(BuildContext context) {
   return const Center(
-    child: AtomixActionIcon(
-      icon: Icons.favorite,
-      color: Colors.red,
-      tooltip: 'Favorite',
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixActionIcon(
+          icon: Icons.favorite,
+          color: Colors.red,
+          tooltip: 'Favorite',
+          onPressed: null,
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixActionIcon(
+  icon: Icons.favorite,
+  color: Colors.red,
+  tooltip: 'Favorite',
+  onPressed: () {},
+)''',
+        ),
+      ],
     ),
   );
 }

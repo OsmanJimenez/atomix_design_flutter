@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_elevation.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Card variant types.
 enum AtomixCardVariant {
@@ -62,25 +61,37 @@ class AtomixCard extends StatelessWidget {
   double _getElevation() {
     switch (variant) {
       case AtomixCardVariant.filled:
-        return AtomixElevation.xs;
+        return 0; // Filled usually has 0 elevation but distinct color
       case AtomixCardVariant.outlined:
-        return AtomixElevation.none;
+        return 0;
       case AtomixCardVariant.elevated:
-        return AtomixElevation.md;
+        return 2; // Standard elevation
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = AtomixTheme.of(context);
+    // Use theme.colors for default background if not provided
+    // Filled: Surface Variant (or similar)
+    // Outlined: Surface (transparent)
+    // Elevated: Surface
+    Color? defaultColor;
+    if (variant == AtomixCardVariant.filled) {
+      defaultColor = theme.colors.border.withValues(
+        alpha: 0.1,
+      ); // Placeholder for surface variant
+    } else {
+      defaultColor = theme.colors.background;
+    }
 
     final card = Card(
       elevation: elevation ?? _getElevation(),
-      color: backgroundColor,
+      color: backgroundColor ?? defaultColor,
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.md),
         side: variant == AtomixCardVariant.outlined
-            ? BorderSide(color: colorScheme.outline)
+            ? BorderSide(color: theme.colors.outline)
             : BorderSide.none,
       ),
       child: child,
@@ -89,7 +100,7 @@ class AtomixCard extends StatelessWidget {
     if (onTap != null) {
       return InkWell(
         onTap: onTap,
-        borderRadius: AtomixRadius.mdBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.md),
         child: card,
       );
     }

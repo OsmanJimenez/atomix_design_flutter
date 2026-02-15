@@ -21,24 +21,26 @@ Widget atomixCardPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.surface,
-            AtomixColors.success,
-            AtomixColors.warning,
-            AtomixColors.error,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.surface,
+            theme.colors.success,
+            theme.colors.warning,
+            theme.colors.error,
           ],
           labelBuilder: (color) {
-            if (color == AtomixColors.primary) return 'Primary';
-            if (color == AtomixColors.secondary) return 'Secondary';
-            if (color == AtomixColors.surface) return 'Surface';
-            if (color == AtomixColors.success) return 'Success';
-            if (color == AtomixColors.warning) return 'Warning';
-            if (color == AtomixColors.error) return 'Error';
+            if (color == theme.colors.primary) return 'Primary';
+            if (color == theme.colors.secondary) return 'Secondary';
+            if (color == theme.colors.surface) return 'Surface';
+            if (color == theme.colors.success) return 'Success';
+            if (color == theme.colors.warning) return 'Warning';
+            if (color == theme.colors.error) return 'Error';
             return 'Unknown';
           },
         )
@@ -61,14 +63,14 @@ Widget atomixCardPlayground(BuildContext context) {
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
-      AtomixRadius.xlBorderRadius,
-      AtomixRadius.fullBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
+      BorderRadius.all(theme.radius.xl),
+      BorderRadius.all(theme.radius.full),
     ],
-    initialOption: AtomixRadius.mdBorderRadius,
+    initialOption: BorderRadius.all(theme.radius.md),
   );
 
   final isTappable = context.knobs.boolean(
@@ -78,33 +80,45 @@ Widget atomixCardPlayground(BuildContext context) {
 
   // Helper strings
   String colorName(Color? color) {
-    if (color == AtomixColors.primary) return 'AtomixColors.primary';
-    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (color == AtomixColors.surface) return 'AtomixColors.surface';
-    if (color == AtomixColors.success) return 'AtomixColors.success';
-    if (color == AtomixColors.warning) return 'AtomixColors.warning';
-    if (color == AtomixColors.error) return 'AtomixColors.error';
+    if (color == theme.colors.primary) {
+      return 'theme.colors.primary';
+    }
+    if (color == theme.colors.secondary) {
+      return 'theme.colors.secondary';
+    }
+    if (color == theme.colors.surface) {
+      return 'theme.colors.surface';
+    }
+    if (color == theme.colors.success) {
+      return 'theme.colors.success';
+    }
+    if (color == theme.colors.warning) {
+      return 'theme.colors.warning';
+    }
+    if (color == theme.colors.error) {
+      return 'theme.colors.error';
+    }
     return 'null';
   }
 
   String radiusName(BorderRadius radius) {
-    if (radius == AtomixRadius.xsBorderRadius) {
-      return 'AtomixRadius.xsBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.xs)) {
+      return 'BorderRadius.all(theme.radius.xs)';
     }
-    if (radius == AtomixRadius.smBorderRadius) {
-      return 'AtomixRadius.smBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.sm)) {
+      return 'BorderRadius.all(theme.radius.sm)';
     }
-    if (radius == AtomixRadius.mdBorderRadius) {
-      return 'AtomixRadius.mdBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.md)) {
+      return 'BorderRadius.all(theme.radius.md)';
     }
-    if (radius == AtomixRadius.lgBorderRadius) {
-      return 'AtomixRadius.lgBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.lg)) {
+      return 'BorderRadius.all(theme.radius.lg)';
     }
-    if (radius == AtomixRadius.xlBorderRadius) {
-      return 'AtomixRadius.xlBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.xl)) {
+      return 'BorderRadius.all(theme.radius.xl)';
     }
-    if (radius == AtomixRadius.fullBorderRadius) {
-      return 'AtomixRadius.fullBorderRadius';
+    if (radius == BorderRadius.all(theme.radius.full)) {
+      return 'BorderRadius.all(theme.radius.full)';
     }
     return 'null';
   }

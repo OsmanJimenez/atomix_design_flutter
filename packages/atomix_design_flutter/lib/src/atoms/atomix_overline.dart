@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 import 'atomix_text.dart';
 
 /// Atomix overline component.
@@ -39,7 +40,7 @@ class AtomixOverline extends StatelessWidget {
   Widget build(BuildContext context) {
     return AtomixText(
       uppercase ? data.toUpperCase() : data,
-      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+      style: AtomixTheme.of(context).typography.labelSmall.copyWith(
         letterSpacing: 1.5,
         fontWeight: FontWeight.bold,
       ),

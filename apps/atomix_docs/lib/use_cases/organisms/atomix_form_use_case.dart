@@ -12,8 +12,10 @@ import '../../widgets/code_snippet.dart';
 Widget buildRegistrationFormUseCase(BuildContext context) {
   final formKey = GlobalKey<FormState>();
 
+  final theme = AtomixTheme.of(context);
+
   return Padding(
-    padding: const EdgeInsets.all(AtomixSpacing.md),
+    padding: EdgeInsets.all(theme.spacing.md),
     child: AtomixForm(
       formKey: formKey,
       children: [
@@ -25,7 +27,9 @@ Widget buildRegistrationFormUseCase(BuildContext context) {
               hint: 'John Doe',
               prefixIcon: Icons.person,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Name is required';
+                if (value == null || value.isEmpty) {
+                  return 'Name is required';
+                }
                 return null;
               },
             ),
@@ -35,14 +39,15 @@ Widget buildRegistrationFormUseCase(BuildContext context) {
               prefixIcon: Icons.email,
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || !value.contains('@'))
+                if (value == null || !value.contains('@')) {
                   return 'Invalid email';
+                }
                 return null;
               },
             ),
           ],
         ),
-        const SizedBox(height: AtomixSpacing.lg),
+        SizedBox(height: theme.spacing.lg),
         AtomixFormSection(
           title: 'Account Security',
           children: [
@@ -51,13 +56,15 @@ Widget buildRegistrationFormUseCase(BuildContext context) {
               obscureText: true,
               prefixIcon: Icons.lock,
               validator: (value) {
-                if (value == null || value.length < 6) return 'Too short';
+                if (value == null || value.length < 6) {
+                  return 'Too short';
+                }
                 return null;
               },
             ),
           ],
         ),
-        const SizedBox(height: AtomixSpacing.xl),
+        SizedBox(height: theme.spacing.xl),
         AtomixButton(
           label: 'Create Account',
           fullWidth: true,
@@ -80,15 +87,17 @@ Widget buildRegistrationFormUseCase(BuildContext context) {
   path: '[Organisms]/AtomixForm',
 )
 Widget buildFormPlayground(BuildContext context) {
+  final theme = AtomixTheme.of(context);
+
   final spacing = context.knobs.double.slider(
     label: 'Spacing',
-    initialValue: AtomixSpacing.md,
+    initialValue: theme.spacing.md,
     min: 0,
     max: 40,
   );
   final paddingValue = context.knobs.double.slider(
     label: 'Padding',
-    initialValue: AtomixSpacing.md,
+    initialValue: theme.spacing.md,
     min: 0,
     max: 40,
   );
@@ -96,7 +105,7 @@ Widget buildFormPlayground(BuildContext context) {
     label: 'Scrollable',
     initialValue: false,
   );
-  final alignment = context.knobs.list<CrossAxisAlignment>(
+  final alignment = context.knobs.object.dropdown<CrossAxisAlignment>(
     label: 'Cross Axis Alignment',
     options: CrossAxisAlignment.values,
     labelBuilder: (value) => value.toString().split('.').last,
@@ -117,7 +126,7 @@ Widget buildFormPlayground(BuildContext context) {
 )''';
 
   return SingleChildScrollView(
-    padding: const EdgeInsets.all(AtomixSpacing.md),
+    padding: EdgeInsets.all(theme.spacing.md),
     child: Column(
       children: [
         AtomixForm(
@@ -178,7 +187,7 @@ Widget buildTextFormFieldPlayground(BuildContext context) {
 )''';
 
   return SingleChildScrollView(
-    padding: const EdgeInsets.all(AtomixSpacing.md),
+    padding: EdgeInsets.all(AtomixTheme.of(context).spacing.md),
     child: Column(
       children: [
         AtomixTextFormField(

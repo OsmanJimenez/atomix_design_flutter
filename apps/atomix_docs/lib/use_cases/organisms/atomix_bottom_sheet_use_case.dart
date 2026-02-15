@@ -25,11 +25,13 @@ Widget atomixBottomSheetPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Background Color',
           options: [
-            AtomixColors.surface,
+            theme.colors.surface,
             const Color(0xFFF3F4F6),
             const Color(0xFFE5E7EB),
           ],
@@ -39,22 +41,19 @@ Widget atomixBottomSheetPlayground(BuildContext context) {
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius (Top)',
     options: [
-      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.xs)),
-      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.sm)),
-      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.md)),
-      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg)),
-      const BorderRadius.vertical(top: Radius.circular(AtomixRadius.xl)),
+      BorderRadius.vertical(top: theme.radius.xs),
+      BorderRadius.vertical(top: theme.radius.sm),
+      BorderRadius.vertical(top: theme.radius.md),
+      BorderRadius.vertical(top: theme.radius.lg),
+      BorderRadius.vertical(top: theme.radius.xl),
     ],
-    initialOption: const BorderRadius.vertical(
-      top: Radius.circular(AtomixRadius.lg),
-    ),
+    initialOption: BorderRadius.vertical(top: theme.radius.lg),
   );
 
   // Helper strings
   final handleStr = !showHandle ? '\n    showHandle: false,' : '';
   final radiusStr =
-      foundationRadius !=
-          const BorderRadius.vertical(top: Radius.circular(AtomixRadius.lg))
+      foundationRadius != BorderRadius.vertical(top: theme.radius.lg)
       ? '\n    borderRadius: ...,'
       : '';
 
@@ -139,10 +138,13 @@ Widget atomixBottomSheetDefault(BuildContext context) {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        AtomixListTile(title: 'Option 1', leading: Icons.star),
+                        AtomixListTile(
+                          title: 'Option 1',
+                          leading: const Icon(Icons.star),
+                        ),
                         AtomixListTile(
                           title: 'Option 2',
-                          leading: Icons.favorite,
+                          leading: const Icon(Icons.favorite),
                         ),
                       ],
                     ),

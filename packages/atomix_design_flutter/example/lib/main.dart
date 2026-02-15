@@ -132,7 +132,7 @@ class ExampleHomePage extends StatelessWidget {
                   AtomixListTile(
                     title: 'Settings',
                     subtitle: 'Manage your preferences',
-                    leading: Icons.settings,
+                    leading: const Icon(Icons.settings),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
@@ -140,7 +140,7 @@ class ExampleHomePage extends StatelessWidget {
                   AtomixListTile(
                     title: 'Profile',
                     subtitle: 'View your profile',
-                    leading: Icons.person,
+                    leading: const Icon(Icons.person),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {},
                   ),

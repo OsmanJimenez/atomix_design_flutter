@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -21,9 +22,10 @@ Widget atomixCornerIndicatorPlayground(BuildContext context) {
   );
 
   final code =
-      '''AtomixCornerIndicator(
+      '''final theme = AtomixTheme.of(context);
+AtomixCornerIndicator(
   alignment: ${alignment.toString()},
-  indicator: AtomixDot(size: 12, color: AtomixColors.error),
+  indicator: AtomixDot(size: 12, color: theme.colors.error),
   child: AtomixAvatar(initials: 'JD'),
 )''';
 
@@ -33,7 +35,10 @@ Widget atomixCornerIndicatorPlayground(BuildContext context) {
       children: [
         AtomixCornerIndicator(
           alignment: alignment,
-          indicator: const AtomixDot(size: 12, color: AtomixColors.error),
+          indicator: AtomixDot(
+            size: 12,
+            color: AtomixTheme.of(context).colors.error,
+          ),
           child: const AtomixAvatar(initials: 'JD'),
         ),
         const SizedBox(height: 32),

@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -33,23 +33,38 @@ Widget avatarPlayground(BuildContext context) {
     initialValue: true,
   );
 
+  final forceError = context.knobs.boolean(
+    label: 'Avatar > Force Error (Test Fallback)',
+    initialValue: false,
+  );
+
   final useFoundationColor = context.knobs.boolean(
     label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.warning,
-            AtomixColors.error,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.warning,
+            theme.colors.error,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
@@ -57,20 +72,29 @@ Widget avatarPlayground(BuildContext context) {
     label: 'Foundation > Radius',
     options: [
       BorderRadius.zero,
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
       BorderRadius.circular(size),
     ],
     initialOption: BorderRadius.circular(80),
-    labelBuilder: KnobHelpers.radiusLabel,
+    labelBuilder: (r) {
+      if (r == BorderRadius.zero) return 'Zero';
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      if (r == BorderRadius.all(theme.radius.lg)) return 'LG';
+      return 'Circular';
+    },
   );
 
   return _AvatarPlaygroundWrapper(
     size: size,
     initials: initials,
-    imageUrl: useImage ? imageUrl : null,
+    imageUrl: useImage
+        ? (forceError ? 'https://invalid-url.com/image.png' : imageUrl)
+        : null,
     backgroundColor: foundationColor,
     borderRadius: foundationRadius,
   );
@@ -91,40 +115,43 @@ class _AvatarPlaygroundWrapper extends StatelessWidget {
     this.borderRadius,
   });
 
-  String colorName(Color? color) {
-    if (color == AtomixColors.primary) return 'AtomixColors.primary';
-    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (color == AtomixColors.success) return 'AtomixColors.success';
-    if (color == AtomixColors.warning) return 'AtomixColors.warning';
-    if (color == AtomixColors.error) return 'AtomixColors.error';
-    if (color == AtomixColors.info) return 'AtomixColors.info';
+  String colorName(BuildContext context, Color? color) {
+    final theme = AtomixTheme.of(context);
+    if (color == theme.colors.primary) return 'theme.colors.primary';
+    if (color == theme.colors.secondary) return 'theme.colors.secondary';
+    if (color == theme.colors.success) return 'theme.colors.success';
+    if (color == theme.colors.warning) return 'theme.colors.warning';
+    if (color == theme.colors.error) return 'theme.colors.error';
+    if (color == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
-  String radiusName(BorderRadius? radius) {
-    if (radius == AtomixRadius.xsBorderRadius)
-      return 'AtomixRadius.xsBorderRadius';
-    if (radius == AtomixRadius.smBorderRadius)
-      return 'AtomixRadius.smBorderRadius';
-    if (radius == AtomixRadius.mdBorderRadius)
-      return 'AtomixRadius.mdBorderRadius';
-    if (radius == AtomixRadius.lgBorderRadius)
-      return 'AtomixRadius.lgBorderRadius';
+  String radiusName(BuildContext context, BorderRadius? radius) {
+    final theme = AtomixTheme.of(context);
+    if (radius == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (radius == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (radius == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
+    if (radius == BorderRadius.all(theme.radius.lg))
+      return 'BorderRadius.all(theme.radius.lg)';
     if (radius == BorderRadius.zero) return 'BorderRadius.zero';
-    return 'BorderRadius.circular($size)';
+    return 'BorderRadius.circular(\$size)';
   }
 
   @override
   Widget build(BuildContext context) {
     final colorStr = backgroundColor != null
-        ? '\n  backgroundColor: ${colorName(backgroundColor)},'
+        ? '\n  backgroundColor: ${colorName(context, backgroundColor)},'
         : '';
     final radiusStr = borderRadius != BorderRadius.circular(size)
-        ? '\n  borderRadius: ${radiusName(borderRadius)},'
+        ? '\n  borderRadius: ${radiusName(context, borderRadius)},'
         : '';
 
     final code =
-        '''AtomixAvatar(
+        '''final theme = AtomixTheme.of(context);
+AtomixAvatar(
   size: $size,
   initials: '$initials',
   ${imageUrl != null ? "imageUrl: '$imageUrl'," : "// No image"}$colorStr$radiusStr
@@ -143,7 +170,7 @@ class _AvatarPlaygroundWrapper extends StatelessWidget {
               borderRadius: borderRadius,
             ),
             const SizedBox(height: 32),
-            CodeSnippet(code: code),
+            CodeSnippet(code: code.toString()),
           ],
         ),
       ),
@@ -203,21 +230,22 @@ Widget avatarWithInitials(BuildContext context) {
   type: AtomixAvatar,
 )
 Widget avatarSquircle(BuildContext context) {
-  return const Center(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AtomixAvatar(
           size: 100,
           initials: 'SQ',
-          borderRadius: AtomixRadius.lgBorderRadius,
+          borderRadius: BorderRadius.all(AtomixTheme.of(context).radius.lg),
         ),
-        SizedBox(height: 24),
-        CodeSnippet(
-          code: '''AtomixAvatar(
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixAvatar(
   size: 100,
   initials: 'SQ',
-  borderRadius: AtomixRadius.lgBorderRadius,
+  borderRadius: BorderRadius.all(theme.radius.lg),
 )''',
         ),
       ],

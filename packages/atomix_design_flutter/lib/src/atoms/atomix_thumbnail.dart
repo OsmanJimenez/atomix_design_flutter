@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../atomix_design_flutter.dart';
+import '../theme/atomix_theme.dart';
 
 /// A small image preview or thumbnail component.
 class AtomixThumbnail extends StatelessWidget {
@@ -29,14 +30,15 @@ class AtomixThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: AtomixColors.border.withValues(alpha: 0.1),
-        borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+        color: theme.colors.border.withValues(alpha: 0.1),
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
         border: hasBorder
-            ? Border.all(color: borderColor ?? AtomixColors.border)
+            ? Border.all(color: borderColor ?? theme.colors.border)
             : null,
         image: DecorationImage(
           image: NetworkImage(imageUrl),

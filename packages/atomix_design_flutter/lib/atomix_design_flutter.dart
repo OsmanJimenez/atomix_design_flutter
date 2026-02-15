@@ -6,14 +6,37 @@ export 'src/foundation/atomix_elevation.dart';
 export 'src/foundation/atomix_radius.dart';
 export 'src/foundation/atomix_shadows.dart';
 export 'src/foundation/atomix_spacing.dart';
-export 'src/foundation/atomix_theme.dart';
+// export 'src/foundation/atomix_theme.dart'; // Legacy theme replaced by new system
 export 'src/foundation/atomix_typography.dart';
+
+// Theme System
+export 'src/theme/atomix_theme.dart';
+export 'src/theme/atomix_theme_data.dart';
+export 'src/theme/strategies/atomix_theme_strategy.dart';
+export 'src/theme/strategies/atomix_theme_materialize.dart';
+export 'src/theme/strategies/atomix_theme_glass.dart';
+export 'src/theme/strategies/atomix_theme_expressive.dart';
+export 'src/theme/tokens/atomix_color_tokens.dart';
+export 'src/theme/tokens/atomix_typography_tokens.dart';
+export 'src/theme/tokens/atomix_geometry_tokens.dart';
 
 // Atoms
 export 'src/atoms/atomix_text.dart';
 export 'src/atoms/atomix_icon.dart';
 export 'src/atoms/atomix_divider.dart';
 export 'src/atoms/atomix_spacer.dart';
+
+// Templates
+export 'src/templates/atomix_dashboard_template.dart';
+export 'src/templates/atomix_auth_template.dart';
+export 'src/templates/atomix_settings_template.dart';
+export 'src/templates/atomix_list_template.dart';
+export 'src/templates/atomix_detail_template.dart';
+export 'src/templates/atomix_landing_template.dart';
+
+// Utils
+export 'src/utils/atomix_responsive.dart';
+export 'src/utils/atomix_theme_extensions.dart';
 export 'src/atoms/atomix_badge.dart';
 export 'src/atoms/atomix_checkbox.dart';
 export 'src/atoms/atomix_radio.dart';
@@ -27,7 +50,6 @@ export 'src/atoms/atomix_progress_linear.dart';
 export 'src/atoms/atomix_price_text.dart';
 export 'src/atoms/atomix_link.dart';
 export 'src/atoms/atomix_counter.dart';
-export 'src/atoms/atomix_rating.dart';
 export 'src/atoms/atomix_skeleton.dart';
 export 'src/atoms/atomix_shimmer.dart';
 export 'src/atoms/atomix_tooltip.dart';
@@ -54,6 +76,8 @@ export 'src/atoms/atomix_placeholder.dart';
 export 'src/atoms/atomix_pulse.dart';
 export 'src/atoms/atomix_step_indicator.dart';
 export 'src/atoms/atomix_stroke.dart';
+export 'src/atoms/atomix_overlay.dart';
+export 'src/atoms/atomix_scrollbar.dart';
 
 // Molecules
 export 'src/molecules/atomix_avatar_group.dart';
@@ -62,6 +86,30 @@ export 'src/molecules/atomix_text_field.dart';
 export 'src/molecules/atomix_text_form_field.dart';
 export 'src/molecules/atomix_chip.dart';
 export 'src/molecules/atomix_list_tile.dart';
+export 'src/molecules/atomix_alert.dart';
+export 'src/molecules/atomix_toast.dart';
+export 'src/molecules/atomix_breadcrumb.dart';
+export 'src/molecules/atomix_button_group.dart';
+export 'src/molecules/atomix_checkbox_group.dart';
+export 'src/molecules/atomix_radio_group.dart';
+export 'src/molecules/atomix_chip_group.dart';
+export 'src/molecules/atomix_pagination.dart';
+export 'src/molecules/atomix_stepper.dart';
+export 'src/molecules/atomix_tabs.dart';
+export 'src/molecules/atomix_rating.dart';
+export 'src/molecules/atomix_slider.dart';
+export 'src/molecules/atomix_user_profile.dart';
+export 'src/molecules/atomix_expansion_tile.dart';
+export 'src/molecules/atomix_menu_item.dart';
+export 'src/molecules/atomix_timeline_item.dart';
+export 'src/molecules/atomix_stat_card.dart';
+export 'src/molecules/atomix_search_field.dart';
+export 'src/molecules/atomix_code_block.dart';
+export 'src/molecules/atomix_dropdown.dart';
+export 'src/molecules/atomix_color_picker.dart';
+export 'src/molecules/atomix_date_picker.dart';
+export 'src/molecules/atomix_progress_bar.dart';
+export 'src/molecules/atomix_empty_state.dart';
 
 // Organisms
 export 'src/organisms/atomix_app_bar.dart';
@@ -69,6 +117,21 @@ export 'src/organisms/atomix_card.dart';
 export 'src/organisms/atomix_dialog.dart';
 export 'src/organisms/atomix_bottom_sheet.dart';
 export 'src/organisms/atomix_form.dart';
+export 'src/organisms/atomix_data_table.dart';
+export 'src/organisms/atomix_calendar.dart';
+export 'src/organisms/atomix_carousel.dart';
+export 'src/organisms/atomix_side_menu.dart';
+export 'src/organisms/atomix_bottom_navigation.dart';
+export 'src/organisms/atomix_wizard.dart';
+export 'src/organisms/atomix_file_uploader.dart';
+export 'src/organisms/atomix_comments_section.dart';
+export 'src/organisms/atomix_activity_feed.dart';
+export 'src/organisms/atomix_settings_list.dart';
+export 'src/organisms/atomix_pricing_card.dart';
+export 'src/organisms/atomix_product_card.dart';
+export 'src/organisms/atomix_footer.dart';
+export 'src/organisms/atomix_header.dart';
+export 'src/organisms/atomix_hero.dart';
 
 // Layout
 export 'src/layout/atomix_box.dart';

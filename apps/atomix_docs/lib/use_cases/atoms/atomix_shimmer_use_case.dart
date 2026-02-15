@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -21,22 +21,29 @@ Widget shimmerPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Base Color',
           options: [
-            AtomixColors.border,
-            AtomixColors.primary,
-            AtomixColors.secondary,
+            theme.colors.border,
+            theme.colors.primary,
+            theme.colors.secondary,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.border) return 'Border';
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            return 'Custom';
+          },
         )
       : null;
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (c == AtomixColors.border) return 'AtomixColors.border';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.secondary) return 'theme.colors.secondary';
+    if (c == theme.colors.border) return 'theme.colors.border';
     return 'null';
   }
 
@@ -45,7 +52,8 @@ Widget shimmerPlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixShimmer(
+      '''final theme = AtomixTheme.of(context);
+AtomixShimmer(
   isActive: $isActive,$colorStr
   child: AtomixSkeleton(width: 200, height: 100),
 )''';

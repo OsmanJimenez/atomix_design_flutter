@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 import 'atomix_text.dart';
 
 /// Atomix heading component.
@@ -34,7 +35,7 @@ class AtomixHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return AtomixText(
       data,
-      style: Theme.of(context).textTheme.headlineMedium,
+      style: AtomixTheme.of(context).typography.headlineMedium,
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,

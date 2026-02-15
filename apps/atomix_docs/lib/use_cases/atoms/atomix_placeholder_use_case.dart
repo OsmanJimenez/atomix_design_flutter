@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -47,11 +49,11 @@ Widget atomixPlaceholderPlayground(BuildContext context) {
   type: AtomixPlaceholder,
 )
 Widget atomixPlaceholderProfile(BuildContext context) {
-  return const Center(
+  return Center(
     child: AtomixPlaceholder(
       width: 80,
       height: 80,
-      borderRadius: AtomixRadius.fullBorderRadius,
+      borderRadius: BorderRadius.all(AtomixTheme.of(context).radius.full),
       icon: Icons.person,
     ),
   );

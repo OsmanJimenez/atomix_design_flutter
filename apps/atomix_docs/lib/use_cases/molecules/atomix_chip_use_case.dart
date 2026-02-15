@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -53,24 +54,26 @@ Widget atomixChipPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.info,
-            AtomixColors.warning,
-            AtomixColors.error,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.info,
+            theme.colors.warning,
+            theme.colors.error,
           ],
           labelBuilder: (color) {
-            if (color == AtomixColors.primary) return 'Primary';
-            if (color == AtomixColors.secondary) return 'Secondary';
-            if (color == AtomixColors.success) return 'Success';
-            if (color == AtomixColors.info) return 'Info';
-            if (color == AtomixColors.warning) return 'Warning';
-            if (color == AtomixColors.error) return 'Error';
+            if (color == theme.colors.primary) return 'Primary';
+            if (color == theme.colors.secondary) return 'Secondary';
+            if (color == theme.colors.success) return 'Success';
+            if (color == theme.colors.info) return 'Info';
+            if (color == theme.colors.warning) return 'Warning';
+            if (color == theme.colors.error) return 'Error';
             return 'Custom';
           },
         )
@@ -79,58 +82,40 @@ Widget atomixChipPlayground(BuildContext context) {
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
-      AtomixRadius.xlBorderRadius,
-      AtomixRadius.fullBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
+      BorderRadius.all(theme.radius.xl),
+      BorderRadius.all(theme.radius.full),
     ],
-    initialOption: AtomixRadius.smBorderRadius,
+    initialOption: BorderRadius.all(theme.radius.sm),
   );
 
   // Helper strings
   String colorName(Color? color) {
-    if (color == AtomixColors.primary) {
-      return 'AtomixColors.primary';
-    }
-    if (color == AtomixColors.secondary) {
-      return 'AtomixColors.secondary';
-    }
-    if (color == AtomixColors.success) {
-      return 'AtomixColors.success';
-    }
-    if (color == AtomixColors.info) {
-      return 'AtomixColors.info';
-    }
-    if (color == AtomixColors.warning) {
-      return 'AtomixColors.warning';
-    }
-    if (color == AtomixColors.error) {
-      return 'AtomixColors.error';
-    }
+    if (color == theme.colors.primary) return 'theme.colors.primary';
+    if (color == theme.colors.secondary) return 'theme.colors.secondary';
+    if (color == theme.colors.success) return 'theme.colors.success';
+    if (color == theme.colors.info) return 'theme.colors.info';
+    if (color == theme.colors.warning) return 'theme.colors.warning';
+    if (color == theme.colors.error) return 'theme.colors.error';
     return 'null';
   }
 
   String radiusName(BorderRadius radius) {
-    if (radius == AtomixRadius.xsBorderRadius) {
-      return 'AtomixRadius.xsBorderRadius';
-    }
-    if (radius == AtomixRadius.smBorderRadius) {
-      return 'AtomixRadius.smBorderRadius';
-    }
-    if (radius == AtomixRadius.mdBorderRadius) {
-      return 'AtomixRadius.mdBorderRadius';
-    }
-    if (radius == AtomixRadius.lgBorderRadius) {
-      return 'AtomixRadius.lgBorderRadius';
-    }
-    if (radius == AtomixRadius.xlBorderRadius) {
-      return 'AtomixRadius.xlBorderRadius';
-    }
-    if (radius == AtomixRadius.fullBorderRadius) {
-      return 'AtomixRadius.fullBorderRadius';
-    }
+    if (radius == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (radius == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (radius == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
+    if (radius == BorderRadius.all(theme.radius.lg))
+      return 'BorderRadius.all(theme.radius.lg)';
+    if (radius == BorderRadius.all(theme.radius.xl))
+      return 'BorderRadius.all(theme.radius.xl)';
+    if (radius == BorderRadius.all(theme.radius.full))
+      return 'BorderRadius.all(theme.radius.full)';
     return 'null';
   }
 
@@ -143,12 +128,13 @@ Widget atomixChipPlayground(BuildContext context) {
   final colorStr = useFoundationColor
       ? '\n  backgroundColor: ${colorName(foundationColor)},'
       : '';
-  final radiusStr = foundationRadius != AtomixRadius.smBorderRadius
+  final radiusStr = foundationRadius != BorderRadius.all(theme.radius.sm)
       ? '\n  borderRadius: ${radiusName(foundationRadius)},'
       : '';
 
   final code =
-      '''AtomixChip(
+      '''final theme = AtomixTheme.of(context);
+AtomixChip(
   label: '$label',$selectedStr$onSelectedStr$onDeletedStr$iconStr$colorStr$radiusStr
 )''';
 

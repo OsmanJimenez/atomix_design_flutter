@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -27,33 +27,51 @@ Widget atomixBadgePlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.warning,
-            AtomixColors.error,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.warning,
+            theme.colors.error,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
-      AtomixRadius.xlBorderRadius,
-      AtomixRadius.fullBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
+      BorderRadius.all(theme.radius.xl),
+      BorderRadius.all(theme.radius.full),
     ],
-    initialOption: AtomixRadius.smBorderRadius,
-    labelBuilder: KnobHelpers.radiusLabel,
+    initialOption: BorderRadius.all(theme.radius.sm),
+    labelBuilder: (r) {
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      if (r == BorderRadius.all(theme.radius.lg)) return 'LG';
+      if (r == BorderRadius.all(theme.radius.xl)) return 'XL';
+      if (r == BorderRadius.all(theme.radius.full)) return 'Full';
+      return 'Custom';
+    },
   );
 
   final showIcon = context.knobs.boolean(
@@ -76,46 +94,28 @@ Widget atomixBadgePlayground(BuildContext context) {
 
   // Helper strings
   String colorName(Color? color) {
-    if (color == AtomixColors.primary) {
-      return 'AtomixColors.primary';
-    }
-    if (color == AtomixColors.secondary) {
-      return 'AtomixColors.secondary';
-    }
-    if (color == AtomixColors.success) {
-      return 'AtomixColors.success';
-    }
-    if (color == AtomixColors.warning) {
-      return 'AtomixColors.warning';
-    }
-    if (color == AtomixColors.error) {
-      return 'AtomixColors.error';
-    }
-    if (color == AtomixColors.info) {
-      return 'AtomixColors.info';
-    }
+    if (color == theme.colors.primary) return 'theme.colors.primary';
+    if (color == theme.colors.secondary) return 'theme.colors.secondary';
+    if (color == theme.colors.success) return 'theme.colors.success';
+    if (color == theme.colors.warning) return 'theme.colors.warning';
+    if (color == theme.colors.error) return 'theme.colors.error';
+    if (color == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
   String radiusName(BorderRadius radius) {
-    if (radius == AtomixRadius.xsBorderRadius) {
-      return 'AtomixRadius.xsBorderRadius';
-    }
-    if (radius == AtomixRadius.smBorderRadius) {
-      return 'AtomixRadius.smBorderRadius';
-    }
-    if (radius == AtomixRadius.mdBorderRadius) {
-      return 'AtomixRadius.mdBorderRadius';
-    }
-    if (radius == AtomixRadius.lgBorderRadius) {
-      return 'AtomixRadius.lgBorderRadius';
-    }
-    if (radius == AtomixRadius.xlBorderRadius) {
-      return 'AtomixRadius.xlBorderRadius';
-    }
-    if (radius == AtomixRadius.fullBorderRadius) {
-      return 'AtomixRadius.fullBorderRadius';
-    }
+    if (radius == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (radius == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (radius == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
+    if (radius == BorderRadius.all(theme.radius.lg))
+      return 'BorderRadius.all(theme.radius.lg)';
+    if (radius == BorderRadius.all(theme.radius.xl))
+      return 'BorderRadius.all(theme.radius.xl)';
+    if (radius == BorderRadius.all(theme.radius.full))
+      return 'BorderRadius.all(theme.radius.full)';
     return 'null';
   }
 
@@ -123,7 +123,7 @@ Widget atomixBadgePlayground(BuildContext context) {
   final colorStr = useFoundationColor
       ? '\n  backgroundColor: ${colorName(foundationColor)},'
       : '';
-  final radiusStr = foundationRadius != AtomixRadius.smBorderRadius
+  final radiusStr = foundationRadius != BorderRadius.all(theme.radius.sm)
       ? '\n  borderRadius: ${radiusName(foundationRadius)},'
       : '';
   final iconStr = showIcon
@@ -131,7 +131,8 @@ Widget atomixBadgePlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixBadge(
+      '''final theme = AtomixTheme.of(context);
+AtomixBadge(
   label: '$label',
   variant: $variantStr,$iconStr$colorStr$radiusStr
 )''';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix indicator component.
 ///
@@ -28,12 +28,12 @@ class AtomixIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = AtomixTheme.of(context);
     final finalColor =
         color ??
         (active
-            ? theme.primaryColor
-            : theme.disabledColor.withValues(alpha: 0.3));
+            ? theme.colors.primary
+            : theme.colors.textDisabled.withValues(alpha: 0.3));
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -41,7 +41,7 @@ class AtomixIndicator extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: finalColor,
-        borderRadius: AtomixRadius.fullBorderRadius,
+        borderRadius: BorderRadius.circular(100),
       ),
     );
   }

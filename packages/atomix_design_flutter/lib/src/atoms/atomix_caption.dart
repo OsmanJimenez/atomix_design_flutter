@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 import 'atomix_text.dart';
 
 /// Atomix caption component.
@@ -34,7 +35,7 @@ class AtomixCaption extends StatelessWidget {
   Widget build(BuildContext context) {
     return AtomixText(
       data,
-      style: Theme.of(context).textTheme.bodySmall,
+      style: AtomixTheme.of(context).typography.bodySmall,
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,

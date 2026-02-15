@@ -1,161 +1,102 @@
-# Atomix Design Flutter
+# Atomix Design Flutter (Package) 🚀
 
 [![pub package](https://img.shields.io/pub/v/atomix_design_flutter.svg)](https://pub.dev/packages/atomix_design_flutter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.16.0-blue.svg)](https://flutter.dev)
 
-A modern, scalable **Design System for Flutter** built with **Atomic Design** principles and powered by **Material Design 3**. Atomix provides a comprehensive set of reusable components with consistent styling, theming, and interactive documentation.
+A modern, high-performance **Design System for Flutter** built with **Atomic Design** principles. This package provides the core implementation of **101 components** and the **Multi-Strategy Theming Engine**.
 
-## ✨ Features
-
-- 🎨 **Material 3 Foundation** - Built on top of Flutter's Material Design 3
-- ⚛️ **Atomic Design Architecture** - Organized into Atoms, Molecules, and Organisms
-- 🌓 **Light & Dark Themes** - Full support for both themes with seamless switching
-- 🎯 **Design Tokens** - Consistent colors, spacing, typography, radius, and elevation
-- 📦 **13 Components** - Production-ready, customizable components
-- 🧪 **Tested** - Comprehensive test coverage
-- 📚 **Well Documented** - Complete DartDoc for all public APIs
+---
 
 ## 📦 Installation
 
-Add to your `pubspec.yaml`:
+Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  atomix_design_flutter: ^0.1.0
+  atomix_design_flutter: ^1.0.0
 ```
 
-Then run:
+Install:
 
 ```bash
 flutter pub get
 ```
 
-## 🚀 Quick Start
+---
 
-### 1. Apply the Theme
+## 🏗️ Core Architecture
 
+This package is structured to promote scalability and reusability.
+
+| Layer | Path | Description |
+| :--- | :--- | :--- |
+| **Foundation** | `src/foundation` | Tokens for Color, Spacing, Typography, Radius. |
+| **Theme** | `src/theme` | Strategies for Material, Glass, and Expressive. |
+| **Atoms** | `src/atoms` | 45 Primitives (Icon, Badge, Text). |
+| **Molecules** | `src/molecules` | 30 Functional groups (Button, Input). |
+| **Organisms** | `src/organisms` | 20 Complex modules (Card, Form). |
+| **Templates** | `src/templates` | 6 Page layouts (Dashboard, Auth). |
+
+---
+
+## 🚀 Quick Usage
+
+### Basic Material 3 App
 ```dart
 import 'package:flutter/material.dart';
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      theme: AtomixTheme.light(),
-      darkTheme: AtomixTheme.dark(),
-      themeMode: ThemeMode.system,
-      home: const HomePage(),
-    );
-  }
+  runApp(
+    MaterialApp(
+      theme: AtomixTheme.light(), // Uses Material 3 defaults
+      home: Scaffold(
+        body: Center(
+          child: AtomixButton(
+            label: 'Hello World',
+            onPressed: () {},
+            variant: AtomixButtonVariant.primary,
+          ),
+        ),
+      ),
+    ),
+  );
 }
 ```
 
-### 2. Use Components
-
+### Apple-Style Glass Theme
 ```dart
-import 'package:atomix_design_flutter/atomix_design_flutter.dart';
-
-// Use design tokens
-Container(
-  padding: const EdgeInsets.all(AtomixSpacing.md),
-  decoration: BoxDecoration(
-    color: AtomixColors.primary,
-    borderRadius: AtomixRadius.mdBorderRadius,
-  ),
-)
-
-// Use components
-AtomixButton(
-  label: 'Click Me',
-  onPressed: () {},
-  variant: AtomixButtonVariant.primary,
-)
-
-AtomixTextField(
-  label: 'Email',
-  hint: 'Enter your email',
-  prefixIcon: Icons.email,
-)
-
-AtomixCard(
-  variant: AtomixCardVariant.elevated,
-  child: Padding(
-    padding: const EdgeInsets.all(AtomixSpacing.lg),
-    child: Text('Card content'),
-  ),
-)
-```
-
-## 📚 Components
-
-### Foundation (Design Tokens)
-- `AtomixColors` - Semantic color palette
-- `AtomixSpacing` - 4px-based spacing scale
-- `AtomixRadius` - Border radius values
-- `AtomixElevation` - Material elevation scale
-- `AtomixTypography` - Text style system
-- `AtomixTheme` - Light/dark theme configuration
-
-### Atoms
-- `AtomixText` - Text with typography
-- `AtomixIcon` - Icon component
-- `AtomixDivider` - Visual separator
-- `AtomixSpacer` - Spacing helper
-- `AtomixBadge` - Status badges
-
-### Molecules
-- `AtomixButton` - Buttons with variants and states
-- `AtomixTextField` - Text input with validation
-- `AtomixChip` - Selectable chips
-- `AtomixListTile` - List items
-
-### Organisms
-- `AtomixAppBar` - Application bar
-- `AtomixCard` - Cards with variants
-- `AtomixDialog` - Modal dialogs
-- `AtomixBottomSheet` - Bottom sheets
-
-## 🎨 Customization
-
-Create custom themes:
-
-```dart
-final customTheme = AtomixTheme.themeData(
-  brightness: Brightness.light,
-  primaryColor: Colors.blue,
-  secondaryColor: Colors.orange,
+MaterialApp(
+  theme: AtomixTheme.strategy(AtomixThemeGlass(brightness: Brightness.light)),
+  home: MyGlassApp(),
 );
 ```
 
-## 📚 Documentation
+---
 
-For complete documentation, examples, and interactive component gallery:
-- **[Interactive Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)** - Live component demos (Hosted on GitHub Pages)
-- **[API Documentation](https://pub.dev/documentation/atomix_design_flutter/latest/)** - Complete API reference
-- **[GitHub Repository](https://github.com/OsmanJimenez/atomix_design_flutter)** - Source code and examples
+## 📚 Component Catalog
 
-## 🤝 Contributing
+### Atoms (45)
+`ActionIcon`, `Avatar`, `Backdrop`, `Badge`, `BreadcrumbItem`, `Bullet`, `Caption`, `Checkbox`, `Circle`, `ColorBox`, `CornerIndicator`, `Counter`, `DataPoint`, `Divider`, `Dot`, `Fade`, `Gradient`, `Handle`, `Heading`, `Icon`, `Indicator`, `Key`, `Label`, `Link`, `Mask`, `Overlay`, `Overline`, `Placeholder`, `PriceText`, `ProgressCircular`, `ProgressLinear`, `Pulse`, `Radio`, `Scrollbar`, `Shimmer`, `Skeleton`, `Spacer`, `StepIndicator`, `Stroke`, `Switch`, `TabIndicator`, `Tag`, `Text`, `Thumbnail`, `Tooltip`.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Molecules (30)
+`Alert`, `AvatarGroup`, `Breadcrumb`, `Button`, `ButtonGroup`, `CheckboxGroup`, `Chip`, `ChipGroup`, `CodeBlock`, `ColorPicker`, `DatePicker`, `Dropdown`, `EmptyState`, `ExpansionTile`, `ListTile`, `MenuItem`, `Pagination`, `ProgressBar`, `RadioGroup`, `Rating`, `SearchField`, `Slider`, `StatCard`, `Stepper`, `Tabs`, `TextField`, `TextFormField`, `TimelineItem`, `Toast`, `UserProfile`.
+
+### Organisms (20)
+`ActivityFeed`, `AppBar`, `BottomNavigation`, `BottomSheet`, `Calendar`, `Card`, `Carousel`, `CommentsSection`, `DataTable`, `Dialog`, `FileUploader`, `Footer`, `Form`, `Header`, `Hero`, `PricingCard`, `ProductCard`, `SettingsList`, `SideMenu`, `Wizard`.
+
+### Templates (6)
+`AuthTemplate`, `DashboardTemplate`, `DetailTemplate`, `LandingTemplate`, `ListTemplate`, `SettingsTemplate`.
+
+---
+
+## 📖 Live Documentation
+For interactive demos and API details, visit the **[Atomix Widgetbook](https://osmanjimenez.github.io/atomix_design_flutter/)**.
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License.
 
 ## 👤 Author
-
 **Osman Armando Jimenez Cortes**
-- Email: osman98125@gmail.com
 - GitHub: [@OsmanJimenez](https://github.com/OsmanJimenez)
-
-## 🐛 Issues
-
-Found a bug or have a feature request? Please open an issue on [GitHub](https://github.com/OsmanJimenez/atomix_design_flutter/issues).

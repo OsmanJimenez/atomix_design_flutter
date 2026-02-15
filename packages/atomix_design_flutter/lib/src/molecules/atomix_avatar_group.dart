@@ -78,8 +78,8 @@ class AtomixAvatarGroup extends StatelessWidget {
   }
 
   Widget _buildAvatarWithBorder(BuildContext context, AtomixAvatar avatar) {
-    final effectiveBorderColor =
-        borderColor ?? Theme.of(context).scaffoldBackgroundColor;
+    final theme = AtomixTheme.of(context);
+    final effectiveBorderColor = borderColor ?? theme.colors.background;
 
     // We wrap the avatar to add a border and ensure consistent size
     return Container(
@@ -101,9 +101,10 @@ class AtomixAvatarGroup extends StatelessWidget {
   }
 
   Widget _buildOverlapCounter(BuildContext context, int count) {
-    final effectiveBorderColor =
-        borderColor ?? Theme.of(context).scaffoldBackgroundColor;
-    final effectiveBgColor = backgroundColor ?? AtomixColors.surfaceVariant;
+    final theme = AtomixTheme.of(context);
+    final effectiveBorderColor = borderColor ?? theme.colors.background;
+    final effectiveBgColor =
+        backgroundColor ?? theme.colors.border.withValues(alpha: 0.1);
 
     return Container(
       width: size,
@@ -116,10 +117,10 @@ class AtomixAvatarGroup extends StatelessWidget {
       child: Center(
         child: AtomixText(
           '+$count',
-          style: TextStyle(
-            fontSize: size * 0.35,
+          style: theme.typography.labelSmall.copyWith(
             fontWeight: FontWeight.bold,
-            color: AtomixColors.primary,
+            color: theme.colors.primary,
+            fontSize: size * 0.35,
           ),
         ),
       ),

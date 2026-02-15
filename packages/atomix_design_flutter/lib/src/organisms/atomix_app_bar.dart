@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_elevation.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix app bar component.
 ///
@@ -57,16 +57,18 @@ class AtomixAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return AppBar(
-      title: Text(title),
+      title: Text(title, style: theme.typography.headlineSmall),
+      centerTitle: centerTitle,
+      elevation: elevation ?? 0,
+      scrolledUnderElevation: elevation,
+      backgroundColor: backgroundColor ?? theme.colors.background,
+      foregroundColor: foregroundColor ?? theme.colors.textPrimary,
       leading: leading != null
           ? IconButton(icon: Icon(leading), onPressed: onLeadingPressed)
           : null,
       actions: actions,
-      centerTitle: centerTitle,
-      elevation: elevation ?? AtomixElevation.none,
-      backgroundColor: backgroundColor,
-      foregroundColor: foregroundColor,
     );
   }
 

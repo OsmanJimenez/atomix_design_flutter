@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_spacing.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
+import '../theme/atomix_theme_data.dart';
+// import '../foundation/atomix_spacing.dart'; // Replaced by tokens
+// import '../foundation/atomix_radius.dart'; // Replaced by tokens
 
 /// Button size variants.
 enum AtomixButtonSize {
@@ -86,22 +88,22 @@ class AtomixButton extends StatelessWidget {
   /// Optional border radius override.
   final BorderRadius? borderRadius;
 
-  EdgeInsets _getPadding() {
+  EdgeInsets _getPadding(AtomixThemeData theme) {
     switch (size) {
       case AtomixButtonSize.sm:
-        return const EdgeInsets.symmetric(
-          horizontal: AtomixSpacing.md,
-          vertical: AtomixSpacing.xs,
+        return EdgeInsets.symmetric(
+          horizontal: theme.spacing.md,
+          vertical: theme.spacing.xs,
         );
       case AtomixButtonSize.md:
-        return const EdgeInsets.symmetric(
-          horizontal: AtomixSpacing.xl,
-          vertical: AtomixSpacing.sm,
+        return EdgeInsets.symmetric(
+          horizontal: theme.spacing.xl,
+          vertical: theme.spacing.sm,
         );
       case AtomixButtonSize.lg:
-        return const EdgeInsets.symmetric(
-          horizontal: AtomixSpacing.xxl,
-          vertical: AtomixSpacing.md,
+        return EdgeInsets.symmetric(
+          horizontal: theme.spacing.xxl,
+          vertical: theme.spacing.md,
         );
     }
   }
@@ -117,7 +119,7 @@ class AtomixButton extends StatelessWidget {
     }
   }
 
-  Widget _buildButtonContent(BuildContext context) {
+  Widget _buildButtonContent(BuildContext context, AtomixThemeData theme) {
     if (isLoading) {
       return SizedBox(
         width: _getIconSize(),
@@ -126,8 +128,8 @@ class AtomixButton extends StatelessWidget {
           strokeWidth: 2,
           valueColor: AlwaysStoppedAnimation<Color>(
             variant == AtomixButtonVariant.tertiary
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onPrimary,
+                ? theme.colors.primary
+                : theme.colors.onPrimary,
           ),
         ),
       );
@@ -138,7 +140,7 @@ class AtomixButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: _getIconSize()),
-          const SizedBox(width: AtomixSpacing.xs),
+          SizedBox(width: theme.spacing.xs),
           Text(label),
         ],
       );
@@ -149,8 +151,9 @@ class AtomixButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final content = _buildButtonContent(context);
-    final padding = _getPadding();
+    final theme = AtomixTheme.of(context);
+    final content = _buildButtonContent(context, theme);
+    final padding = _getPadding(theme);
     final isDisabled = onPressed == null || isLoading;
 
     Widget button;
@@ -161,10 +164,10 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: FilledButton.styleFrom(
             padding: padding,
-            backgroundColor: backgroundColor,
-            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor ?? theme.colors.primary,
+            foregroundColor: foregroundColor ?? theme.colors.onPrimary,
             shape: RoundedRectangleBorder(
-              borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
+              borderRadius: borderRadius ?? BorderRadius.all(theme.radius.md),
             ),
           ),
           child: content,
@@ -176,12 +179,11 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: OutlinedButton.styleFrom(
             padding: padding,
-            side: backgroundColor != null
-                ? BorderSide(color: backgroundColor!)
-                : null,
-            foregroundColor: foregroundColor ?? backgroundColor,
+            side: BorderSide(color: backgroundColor ?? theme.colors.primary),
+            foregroundColor:
+                foregroundColor ?? (backgroundColor ?? theme.colors.primary),
             shape: RoundedRectangleBorder(
-              borderRadius: borderRadius ?? AtomixRadius.mdBorderRadius,
+              borderRadius: borderRadius ?? BorderRadius.all(theme.radius.md),
             ),
           ),
           child: content,
@@ -193,9 +195,10 @@ class AtomixButton extends StatelessWidget {
           onPressed: isDisabled ? null : onPressed,
           style: TextButton.styleFrom(
             padding: padding,
-            foregroundColor: foregroundColor ?? backgroundColor,
+            foregroundColor:
+                foregroundColor ?? (backgroundColor ?? theme.colors.primary),
             shape: RoundedRectangleBorder(
-              borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+              borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
             ),
           ),
           child: content,

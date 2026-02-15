@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -31,32 +31,49 @@ Widget checkboxPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Active Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.warning,
-            AtomixColors.error,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.warning,
+            theme.colors.error,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
-      AtomixRadius.fullBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
+      BorderRadius.all(theme.radius.full),
     ],
-    initialOption: AtomixRadius.xsBorderRadius,
-    labelBuilder: KnobHelpers.radiusLabel,
+    initialOption: BorderRadius.all(theme.radius.xs),
+    labelBuilder: (r) {
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      if (r == BorderRadius.all(theme.radius.lg)) return 'LG';
+      if (r == BorderRadius.all(theme.radius.full)) return 'Full';
+      return 'Custom';
+    },
   );
 
   return _CheckboxPlaygroundWrapper(
@@ -92,41 +109,46 @@ class _CheckboxPlaygroundWrapperState
     extends State<_CheckboxPlaygroundWrapper> {
   bool _value = false;
 
-  String colorName(Color? color) {
-    if (color == AtomixColors.primary) return 'AtomixColors.primary';
-    if (color == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (color == AtomixColors.success) return 'AtomixColors.success';
-    if (color == AtomixColors.warning) return 'AtomixColors.warning';
-    if (color == AtomixColors.error) return 'AtomixColors.error';
-    if (color == AtomixColors.info) return 'AtomixColors.info';
-    return 'null';
-  }
-
-  String radiusName(BorderRadius? radius) {
-    if (radius == AtomixRadius.xsBorderRadius)
-      return 'AtomixRadius.xsBorderRadius';
-    if (radius == AtomixRadius.smBorderRadius)
-      return 'AtomixRadius.smBorderRadius';
-    if (radius == AtomixRadius.mdBorderRadius)
-      return 'AtomixRadius.mdBorderRadius';
-    if (radius == AtomixRadius.lgBorderRadius)
-      return 'AtomixRadius.lgBorderRadius';
-    if (radius == AtomixRadius.fullBorderRadius)
-      return 'AtomixRadius.fullBorderRadius';
-    return 'null';
-  }
-
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+
+    String getColorName(Color? c) {
+      if (c == theme.colors.primary) return 'theme.colors.primary';
+      if (c == theme.colors.secondary) return 'theme.colors.secondary';
+      if (c == theme.colors.success) return 'theme.colors.success';
+      if (c == theme.colors.warning) return 'theme.colors.warning';
+      if (c == theme.colors.error) return 'theme.colors.error';
+      if (c == theme.colors.info) return 'theme.colors.info';
+      return 'null';
+    }
+
+    String getRadiusName(BorderRadius? r) {
+      if (r == BorderRadius.all(theme.radius.xs))
+        return 'BorderRadius.all(theme.radius.xs)';
+      if (r == BorderRadius.all(theme.radius.sm))
+        return 'BorderRadius.all(theme.radius.sm)';
+      if (r == BorderRadius.all(theme.radius.md))
+        return 'BorderRadius.all(theme.radius.md)';
+      if (r == BorderRadius.all(theme.radius.lg))
+        return 'BorderRadius.all(theme.radius.lg)';
+      if (r == BorderRadius.all(theme.radius.full))
+        return 'BorderRadius.all(theme.radius.full)';
+      return 'null';
+    }
+
     final colorStr = widget.activeColor != null
-        ? '\n  activeColor: ${colorName(widget.activeColor)},'
+        ? '\n  activeColor: ${getColorName(widget.activeColor)},'
         : '';
-    final radiusStr = widget.borderRadius != AtomixRadius.xsBorderRadius
-        ? '\n  borderRadius: ${radiusName(widget.borderRadius)},'
+    final radiusStr =
+        widget.borderRadius != BorderRadius.all(theme.radius.xs) &&
+            widget.borderRadius != null
+        ? '\n  borderRadius: ${getRadiusName(widget.borderRadius)},'
         : '';
 
     final code =
-        '''AtomixCheckbox(
+        '''final theme = AtomixTheme.of(context);
+AtomixCheckbox(
   value: $_value,
   label: '${widget.label}',
   isError: ${widget.isError},

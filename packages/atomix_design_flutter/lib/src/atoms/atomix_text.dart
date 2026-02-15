@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix text component.
 ///
@@ -52,9 +53,13 @@ class AtomixText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+    final defaultStyle = style ?? theme.typography.bodyMedium;
+    final effectiveColor = color ?? style?.color ?? theme.colors.textPrimary;
+
     return Text(
       data,
-      style: style?.copyWith(color: color) ?? TextStyle(color: color),
+      style: defaultStyle.copyWith(color: effectiveColor),
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,

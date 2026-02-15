@@ -41,22 +41,23 @@ class AtomixCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     final defaultActiveColor = isError
-        ? AtomixColors.error
-        : AtomixColors.primary;
+        ? theme.colors.error
+        : theme.colors.primary;
     final finalActiveColor = activeColor ?? defaultActiveColor;
 
     Widget checkbox = Checkbox(
       value: value,
       onChanged: isDisabled ? null : onChanged,
       activeColor: finalActiveColor,
-      checkColor: checkColor ?? AtomixColors.onPrimary,
+      checkColor: checkColor ?? theme.colors.onPrimary,
       side: BorderSide(
-        color: isError ? AtomixColors.error : AtomixColors.border,
+        color: isError ? theme.colors.error : theme.colors.border,
         width: 2,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? AtomixRadius.xsBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.xs),
       ),
     );
 
@@ -64,23 +65,23 @@ class AtomixCheckbox extends StatelessWidget {
 
     return InkWell(
       onTap: isDisabled ? null : () => onChanged?.call(!value),
-      borderRadius: AtomixRadius.smBorderRadius,
+      borderRadius: BorderRadius.all(theme.radius.sm),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AtomixSpacing.xs,
-          horizontal: AtomixSpacing.sm,
+        padding: EdgeInsets.symmetric(
+          vertical: theme.spacing.xs,
+          horizontal: theme.spacing.sm,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             checkbox,
-            const AtomixSpacer.sm(),
+            AtomixSpacer.sm(),
             AtomixText(
               label!,
               style: TextStyle(
                 color: isDisabled
-                    ? AtomixColors.textDisabled
-                    : AtomixColors.textPrimary,
+                    ? theme.colors.textDisabled
+                    : theme.colors.textPrimary,
               ),
             ),
           ],

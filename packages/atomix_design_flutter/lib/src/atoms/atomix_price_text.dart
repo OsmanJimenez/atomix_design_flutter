@@ -41,25 +41,26 @@ class AtomixPriceText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     final formattedPrice = price.toStringAsFixed(decimalPlaces);
 
     final pricePart = AtomixText(
       formattedPrice,
       style:
           style ??
-          Theme.of(context).textTheme.titleLarge?.copyWith(
+          theme.typography.titleLarge.copyWith(
             fontWeight: FontWeight.bold,
-            color: color ?? AtomixColors.textPrimary,
+            color: color ?? theme.colors.textPrimary,
           ),
     );
 
-    final finalSymbolColor = symbolColor ?? color ?? AtomixColors.textSecondary;
+    final finalSymbolColor = symbolColor ?? color ?? theme.colors.textSecondary;
 
     final symbolPart = AtomixText(
       currency,
       style:
           symbolStyle ??
-          (style ?? Theme.of(context).textTheme.titleLarge)?.copyWith(
+          (style ?? theme.typography.titleLarge).copyWith(
             fontWeight: FontWeight.w400,
             color: finalSymbolColor,
             fontSize: (style?.fontSize ?? 20) * 0.7,

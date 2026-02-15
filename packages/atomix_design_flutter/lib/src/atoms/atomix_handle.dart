@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_colors.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix handle component.
 ///
@@ -25,17 +24,14 @@ class AtomixHandle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final defaultColor = brightness == Brightness.light
-        ? AtomixColors.outline
-        : AtomixColors.outlineDark;
+    final theme = AtomixTheme.of(context);
 
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: color ?? defaultColor,
-        borderRadius: AtomixRadius.fullBorderRadius,
+        color: color ?? theme.colors.outline,
+        borderRadius: BorderRadius.circular(100),
       ),
     );
   }

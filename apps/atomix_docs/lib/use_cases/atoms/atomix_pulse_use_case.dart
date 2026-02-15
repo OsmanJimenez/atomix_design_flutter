@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -44,10 +45,10 @@ Widget atomixPulsePlayground(BuildContext context) {
   type: AtomixPulse,
 )
 Widget atomixPulseWarning(BuildContext context) {
-  return const Center(
+  return Center(
     child: AtomixPulse(
-      duration: Duration(milliseconds: 500),
-      child: AtomixDot(size: 16, color: AtomixColors.error),
+      duration: const Duration(milliseconds: 500),
+      child: AtomixDot(size: 16, color: AtomixTheme.of(context).colors.error),
     ),
   );
 }

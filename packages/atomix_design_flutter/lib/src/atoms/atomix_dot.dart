@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../atomix_design_flutter.dart';
+import '../theme/atomix_theme.dart';
 
 /// A small status Dot component.
 class AtomixDot extends StatelessWidget {
   /// Color of the dot.
-  final Color color;
+  final Color? color;
 
   /// Size of the dot (diameter).
   final double size;
@@ -17,7 +18,7 @@ class AtomixDot extends StatelessWidget {
 
   const AtomixDot({
     super.key,
-    this.color = AtomixColors.primary,
+    this.color,
     this.size = 8,
     this.isPulsing = false,
     this.borderRadius,
@@ -25,15 +26,22 @@ class AtomixDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+    final effectiveColor = color ?? theme.colors.primary;
+
     if (isPulsing) {
-      return _PulsingDot(color: color, size: size, borderRadius: borderRadius);
+      return _PulsingDot(
+        color: effectiveColor,
+        size: size,
+        borderRadius: borderRadius,
+      );
     }
 
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: color,
+        color: effectiveColor,
         borderRadius: borderRadius ?? BorderRadius.circular(size),
       ),
     );

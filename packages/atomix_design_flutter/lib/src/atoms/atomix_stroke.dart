@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix stroke component.
 ///
@@ -35,10 +36,8 @@ class AtomixStroke extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final defaultColor = brightness == Brightness.light
-        ? Colors.black12
-        : Colors.white12;
+    final theme = AtomixTheme.of(context);
+    final defaultColor = theme.colors.outline.withValues(alpha: 0.5);
 
     return Container(
       width: width,
@@ -48,6 +47,8 @@ class AtomixStroke extends StatelessWidget {
         borderRadius: borderRadius,
       ),
       child: child,
+      // Note: borderRadius property on Container uses decoration's borderRadius.
+      // But passing it directly to BoxDecoration is correct.
     );
   }
 }

@@ -33,37 +33,37 @@ class AtomixRadio<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     Widget radio = Radio<T>(
-      // ignore: deprecated_member_use
       value: value,
       // ignore: deprecated_member_use
       groupValue: groupValue,
       // ignore: deprecated_member_use
       onChanged: isDisabled ? null : onChanged,
-      activeColor: activeColor ?? AtomixColors.primary,
+      activeColor: activeColor ?? theme.colors.primary,
     );
 
     if (label == null) return radio;
 
     return InkWell(
       onTap: isDisabled ? null : () => onChanged?.call(value),
-      borderRadius: AtomixRadius.smBorderRadius,
+      borderRadius: BorderRadius.all(theme.radius.sm),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AtomixSpacing.xs,
-          horizontal: AtomixSpacing.sm,
+        padding: EdgeInsets.symmetric(
+          vertical: theme.spacing.xs,
+          horizontal: theme.spacing.sm,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             radio,
-            const AtomixSpacer.sm(),
+            AtomixSpacer.sm(),
             AtomixText(
               label!,
               style: TextStyle(
                 color: isDisabled
-                    ? AtomixColors.textDisabled
-                    : AtomixColors.textPrimary,
+                    ? theme.colors.textDisabled
+                    : theme.colors.textPrimary,
               ),
             ),
           ],

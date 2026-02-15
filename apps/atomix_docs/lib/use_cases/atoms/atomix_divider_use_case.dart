@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -39,51 +39,102 @@ Widget atomixDividerPlayground(BuildContext context) {
     max: 100,
   );
 
+  final labelText = context.knobs.string(
+    label: 'Divider > Label',
+    initialValue: 'OR',
+  );
+
+  final direction = context.knobs.list(
+    label: 'Divider > Direction',
+    options: [Axis.horizontal, Axis.vertical],
+    initialOption: Axis.horizontal,
+    labelBuilder: (axis) => axis == Axis.horizontal ? 'Horizontal' : 'Vertical',
+  );
+
   final useFoundationColor = context.knobs.boolean(
     label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.textSecondary,
-            AtomixColors.border,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.textSecondary,
+            theme.colors.border,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.textSecondary) return 'Text Secondary';
+            if (c == theme.colors.border) return 'Border';
+            return 'Custom';
+          },
         )
       : null;
 
+  String colorName(Color? c) {
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.secondary) return 'theme.colors.secondary';
+    if (c == theme.colors.textSecondary) return 'theme.colors.textSecondary';
+    if (c == theme.colors.border) return 'theme.colors.border';
+    return 'null';
+  }
+
   final code =
-      '''AtomixDivider(
+      '''final theme = AtomixTheme.of(context);
+AtomixDivider(
   height: $height,
   thickness: $thickness,
   indent: $indent,
   endIndent: $endIndent,
-  color: ${useFoundationColor ? '...' : 'null'},
+  color: ${useFoundationColor ? colorName(foundationColor) : 'null'},
+  ${labelText.isNotEmpty ? "label: '$labelText'," : ""}
+  direction: $direction,
 )''';
+
+  Widget buildDivider() {
+    return AtomixDivider(
+      height: height,
+      thickness: thickness,
+      indent: indent,
+      endIndent: endIndent,
+      color: foundationColor,
+      label: labelText.isNotEmpty ? labelText : null,
+      direction: direction,
+    );
+  }
 
   return Center(
     child: SingleChildScrollView(
       padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          const Text('Text Above'),
-          AtomixDivider(
-            height: height,
-            thickness: thickness,
-            indent: indent,
-            endIndent: endIndent,
-            color: foundationColor,
-          ),
-          const Text('Text Below'),
-          const SizedBox(height: 32),
-          CodeSnippet(code: code),
-        ],
-      ),
+      child: direction == Axis.horizontal
+          ? Column(
+              children: [
+                const Text('Text Above'),
+                buildDivider(),
+                const Text('Text Below'),
+                const SizedBox(height: 32),
+                CodeSnippet(code: code),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Left'),
+                SizedBox(
+                  height: 200, // Fixed height for vertical demonstration
+                  child: buildDivider(),
+                ),
+                const Text('Right'),
+                const SizedBox(width: 32),
+                Expanded(child: CodeSnippet(code: code)),
+              ],
+            ),
     ),
   );
 }

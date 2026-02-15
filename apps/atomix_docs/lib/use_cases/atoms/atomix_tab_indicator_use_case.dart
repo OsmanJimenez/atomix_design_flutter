@@ -1,4 +1,5 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -28,16 +29,24 @@ Widget tabIndicatorPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
@@ -53,10 +62,10 @@ Widget tabIndicatorPlayground(BuildContext context) {
   );
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.secondary) return 'AtomixColors.secondary';
-    if (c == AtomixColors.success) return 'AtomixColors.success';
-    if (c == AtomixColors.info) return 'AtomixColors.info';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.secondary) return 'theme.colors.secondary';
+    if (c == theme.colors.success) return 'theme.colors.success';
+    if (c == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
@@ -75,7 +84,8 @@ Widget tabIndicatorPlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixTabIndicator(
+      '''final theme = AtomixTheme.of(context);
+AtomixTabIndicator(
   isActive: $isActive,
   height: $height,$colorStr$radiusStr
 )''';
@@ -126,7 +136,7 @@ Widget tabIndicatorActive(BuildContext context) {
   type: AtomixTabIndicator,
 )
 Widget tabIndicatorSuccess(BuildContext context) {
-  return const Center(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -134,15 +144,16 @@ Widget tabIndicatorSuccess(BuildContext context) {
           width: 100,
           child: AtomixTabIndicator(
             isActive: true,
-            color: AtomixColors.success,
+            color: AtomixTheme.of(context).colors.success,
             height: 4,
           ),
         ),
-        SizedBox(height: 24),
-        CodeSnippet(
-          code: '''AtomixTabIndicator(
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixTabIndicator(
   isActive: true,
-  color: AtomixColors.success,
+  color: theme.colors.success,
   height: 4,
 )''',
         ),

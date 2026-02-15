@@ -25,13 +25,14 @@ class AtomixTabIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return AnimatedContainer(
       duration: AtomixAnimations.fast,
       curve: AtomixAnimations.standard,
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: isActive ? (color ?? AtomixColors.primary) : Colors.transparent,
+        color: isActive ? (color ?? theme.colors.primary) : Colors.transparent,
         borderRadius:
             borderRadius ?? BorderRadius.vertical(top: Radius.circular(height)),
       ),

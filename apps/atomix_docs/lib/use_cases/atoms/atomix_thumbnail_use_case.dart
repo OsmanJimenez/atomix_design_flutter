@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -33,57 +33,76 @@ Widget thumbnailPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Border Color',
           options: [
-            AtomixColors.border,
-            AtomixColors.primary,
-            AtomixColors.success,
-            AtomixColors.error,
+            theme.colors.border,
+            theme.colors.primary,
+            theme.colors.success,
+            theme.colors.error,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.border) return 'Border';
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.error) return 'Error';
+            return 'Custom';
+          },
         )
       : null;
 
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
       BorderRadius.zero,
     ],
-    initialOption: AtomixRadius.smBorderRadius,
-    labelBuilder: KnobHelpers.radiusLabel,
+    initialOption: BorderRadius.all(theme.radius.sm),
+    labelBuilder: (r) {
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      if (r == BorderRadius.all(theme.radius.lg)) return 'LG';
+      return 'Zero';
+    },
   );
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.success) return 'AtomixColors.success';
-    if (c == AtomixColors.error) return 'AtomixColors.error';
-    if (c == AtomixColors.border) return 'AtomixColors.border';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.success) return 'theme.colors.success';
+    if (c == theme.colors.error) return 'theme.colors.error';
+    if (c == theme.colors.border) return 'theme.colors.border';
     return 'null';
   }
 
   String radiusName(BorderRadius r) {
-    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
-    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
-    if (r == AtomixRadius.mdBorderRadius) return 'AtomixRadius.mdBorderRadius';
-    if (r == AtomixRadius.lgBorderRadius) return 'AtomixRadius.lgBorderRadius';
+    if (r == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (r == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (r == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
+    if (r == BorderRadius.all(theme.radius.lg))
+      return 'BorderRadius.all(theme.radius.lg)';
     return 'BorderRadius.zero';
   }
 
   final colorStr = foundationColor != null
       ? '\n  borderColor: ${colorName(foundationColor)},'
       : '';
-  final radiusStr = foundationRadius != AtomixRadius.smBorderRadius
+  final radiusStr = foundationRadius != BorderRadius.all(theme.radius.sm)
       ? '\n  borderRadius: ${radiusName(foundationRadius)},'
       : '';
 
   final code =
-      '''AtomixThumbnail(
+      '''final theme = AtomixTheme.of(context);
+AtomixThumbnail(
   imageUrl: '$imageUrl',
   size: $size,
   hasBorder: $hasBorder,$colorStr$radiusStr
@@ -138,21 +157,22 @@ Widget thumbnailStandard(BuildContext context) {
   type: AtomixThumbnail,
 )
 Widget thumbnailLarge(BuildContext context) {
-  return const Center(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AtomixThumbnail(
           imageUrl: 'https://picsum.photos/300',
           size: 150,
-          borderRadius: AtomixRadius.lgBorderRadius,
+          borderRadius: BorderRadius.all(AtomixTheme.of(context).radius.lg),
         ),
-        SizedBox(height: 24),
-        CodeSnippet(
-          code: '''AtomixThumbnail(
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixThumbnail(
   imageUrl: '...',
   size: 150,
-  borderRadius: AtomixRadius.lgBorderRadius,
+  borderRadius: BorderRadius.all(theme.radius.lg),
 )''',
         ),
       ],

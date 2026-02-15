@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix text form field component.
 ///
@@ -243,6 +243,7 @@ class AtomixTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return TextFormField(
       controller: controller,
       initialValue: initialValue,
@@ -254,7 +255,13 @@ class AtomixTextFormField extends StatelessWidget {
         errorText: errorText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
-        border: OutlineInputBorder(borderRadius: AtomixRadius.mdBorderRadius),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(theme.radius.md),
+        ),
+        labelStyle: theme.typography.bodyMedium,
+        hintStyle: theme.typography.bodyMedium.copyWith(
+          color: theme.colors.textSecondary,
+        ),
       ),
       keyboardType: keyboardType,
       textCapitalization: textCapitalization,

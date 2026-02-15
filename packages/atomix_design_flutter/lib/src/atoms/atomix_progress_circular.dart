@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../atomix_design_flutter.dart';
+import '../theme/atomix_theme.dart';
 
 /// A circular progress indicator that follows the Atomix Design System.
 class AtomixProgressCircular extends StatelessWidget {
@@ -25,14 +26,16 @@ class AtomixProgressCircular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+    final effectiveColor = color ?? theme.colors.primary;
     return SizedBox(
       width: size,
       height: size,
       child: CircularProgressIndicator(
         value: value,
         strokeWidth: strokeWidth,
-        color: color ?? AtomixColors.primary,
-        backgroundColor: (color ?? AtomixColors.primary).withValues(alpha: 0.1),
+        color: effectiveColor,
+        backgroundColor: effectiveColor.withValues(alpha: 0.1),
         strokeCap: StrokeCap.round,
       ),
     );

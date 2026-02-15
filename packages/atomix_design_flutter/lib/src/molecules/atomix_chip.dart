@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_spacing.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix chip component.
 ///
@@ -55,18 +54,19 @@ class AtomixChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     final shape = RoundedRectangleBorder(
-      borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+      borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
     );
     final avatar = leadingIcon != null ? Icon(leadingIcon, size: 18) : null;
-    const padding = EdgeInsets.symmetric(
-      horizontal: AtomixSpacing.sm,
-      vertical: AtomixSpacing.xs,
+    final padding = EdgeInsets.symmetric(
+      horizontal: theme.spacing.sm,
+      vertical: theme.spacing.xs,
     );
 
     if (onSelected != null) {
       return FilterChip(
-        label: Text(label),
+        label: Text(label, style: theme.typography.labelMedium),
         selected: selected,
         onSelected: onSelected,
         avatar: avatar,
@@ -74,12 +74,13 @@ class AtomixChip extends StatelessWidget {
         backgroundColor: backgroundColor,
         selectedColor: selectedColor,
         shape: shape,
+        showCheckmark: false, // Cleaner look often preferred
       );
     }
 
     if (onDeleted != null) {
       return Chip(
-        label: Text(label),
+        label: Text(label, style: theme.typography.labelMedium),
         avatar: avatar,
         onDeleted: onDeleted,
         padding: padding,
@@ -89,7 +90,7 @@ class AtomixChip extends StatelessWidget {
     }
 
     return Chip(
-      label: Text(label),
+      label: Text(label, style: theme.typography.labelMedium),
       avatar: avatar,
       padding: padding,
       backgroundColor: backgroundColor,

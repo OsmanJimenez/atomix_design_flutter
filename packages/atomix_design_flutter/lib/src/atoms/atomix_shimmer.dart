@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../atomix_design_flutter.dart';
+import '../theme/atomix_theme.dart';
 
 /// A Shimmer effect wrapper for loading placeholders.
 class AtomixShimmer extends StatefulWidget {
@@ -66,6 +67,11 @@ class _AtomixShimmerState extends State<AtomixShimmer>
   Widget build(BuildContext context) {
     if (!widget.isActive) return widget.child;
 
+    final theme = AtomixTheme.of(context);
+    final defaultBaseColor = widget.baseColor ?? theme.colors.border;
+    final defaultHighlightColor =
+        widget.highlightColor ?? widget.baseColor ?? theme.colors.border;
+
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
@@ -76,16 +82,9 @@ class _AtomixShimmerState extends State<AtomixShimmer>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                (widget.baseColor ?? AtomixColors.border).withValues(
-                  alpha: 0.1,
-                ),
-                (widget.highlightColor ??
-                        widget.baseColor ??
-                        AtomixColors.border)
-                    .withValues(alpha: 0.6),
-                (widget.baseColor ?? AtomixColors.border).withValues(
-                  alpha: 0.1,
-                ),
+                defaultBaseColor.withValues(alpha: 0.1),
+                defaultHighlightColor.withValues(alpha: 0.6),
+                defaultBaseColor.withValues(alpha: 0.1),
               ],
               stops: const [0.1, 0.5, 0.9],
               transform: _SlidingGradientTransform(offset: _animation.value),

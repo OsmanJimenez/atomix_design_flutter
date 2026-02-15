@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_colors.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix placeholder component.
 ///
@@ -29,20 +28,16 @@ class AtomixPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final backgroundColor = brightness == Brightness.light
-        ? AtomixColors.surfaceVariant
-        : AtomixColors.surfaceVariantDark;
-    final iconColor = brightness == Brightness.light
-        ? AtomixColors.textSecondary
-        : AtomixColors.textSecondaryDark;
+    final theme = AtomixTheme.of(context);
+    final backgroundColor = theme.colors.border.withValues(alpha: 0.1);
+    final iconColor = theme.colors.textSecondary;
 
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: borderRadius ?? AtomixRadius.smBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.sm),
       ),
       child: Center(child: Icon(icon, color: iconColor, size: 32)),
     );

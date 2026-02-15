@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Icon', type: AtomixIcon)
 Widget atomixIconPlayground(BuildContext context) {
@@ -35,27 +35,51 @@ Widget atomixIconPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.primary,
-            AtomixColors.secondary,
-            AtomixColors.success,
-            AtomixColors.error,
-            AtomixColors.info,
-            AtomixColors.warning,
+            theme.colors.primary,
+            theme.colors.secondary,
+            theme.colors.success,
+            theme.colors.error,
+            theme.colors.info,
+            theme.colors.warning,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.secondary) return 'Secondary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.info) return 'Info';
+            if (c == theme.colors.warning) return 'Warning';
+            return 'Custom';
+          },
         )
       : null;
 
   // Helper strings
   final iconName = icon.toString().split('(').last.split(')').first;
-  final colorStr = useFoundationColor ? '\n  color: ...,' : '';
+
+  String colorName(Color? c) {
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.secondary) return 'theme.colors.secondary';
+    if (c == theme.colors.success) return 'theme.colors.success';
+    if (c == theme.colors.error) return 'theme.colors.error';
+    if (c == theme.colors.info) return 'theme.colors.info';
+    if (c == theme.colors.warning) return 'theme.colors.warning';
+    return 'null';
+  }
+
+  final colorStr = useFoundationColor
+      ? '\n  color: ${colorName(foundationColor)},'
+      : '';
 
   final code =
-      '''AtomixIcon(
+      '''final theme = AtomixTheme.of(context);
+AtomixIcon(
   Icons.$iconName,
   size: $size,$colorStr
 )''';
@@ -112,6 +136,7 @@ Widget atomixIconSizes(BuildContext context) {
 
 @widgetbook.UseCase(name: 'Colors', path: '[Atoms]/Icon', type: AtomixIcon)
 Widget atomixIconColors(BuildContext context) {
+  final theme = AtomixTheme.of(context);
   return Center(
     child: Padding(
       padding: const EdgeInsets.all(24),
@@ -120,22 +145,23 @@ Widget atomixIconColors(BuildContext context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AtomixIcon(Icons.star, color: AtomixColors.primary),
+              AtomixIcon(Icons.star, color: theme.colors.primary),
               const SizedBox(width: 16),
-              AtomixIcon(Icons.check_circle, color: AtomixColors.success),
+              AtomixIcon(Icons.check_circle, color: theme.colors.success),
               const SizedBox(width: 16),
-              AtomixIcon(Icons.error, color: AtomixColors.error),
+              AtomixIcon(Icons.error, color: theme.colors.error),
               const SizedBox(width: 16),
-              AtomixIcon(Icons.info, color: AtomixColors.info),
+              AtomixIcon(Icons.info, color: theme.colors.info),
             ],
           ),
           const SizedBox(height: 24),
           const CodeSnippet(
-            code: '''Row(
+            code: '''final theme = AtomixTheme.of(context);
+Row(
   children: [
-    AtomixIcon(Icons.star, color: AtomixColors.primary),
-    AtomixIcon(Icons.check_circle, color: AtomixColors.success),
-    AtomixIcon(Icons.error, color: AtomixColors.error),
+    AtomixIcon(Icons.star, color: theme.colors.primary),
+    AtomixIcon(Icons.check_circle, color: theme.colors.success),
+    AtomixIcon(Icons.error, color: theme.colors.error),
   ],
 )''',
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../atomix_design_flutter.dart';
 
 /// A clickable link component.
@@ -37,10 +38,11 @@ class _AtomixLinkState extends State<AtomixLink> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     final bool showUnderline = !widget.underlineOnHover || _isHovered;
     final Color defaultColor = widget.onTap == null
-        ? AtomixColors.textDisabled
-        : AtomixColors.primary;
+        ? theme.colors.textDisabled
+        : theme.colors.primary;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),

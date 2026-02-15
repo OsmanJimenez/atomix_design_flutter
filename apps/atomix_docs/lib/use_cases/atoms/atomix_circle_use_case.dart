@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -22,9 +23,10 @@ Widget atomixCirclePlayground(BuildContext context) {
   );
 
   final code =
-      '''AtomixCircle(
+      '''final theme = AtomixTheme.of(context);
+AtomixCircle(
   radius: $radius,
-  color: AtomixColors.primary,
+  color: theme.colors.primary,
   child: ${showContent ? "Icon(Icons.person, color: Colors.white)" : "null"},
 )''';
 
@@ -34,7 +36,7 @@ Widget atomixCirclePlayground(BuildContext context) {
       children: [
         AtomixCircle(
           radius: radius,
-          color: AtomixColors.primary,
+          color: AtomixTheme.of(context).colors.primary,
           child: showContent
               ? const Icon(Icons.person, color: Colors.white)
               : null,
@@ -53,12 +55,27 @@ Widget atomixCirclePlayground(BuildContext context) {
 )
 Widget atomixCircleWithImage(BuildContext context) {
   return const Center(
-    child: AtomixCircle(
-      radius: 40,
-      backgroundImage: DecorationImage(
-        image: NetworkImage('https://placeholder.com/150'),
-        fit: BoxFit.cover,
-      ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixCircle(
+          radius: 40,
+          backgroundImage: DecorationImage(
+            image: NetworkImage('https://placeholder.com/150'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''AtomixCircle(
+  radius: 40,
+  backgroundImage: DecorationImage(
+    image: NetworkImage('https://placeholder.com/150'),
+    fit: BoxFit.cover,
+  ),
+)''',
+        ),
+      ],
     ),
   );
 }
@@ -70,11 +87,32 @@ Widget atomixCircleWithImage(BuildContext context) {
 )
 Widget atomixCircleWithBorder(BuildContext context) {
   return Center(
-    child: AtomixCircle(
-      radius: 40,
-      color: AtomixColors.surface,
-      border: Border.all(color: AtomixColors.primary, width: 2),
-      child: const Icon(Icons.star, color: AtomixColors.primary),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AtomixCircle(
+          radius: 40,
+          color: AtomixTheme.of(context).colors.surface,
+          border: Border.all(
+            color: AtomixTheme.of(context).colors.primary,
+            width: 2,
+          ),
+          child: Icon(
+            Icons.star,
+            color: AtomixTheme.of(context).colors.primary,
+          ),
+        ),
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixCircle(
+  radius: 40,
+  color: theme.colors.surface,
+  border: Border.all(color: theme.colors.primary, width: 2),
+  child: Icon(Icons.star, color: theme.colors.primary),
+)''',
+        ),
+      ],
     ),
   );
 }

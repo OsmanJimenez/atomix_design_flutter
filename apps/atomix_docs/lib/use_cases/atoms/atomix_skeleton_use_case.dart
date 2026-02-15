@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -30,48 +30,70 @@ Widget skeletonPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final animate = context.knobs.boolean(
+    label: 'Skeleton > Animate',
+    initialValue: true,
+  );
+
   final useFoundationColor = context.knobs.boolean(
     label: 'Foundation > Custom Color',
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.border,
-            AtomixColors.primary,
-            AtomixColors.textDisabled,
+            theme.colors.border,
+            theme.colors.primary,
+            theme.colors.textDisabled,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.border) return 'Border';
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.textDisabled) return 'Text Disabled';
+            return 'Custom';
+          },
         )
       : null;
 
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
-      AtomixRadius.lgBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
+      BorderRadius.all(theme.radius.lg),
       BorderRadius.zero,
     ],
-    initialOption: AtomixRadius.smBorderRadius,
-    labelBuilder: KnobHelpers.radiusLabel,
+    initialOption: BorderRadius.all(theme.radius.sm),
+    labelBuilder: (r) {
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      if (r == BorderRadius.all(theme.radius.lg)) return 'LG';
+      return 'Zero';
+    },
   );
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.border) return 'AtomixColors.border';
-    if (c == AtomixColors.textDisabled) return 'AtomixColors.textDisabled';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.border) return 'theme.colors.border';
+    if (c == theme.colors.textDisabled) return 'theme.colors.textDisabled';
     return 'null';
   }
 
   String radiusName(BorderRadius r) {
-    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
-    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
-    if (r == AtomixRadius.mdBorderRadius) return 'AtomixRadius.mdBorderRadius';
-    if (r == AtomixRadius.lgBorderRadius) return 'AtomixRadius.lgBorderRadius';
+    if (r == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (r == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (r == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
+    if (r == BorderRadius.all(theme.radius.lg))
+      return 'BorderRadius.all(theme.radius.lg)';
     return 'BorderRadius.zero';
   }
 
@@ -79,15 +101,16 @@ Widget skeletonPlayground(BuildContext context) {
       ? '\n  color: ${colorName(foundationColor)},'
       : '';
   final radiusStr =
-      (!isCircle && foundationRadius != AtomixRadius.smBorderRadius)
+      (!isCircle && foundationRadius != BorderRadius.all(theme.radius.sm))
       ? '\n  borderRadius: ${radiusName(foundationRadius)},'
       : '';
 
   final code =
-      '''AtomixSkeleton(
+      '''final theme = AtomixTheme.of(context);
   width: ${isCircle ? height : width},
   height: $height,
-  isCircle: $isCircle,$colorStr$radiusStr
+  isCircle: $isCircle,
+  animate: $animate,$colorStr$radiusStr
 )''';
 
   return Center(
@@ -99,6 +122,7 @@ Widget skeletonPlayground(BuildContext context) {
             width: isCircle ? height : width,
             height: height,
             isCircle: isCircle,
+            animate: animate,
             color: foundationColor,
             borderRadius: foundationRadius,
           ),

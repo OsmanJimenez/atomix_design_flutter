@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../foundation/atomix_spacing.dart';
-import '../foundation/atomix_radius.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix dialog component.
 ///
@@ -60,27 +59,30 @@ class AtomixDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return AlertDialog(
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? theme.colors.background,
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? AtomixRadius.lgBorderRadius,
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.lg),
       ),
-      icon: icon != null ? Icon(icon, size: 32) : null,
-      title: Text(title),
-      content: Text(content),
+      icon: icon != null
+          ? Icon(icon, size: 32, color: theme.colors.primary)
+          : null,
+      title: Text(title, style: theme.typography.headlineSmall),
+      content: Text(content, style: theme.typography.bodyMedium),
       actions: actions.isEmpty
           ? null
           : [
               Padding(
-                padding: const EdgeInsets.only(
-                  right: AtomixSpacing.xs,
-                  bottom: AtomixSpacing.xs,
+                padding: EdgeInsets.only(
+                  right: theme.spacing.xs,
+                  bottom: theme.spacing.xs,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     for (int i = 0; i < actions.length; i++) ...[
-                      if (i > 0) const SizedBox(width: AtomixSpacing.xs),
+                      if (i > 0) SizedBox(width: theme.spacing.xs),
                       actions[i],
                     ],
                   ],

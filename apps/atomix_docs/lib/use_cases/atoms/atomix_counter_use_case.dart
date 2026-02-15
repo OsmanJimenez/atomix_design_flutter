@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(
   name: 'Playground',
@@ -37,17 +37,26 @@ Widget counterPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Background',
           options: [
-            AtomixColors.primary,
-            AtomixColors.success,
-            AtomixColors.error,
-            AtomixColors.warning,
-            AtomixColors.info,
+            theme.colors.primary,
+            theme.colors.success,
+            theme.colors.error,
+            theme.colors.warning,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
       : null;
 
@@ -55,30 +64,39 @@ Widget counterPlayground(BuildContext context) {
     label: 'Foundation > Radius',
     options: [
       BorderRadius.zero,
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
-      AtomixRadius.mdBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
+      BorderRadius.all(theme.radius.md),
       BorderRadius.circular(size),
     ],
     initialOption: BorderRadius.circular(20),
-    labelBuilder: KnobHelpers.radiusLabel,
+    labelBuilder: (r) {
+      if (r == BorderRadius.zero) return 'Zero';
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      if (r == BorderRadius.all(theme.radius.md)) return 'MD';
+      return 'Circular';
+    },
   );
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.success) return 'AtomixColors.success';
-    if (c == AtomixColors.error) return 'AtomixColors.error';
-    if (c == AtomixColors.warning) return 'AtomixColors.warning';
-    if (c == AtomixColors.info) return 'AtomixColors.info';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.success) return 'theme.colors.success';
+    if (c == theme.colors.error) return 'theme.colors.error';
+    if (c == theme.colors.warning) return 'theme.colors.warning';
+    if (c == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
   String radiusName(BorderRadius r) {
-    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
-    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
-    if (r == AtomixRadius.mdBorderRadius) return 'AtomixRadius.mdBorderRadius';
+    if (r == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (r == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
+    if (r == BorderRadius.all(theme.radius.md))
+      return 'BorderRadius.all(theme.radius.md)';
     if (r == BorderRadius.zero) return 'BorderRadius.zero';
-    return 'BorderRadius.circular($size)';
+    return 'BorderRadius.circular(\$size)';
   }
 
   final colorStr = foundationColor != null
@@ -89,7 +107,8 @@ Widget counterPlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixCounter(
+      '''final theme = AtomixTheme.of(context);
+AtomixCounter(
   count: $count,
   maxCount: $maxCount,
   size: $size,$colorStr$radiusStr

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import '../../widgets/code_snippet.dart';
 
 @widgetbook.UseCase(
@@ -10,30 +11,32 @@ import '../../widgets/code_snippet.dart';
   type: AtomixSpacer,
 )
 Widget atomixSpacerPlayground(BuildContext context) {
+  final theme = AtomixTheme.of(context);
+
   final spacing = context.knobs.object.dropdown<double>(
     label: 'Spacer > Foundation Spacing',
     options: [
-      AtomixSpacing.xxs,
-      AtomixSpacing.xs,
-      AtomixSpacing.sm,
-      AtomixSpacing.md,
-      AtomixSpacing.lg,
-      AtomixSpacing.xl,
-      AtomixSpacing.xxl,
-      AtomixSpacing.xxxl,
+      theme.spacing.xxs,
+      theme.spacing.xs,
+      theme.spacing.sm,
+      theme.spacing.md,
+      theme.spacing.lg,
+      theme.spacing.xl,
+      theme.spacing.xxl,
+      theme.spacing.xxxl,
     ],
     labelBuilder: (value) {
-      if (value == AtomixSpacing.xxs) return 'XXS (4px)';
-      if (value == AtomixSpacing.xs) return 'XS (8px)';
-      if (value == AtomixSpacing.sm) return 'SM (12px)';
-      if (value == AtomixSpacing.md) return 'MD (16px)';
-      if (value == AtomixSpacing.lg) return 'LG (20px)';
-      if (value == AtomixSpacing.xl) return 'XL (24px)';
-      if (value == AtomixSpacing.xxl) return 'XXL (32px)';
-      if (value == AtomixSpacing.xxxl) return 'XXXL (40px)';
+      if (value == theme.spacing.xxs) return 'XXS';
+      if (value == theme.spacing.xs) return 'XS';
+      if (value == theme.spacing.sm) return 'SM';
+      if (value == theme.spacing.md) return 'MD';
+      if (value == theme.spacing.lg) return 'LG';
+      if (value == theme.spacing.xl) return 'XL';
+      if (value == theme.spacing.xxl) return 'XXL';
+      if (value == theme.spacing.xxxl) return 'XXXL';
       return 'Custom';
     },
-    initialOption: AtomixSpacing.md,
+    initialOption: theme.spacing.md,
   );
 
   final isVertical = context.knobs.boolean(
@@ -43,20 +46,20 @@ Widget atomixSpacerPlayground(BuildContext context) {
 
   // Helper strings
   String spacingName(double val) {
-    if (val == AtomixSpacing.xxs) return 'xxs';
-    if (val == AtomixSpacing.xs) return 'xs';
-    if (val == AtomixSpacing.sm) return 'sm';
-    if (val == AtomixSpacing.md) return 'md';
-    if (val == AtomixSpacing.lg) return 'lg';
-    if (val == AtomixSpacing.xl) return 'xl';
-    if (val == AtomixSpacing.xxl) return 'xxl';
-    if (val == AtomixSpacing.xxxl) return 'xxxl';
+    if (val == theme.spacing.xxs) return 'theme.spacing.xxs';
+    if (val == theme.spacing.xs) return 'theme.spacing.xs';
+    if (val == theme.spacing.sm) return 'theme.spacing.sm';
+    if (val == theme.spacing.md) return 'theme.spacing.md';
+    if (val == theme.spacing.lg) return 'theme.spacing.lg';
+    if (val == theme.spacing.xl) return 'theme.spacing.xl';
+    if (val == theme.spacing.xxl) return 'theme.spacing.xxl';
+    if (val == theme.spacing.xxxl) return 'theme.spacing.xxxl';
     return 'md';
   }
 
   final code = isVertical
-      ? 'AtomixSpacer.${spacingName(spacing)}()'
-      : 'Row(\n  children: [\n    Text("Left"),\n    AtomixSpacer.horizontal(${spacingName(spacing)}),\n    Text("Right"),\n  ],\n)';
+      ? 'AtomixSpacer(height: ${spacingName(spacing)})'
+      : 'Row(\n  children: [\n    Text("Left"),\n    AtomixSpacer(width: ${spacingName(spacing)}),\n    Text("Right"),\n  ],\n)';
 
   return Center(
     child: SingleChildScrollView(
@@ -133,25 +136,29 @@ Widget atomixSpacerVerticalScale(BuildContext context) {
   type: AtomixSpacer,
 )
 Widget atomixSpacerHorizontalScale(BuildContext context) {
+  final theme = AtomixTheme.of(context);
   return Center(
     child: Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('A'),
-              AtomixSpacer.horizontal(AtomixSpacing.xs),
-              Text('B'),
-              AtomixSpacer.horizontal(AtomixSpacing.md),
-              Text('C'),
-              AtomixSpacer.horizontal(AtomixSpacing.xl),
-              Text('D'),
+              const Text('A'),
+              AtomixSpacer.horizontal(theme.spacing.xs),
+              const Text('B'),
+              AtomixSpacer.horizontal(theme.spacing.md),
+              const Text('C'),
+              AtomixSpacer.horizontal(theme.spacing.xl),
+              const Text('D'),
             ],
           ),
-          SizedBox(height: 24),
-          CodeSnippet(code: 'AtomixSpacer.horizontal(AtomixSpacing.md)'),
+          const SizedBox(height: 24),
+          const CodeSnippet(
+            code: '''final theme = AtomixTheme.of(context);
+AtomixSpacer.horizontal(theme.spacing.md)''',
+          ),
         ],
       ),
     ),

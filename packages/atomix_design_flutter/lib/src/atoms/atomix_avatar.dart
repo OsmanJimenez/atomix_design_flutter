@@ -37,29 +37,65 @@ class AtomixAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
+    final primaryColor = theme.colors.primary;
+    final effectiveBackgroundColor =
+        backgroundColor ?? primaryColor.withValues(alpha: 0.1);
+    final effectiveForegroundColor = foregroundColor ?? primaryColor;
+
+    Widget buildInitials() {
+      if (initials == null) return const SizedBox();
+      return Center(
+        child: AtomixText(
+          initials!.toUpperCase(),
+          style: TextStyle(
+            color: effectiveForegroundColor,
+            fontWeight: FontWeight.bold,
+            fontSize: size * 0.4,
+          ),
+        ),
+      );
+    }
+
+    Widget content;
+    if (imageUrl != null) {
+      content = Image.network(
+        imageUrl!,
+        fit: BoxFit.cover,
+        width: size,
+        height: size,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: effectiveBackgroundColor,
+            child: buildInitials(),
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return AtomixSkeleton(
+            width: size,
+            height: size,
+            isCircle: borderRadius == null,
+            borderRadius: borderRadius,
+          );
+        },
+      );
+    } else {
+      content = Container(
+        color: effectiveBackgroundColor,
+        child: buildInitials(),
+      );
+    }
+
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: backgroundColor ?? AtomixColors.primary.withValues(alpha: 0.1),
         borderRadius: borderRadius ?? BorderRadius.circular(size),
         boxShadow: boxShadow,
-        image: imageUrl != null
-            ? DecorationImage(image: NetworkImage(imageUrl!), fit: BoxFit.cover)
-            : null,
       ),
-      child: initials != null && imageUrl == null
-          ? Center(
-              child: AtomixText(
-                initials!.toUpperCase(),
-                style: TextStyle(
-                  color: foregroundColor ?? AtomixColors.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: size * 0.4,
-                ),
-              ),
-            )
-          : null,
+      clipBehavior: Clip.antiAlias,
+      child: content,
     );
   }
 }

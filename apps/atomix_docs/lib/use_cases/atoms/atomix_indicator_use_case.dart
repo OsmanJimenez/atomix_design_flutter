@@ -36,14 +36,29 @@ Widget atomixIndicatorPlayground(BuildContext context) {
 )
 Widget atomixIndicatorList(BuildContext context) {
   return const Center(
-    child: Row(
+    child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixIndicator(active: true),
-        SizedBox(width: 8),
-        AtomixIndicator(active: false),
-        SizedBox(width: 8),
-        AtomixIndicator(active: false),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AtomixIndicator(active: true),
+            SizedBox(width: 8),
+            AtomixIndicator(active: false),
+            SizedBox(width: 8),
+            AtomixIndicator(active: false),
+          ],
+        ),
+        SizedBox(height: 24),
+        CodeSnippet(
+          code: '''Row(
+  children: [
+    AtomixIndicator(active: true),
+    AtomixIndicator(active: false),
+    AtomixIndicator(active: false),
+  ],
+)''',
+        ),
       ],
     ),
   );

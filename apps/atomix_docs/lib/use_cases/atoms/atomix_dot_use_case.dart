@@ -1,9 +1,9 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgets/code_snippet.dart';
-import '../../utils/knob_helpers.dart';
 
 @widgetbook.UseCase(name: 'Playground', path: '[Atoms]/Dot', type: AtomixDot)
 Widget dotPlayground(BuildContext context) {
@@ -24,46 +24,62 @@ Widget dotPlayground(BuildContext context) {
     initialValue: false,
   );
 
+  final theme = AtomixTheme.of(context);
+
   final foundationColor = useFoundationColor
       ? context.knobs.object.dropdown<Color>(
           label: 'Foundation > Color',
           options: [
-            AtomixColors.success,
-            AtomixColors.error,
-            AtomixColors.warning,
-            AtomixColors.primary,
-            AtomixColors.info,
+            theme.colors.success,
+            theme.colors.error,
+            theme.colors.warning,
+            theme.colors.primary,
+            theme.colors.info,
           ],
-          labelBuilder: KnobHelpers.colorLabel,
+          labelBuilder: (c) {
+            if (c == theme.colors.success) return 'Success';
+            if (c == theme.colors.error) return 'Error';
+            if (c == theme.colors.warning) return 'Warning';
+            if (c == theme.colors.primary) return 'Primary';
+            if (c == theme.colors.info) return 'Info';
+            return 'Custom';
+          },
         )
-      : AtomixColors.primary;
+      : theme.colors.primary;
 
   final foundationRadius = context.knobs.object.dropdown<BorderRadius>(
     label: 'Foundation > Radius',
     options: [
       BorderRadius.zero,
-      AtomixRadius.xsBorderRadius,
-      AtomixRadius.smBorderRadius,
+      BorderRadius.all(theme.radius.xs),
+      BorderRadius.all(theme.radius.sm),
       BorderRadius.circular(size),
     ],
     initialOption: BorderRadius.circular(12),
-    labelBuilder: KnobHelpers.radiusLabel,
+    labelBuilder: (r) {
+      if (r == BorderRadius.zero) return 'Zero';
+      if (r == BorderRadius.all(theme.radius.xs)) return 'XS';
+      if (r == BorderRadius.all(theme.radius.sm)) return 'SM';
+      return 'Circular';
+    },
   );
 
   String colorName(Color? c) {
-    if (c == AtomixColors.primary) return 'AtomixColors.primary';
-    if (c == AtomixColors.success) return 'AtomixColors.success';
-    if (c == AtomixColors.error) return 'AtomixColors.error';
-    if (c == AtomixColors.warning) return 'AtomixColors.warning';
-    if (c == AtomixColors.info) return 'AtomixColors.info';
+    if (c == theme.colors.primary) return 'theme.colors.primary';
+    if (c == theme.colors.success) return 'theme.colors.success';
+    if (c == theme.colors.error) return 'theme.colors.error';
+    if (c == theme.colors.warning) return 'theme.colors.warning';
+    if (c == theme.colors.info) return 'theme.colors.info';
     return 'null';
   }
 
   String radiusName(BorderRadius? r) {
-    if (r == AtomixRadius.xsBorderRadius) return 'AtomixRadius.xsBorderRadius';
-    if (r == AtomixRadius.smBorderRadius) return 'AtomixRadius.smBorderRadius';
+    if (r == BorderRadius.all(theme.radius.xs))
+      return 'BorderRadius.all(theme.radius.xs)';
+    if (r == BorderRadius.all(theme.radius.sm))
+      return 'BorderRadius.all(theme.radius.sm)';
     if (r == BorderRadius.zero) return 'BorderRadius.zero';
-    return 'BorderRadius.circular($size)';
+    return 'BorderRadius.circular(\$size)';
   }
 
   final colorStr = useFoundationColor
@@ -74,7 +90,8 @@ Widget dotPlayground(BuildContext context) {
       : '';
 
   final code =
-      '''AtomixDot(
+      '''final theme = AtomixTheme.of(context);
+AtomixDot(
   size: $size,
   isPulsing: $isPulsing,$colorStr$radiusStr
 )''';
@@ -104,16 +121,21 @@ Widget dotPlayground(BuildContext context) {
   type: AtomixDot,
 )
 Widget dotPulsingSuccess(BuildContext context) {
-  return const Center(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixDot(size: 16, color: AtomixColors.success, isPulsing: true),
-        SizedBox(height: 24),
-        CodeSnippet(
-          code: '''AtomixDot(
+        AtomixDot(
+          size: 16,
+          color: AtomixTheme.of(context).colors.success,
+          isPulsing: true,
+        ),
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixDot(
   size: 16,
-  color: AtomixColors.success,
+  color: theme.colors.success,
   isPulsing: true,
 )''',
         ),
@@ -124,16 +146,17 @@ Widget dotPulsingSuccess(BuildContext context) {
 
 @widgetbook.UseCase(name: 'Error Static', path: '[Atoms]/Dot', type: AtomixDot)
 Widget dotErrorStatic(BuildContext context) {
-  return const Center(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AtomixDot(size: 12, color: AtomixColors.error),
-        SizedBox(height: 24),
-        CodeSnippet(
-          code: '''AtomixDot(
+        AtomixDot(size: 12, color: AtomixTheme.of(context).colors.error),
+        const SizedBox(height: 24),
+        const CodeSnippet(
+          code: '''final theme = AtomixTheme.of(context);
+AtomixDot(
   size: 12,
-  color: AtomixColors.error,
+  color: theme.colors.error,
 )''',
         ),
       ],

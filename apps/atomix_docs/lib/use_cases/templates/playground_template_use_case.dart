@@ -115,7 +115,7 @@ Widget playgroundTemplate(BuildContext context) {
           child: AtomixListTile(
             title: label,
             subtitle: 'Secondary information',
-            leading: Icons.info_outline,
+            leading: const Icon(Icons.info_outline),
           ),
         );
       case 'Chip':
@@ -125,11 +125,15 @@ Widget playgroundTemplate(BuildContext context) {
       case 'Badge':
         return AtomixBadge(label: label, variant: AtomixBadgeVariant.info);
       case 'Icon':
-        return const Center(
-          child: AtomixIcon(Icons.star, size: 48, color: AtomixColors.primary),
+        return Center(
+          child: AtomixIcon(
+            Icons.star,
+            size: 48,
+            color: AtomixTheme.of(context).colors.primary,
+          ),
         );
       case 'Spacer':
-        return const AtomixSpacer.md();
+        return AtomixSpacer.md();
       case 'Divider':
         return const AtomixDivider();
       default:

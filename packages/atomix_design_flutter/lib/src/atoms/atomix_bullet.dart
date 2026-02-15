@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/atomix_theme.dart';
 
 /// Atomix bullet component.
 ///
@@ -19,7 +20,7 @@ class AtomixBullet extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: color ?? Theme.of(context).primaryColor,
+        color: color ?? AtomixTheme.of(context).colors.primary,
         shape: BoxShape.circle,
       ),
     );

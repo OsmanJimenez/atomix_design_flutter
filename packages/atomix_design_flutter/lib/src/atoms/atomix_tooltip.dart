@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../atomix_design_flutter.dart';
+import '../theme/atomix_theme.dart';
 
 /// A simple Tooltip component.
 class AtomixTooltip extends StatelessWidget {
@@ -33,15 +34,19 @@ class AtomixTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomixTheme.of(context);
     return Tooltip(
       message: message,
       triggerMode: triggerMode,
       decoration: BoxDecoration(
         color:
-            backgroundColor ?? AtomixColors.onBackground.withValues(alpha: 0.9),
-        borderRadius: borderRadius ?? AtomixRadius.xsBorderRadius,
+            backgroundColor ?? theme.colors.onBackground.withValues(alpha: 0.9),
+        borderRadius: borderRadius ?? BorderRadius.all(theme.radius.xs),
       ),
-      textStyle: TextStyle(color: textColor ?? Colors.white, fontSize: 12),
+      textStyle: TextStyle(
+        color: textColor ?? theme.colors.background,
+        fontSize: 12,
+      ),
       child: child,
     );
   }

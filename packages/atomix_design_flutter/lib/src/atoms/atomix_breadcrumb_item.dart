@@ -25,28 +25,15 @@ class AtomixBreadcrumbItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AtomixLink(
-          text: label,
-          onTap: isLast ? null : onTap,
-          color:
-              color ??
-              (isLast ? AtomixColors.textPrimary : AtomixColors.primary),
-          style: TextStyle(
-            fontWeight: isLast ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-        if (!isLast) ...[
-          const AtomixSpacer.xs(),
-          const AtomixText(
-            '/',
-            style: TextStyle(color: AtomixColors.textSecondary),
-          ),
-          const AtomixSpacer.xs(),
-        ],
-      ],
+    final theme = AtomixTheme.of(context);
+    return AtomixLink(
+      text: label,
+      onTap: isLast ? null : onTap,
+      color:
+          color ?? (isLast ? theme.colors.textPrimary : theme.colors.primary),
+      style: TextStyle(
+        fontWeight: isLast ? FontWeight.bold : FontWeight.normal,
+      ),
     );
   }
 }

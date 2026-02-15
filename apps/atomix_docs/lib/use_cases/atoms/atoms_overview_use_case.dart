@@ -1,4 +1,5 @@
 import 'package:atomix_design_flutter/atomix_design_flutter.dart';
+import 'package:atomix_design_flutter/src/theme/atomix_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -63,7 +64,6 @@ class AtomixAtomsOverview extends StatelessWidget {
                 child: AtomixSkeleton(width: 100, height: 20),
               ),
             ),
-            _Item('Rating', const AtomixRating(rating: 4)),
           ]),
           const SizedBox(height: 32),
           _buildSection('Visual & Assets', [
@@ -128,9 +128,9 @@ class _Item extends StatelessWidget {
         const SizedBox(height: 8),
         AtomixText(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
-            color: AtomixColors.textSecondary,
+            color: AtomixTheme.of(context).colors.textSecondary,
           ),
         ),
       ],
