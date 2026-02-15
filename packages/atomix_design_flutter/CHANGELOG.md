@@ -1,3 +1,20 @@
+## 1.0.0 - 2026-02-14
+
+**🎉 Official First Major Release**
+Atomix Design System v1.0.0 is now live! This release marks the completion of the core library and the system's readiness for enterprise production use.
+
+### 🌟 Key Enhancements
+- **101 Handcrafted Components**: Complete catalog covering Atoms, Molecules, Organisms, and Templates.
+- **Advanced Multi-Strategy Theming**:
+  - **Materialize**: Pure Material 3 compliance.
+  - **Apple Glass**: Premium iOS-style glassmorphism with blurs and depth.
+  - **Expressive**: High-contrast, brand-forward styling.
+- **Form System**: Full support for validation, custom inputs, and dynamic layouts.
+- **Professional Documentation**: Comprehensive READMEs, Widgetbook integration, and clear architectural guides.
+
+### 🚀 Breaking Changes
+- **Breaking**: `AtomixTheme` architecture has fully migrated to the Strategy pattern. Ensuring stability for future updates.
+
 ## 0.6.0 - 2026-02-14
 
 ### Added
